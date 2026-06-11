@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedVQA AI Dashboard - Multimodal Medical RAG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="pulse-ring"></div>
+                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <div class="logo-text">
+                    <h1>MedVQA<span>RAG</span></h1>
+                    <p>Clinical Multimodal Decision Support</p>
+                </div>
+            </div>
+            
+            <!-- Index Status Bar -->
+            <div id="index-status-card" class="index-status-bar status-not-started">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Checking FAISS index...</span>
+                </div>
+                <div class="progress-container hidden" id="status-progress-container">
+                    <div class="progress-bar" id="status-progress-bar" style="width: 0%"></div>
+                </div>
+                <span id="status-percentage" class="percentage-badge hidden">0%</span>
+                <button id="rebuild-index-btn" class="rebuild-btn" title="Force rebuild index">
+                    <i class="fa-solid fa-sync"></i> Rebuild
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Body Grid -->
+        <main class="dashboard-grid">
+            
+            <!-- Sidebar: Configs -->
+            <aside class="config-sidebar glass-panel">
+                <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> Engine Settings</h3>
+                
+                <form id="config-form">
+                    <!-- Engine Select -->
+                    <div class="form-group">
+                        <label for="engine-select">Generative LLM Engine</label>
+                        <select id="engine-select" class="custom-select">
+                            <option value="huggingface_api">Hugging Face API (LLaVA-7B)</option>
+                            <option value="gemini_api">Gemini API (1.5 Flash)</option>
+                            <option value="local_moondream">Local Moondream (CPU/1.6B)</option>
+                            <option value="local_llava">Local LLaVA-7B (CUDA/16GB)</option>
+                        </select>
+                    </div>
+
+                    <!-- HF Token (for HF API) -->
+                    <div class="form-group config-api-key" id="hf-token-group">
+                        <label for="hf-token-input">Hugging Face API Token</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="hf-token-input" placeholder="hf_xxxxxxxxxxxxxxxxxxxxxx" class="custom-input">
+                            <button type="button" class="toggle-password" tabindex="-1">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="help-text">Required for the Hugging Face Serverless API</small>
+                    </div>
+
+                    <!-- Gemini Key (for Gemini API) -->
+                    <div class="form-group config-api-key hidden" id="gemini-key-group">
+                        <label for="gemini-key-input">Gemini API Key</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="gemini-key-input" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxx" class="custom-input">
+                            <button type="button" class="toggle-password" tabindex="-1">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="help-text">Required for Google Gemini 1.5 Flash</small>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- RAG parameters -->
+                    <h4 class="sub-panel-title">Retrieval Parameters</h4>
+
+                    <!-- Top-K Slider -->
+                    <div class="form-group">
+                        <div class="slider-header">
+                            <label for="top-k-slider">Context Top-K</label>
+                            <span class="slider-value" id="top-k-val">5</span>
+                        </div>
+                        <input type="range" id="top-k-slider" min="1" max="10" value="5" class="custom-slider">
+                        <small class="help-text">Number of retrieved samples from SLAKE</small>
+                    </div>
+
+                    <!-- Alpha Slider -->
+                    <div class="form-group">
+                        <div class="slider-header">
+                            <label for="alpha-slider">Embedding Fusion (&alpha;)</label>
+                            <span class="slider-value" id="alpha-val">0.60</span>
+                        </div>
+                        <input type="range" id="alpha-slider" min="0.0" max="1.0" step="0.05" value="0.60" class="custom-slider">
+                        <div class="slider-labels">
+                            <span>Text-Heavy</span>
+                            <span>Balanced</span>
+                            <span>Image-Heavy</span>
+                        </div>
+                    </div>
+
+                    <!-- Max Tokens -->
+                    <div class="form-group">
+                        <div class="slider-header">
+                            <label for="tokens-slider">Max New Tokens</label>
+                            <span class="slider-value" id="tokens-val">128</span>
+                        </div>
+                        <input type="range" id="tokens-slider" min="32" max="512" step="16" value="128" class="custom-slider">
+                    </div>
+
+                    <button type="button" id="save-config-btn" class="primary-btn full-width">
+                        <i class="fa-solid fa-check"></i> Apply Configuration
+                    </button>
+                </form>
+
+                <!-- Hardware info -->
+                <div class="hw-info-card">
+                    <h4><i class="fa-solid fa-microchip"></i> System Environment</h4>
+                    <div class="hw-grid">
+                        <div class="hw-item">
+                            <span>Device:</span>
+                            <strong id="device-info">CPU</strong>
+                        </div>
+                        <div class="hw-item">
+                            <span>Encoder:</span>
+                            <strong id="encoder-info" title="microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224">BiomedCLIP</strong>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Workspace: Query and Results -->
+            <section class="workspace-area">
+                
+                <!-- Query Composer Section -->
+                <div class="workspace-panel glass-panel">
+                    <h3 class="panel-title"><i class="fa-solid fa- stethoscope"></i> Query Composer</h3>
+                    
+                    <div class="query-composer-grid">
+                        
+                        <!-- Image Upload Dropzone -->
+                        <div class="upload-column">
+                            <div class="drop-zone" id="image-drop-zone">
+                                <input type="file" id="image-file-input" accept="image/*" class="file-input">
+                                <div class="drop-zone-content" id="drop-zone-prompt">
+                                    <div class="upload-icon-wrapper">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    </div>
+                                    <p class="upload-text">Drag & Drop Medical Image</p>
+                                    <p class="upload-subtext">Supports PNG, JPG, DICOM preview (RGB)</p>
+                                    <button type="button" class="browse-btn">Browse Files</button>
+                                </div>
+                                <div class="drop-zone-preview hidden" id="drop-zone-preview">
+                                    <img src="" alt="Selected medical image" id="preview-img">
+                                    <button type="button" class="remove-image-btn" id="remove-img-btn" title="Remove image">
+                                        <i class="fa-solid fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question Input & Presets -->
+                        <div class="question-column">
+                            <div class="form-group">
+                                <label for="question-text">Clinical Question</label>
+                                <textarea id="question-text" placeholder="Describe the image, or ask a clinical question (e.g. 'Is there any abnormality visible in this chest X-ray?')" class="custom-textarea" rows="4"></textarea>
+                            </div>
+                            
+                            <!-- Run Button -->
+                            <button type="button" id="run-query-btn" class="run-btn glow-effect">
+                                <i class="fa-solid fa-play"></i> Run VQA Inference
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Presets Tabs -->
+                    <div class="presets-section">
+                        <div class="presets-header">
+                            <span><i class="fa-solid fa-lightbulb"></i> Clinical Demo Queries</span>
+                            <div class="preset-tabs">
+                                <button class="preset-tab-btn active" data-tab="closed">Closed QA (Yes/No)</button>
+                                <button class="preset-tab-btn" data-tab="open">Open QA (Factual)</button>
+                                <button class="preset-tab-btn" data-tab="ood">Anti-Hallucination (OOD)</button>
+                            </div>
+                        </div>
+                        
+                        <div class="preset-content active" id="tab-closed">
+                            <div class="presets-grid">
+                                <button class="preset-query-btn" data-q="Is there any abnormality visible in the lung area?">
+                                    Is there any abnormality visible in the lung area?
+                                </button>
+                                <button class="preset-query-btn" data-q="Is this a chest X-ray?">
+                                    Is this a chest X-ray?
+                                </button>
+                                <button class="preset-query-btn" data-q="Is the liver visible in this image?">
+                                    Is the liver visible in this image?
+                                </button>
+                                <button class="preset-query-btn" data-q="Is this image taken from an MRI scan?">
+                                    Is this image taken from an MRI scan?
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="preset-content" id="tab-open">
+                            <div class="presets-grid">
+                                <button class="preset-query-btn" data-q="What organ is shown in this medical image?">
+                                    What organ is shown in this medical image?
+                                </button>
+                                <button class="preset-query-btn" data-q="What body part is highlighted in the image?">
+                                    What body part is highlighted in the image?
+                                </button>
+                                <button class="preset-query-btn" data-q="What type of scan is this?">
+                                    What type of scan is this?
+                                </button>
+                                <button class="preset-query-btn" data-q="What abnormality is present in this image?">
+                                    What abnormality is present in this image?
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="preset-content" id="tab-ood">
+                            <div class="presets-grid">
+                                <button class="preset-query-btn" data-q="What is the patient's age?">
+                                    What is the patient's age?
+                                </button>
+                                <button class="preset-query-btn" data-q="What medication is the patient taking?">
+                                    What medication is the patient taking?
+                                </button>
+                                <button class="preset-query-btn" data-q="What is the patient's blood pressure?">
+                                    What is the patient's blood pressure?
+                                </button>
+                                <button class="preset-query-btn" data-q="What is the patient's diagnosis from the blood report?">
+                                    What is the patient's diagnosis from the blood report?
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inference Results -->
+                <div class="results-layout hidden" id="results-layout">
+                    
+                    <!-- LLaVA Answer -->
+                    <div class="workspace-panel glass-panel answer-panel">
+                        <div class="answer-header">
+                            <h3 class="panel-title"><i class="fa-solid fa-circle-check"></i> Generated Answer</h3>
+                            <span class="engine-badge" id="output-engine">LLaVA-1.5-7B</span>
+                        </div>
+                        <div class="answer-body">
+                            <p id="generated-answer-text">Generating answer...</p>
+                        </div>
+                        <div class="answer-meta">
+                            <span><i class="fa-solid fa-clock"></i> Query processed successfully</span>
+                        </div>
+                    </div>
+
+                    <!-- Grounded FAISS Retrieval Context -->
+                    <div class="workspace-panel glass-panel context-panel">
+                        <h3 class="panel-title"><i class="fa-solid fa-database"></i> Grounded Retrieval Context (SLAKE KBase Matches)</h3>
+                        <div class="retrieved-grid" id="retrieved-cards-container">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Overlay -->
+                <div class="loading-overlay hidden" id="loading-overlay">
+                    <div class="spinner-container">
+                        <div class="double-pulse">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                        <p class="loading-msg" id="loading-message">Embedding & querying RAG pipeline...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
