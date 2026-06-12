@@ -116,7 +116,7 @@ SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @app.post("/api/query")
-async def run_vqa_query(
+def run_vqa_query(
     query_text: str = Form(...),
     query_image: Optional[UploadFile] = File(None),
     session_id: Optional[str] = Form(None),
@@ -159,7 +159,7 @@ async def run_vqa_query(
         active_image_path = session_dir / "active_image.jpg"
         if query_image is not None and query_image.filename:
             try:
-                content = await query_image.read()
+                content = query_image.file.read()
                 pil_image = Image.open(BytesIO(content)).convert("RGB")
                 # Cache uploaded image for follow-up turns
                 pil_image.save(active_image_path, "JPEG")
@@ -176,7 +176,7 @@ async def run_vqa_query(
         # Standard stateless logic if no session_id provided
         if query_image is not None and query_image.filename:
             try:
-                content = await query_image.read()
+                content = query_image.file.read()
                 pil_image = Image.open(BytesIO(content)).convert("RGB")
             except Exception as e:
                 raise HTTPException(status_code=400, detail=f"Invalid image file: {str(e)}")
