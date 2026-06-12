@@ -106,24 +106,44 @@ source .venv/bin/activate
 pip install -r backend/requirements.txt
 ```
 
-### 4. Set API keys (optional — only needed for cloud engines)
+This will install the necessary core libraries for the project, including:
+- **FastAPI & Uvicorn** (for the web server and API)
+- **PyTorch & OpenCLIP** (for BiomedCLIP image/text embeddings)
+- **FAISS-CPU** (for high-speed vector search)
+- **Hugging Face Transformers & Accelerate** (for local LLMs)
+- **Google GenerativeAI** (for Gemini API backend)
+- **Python-Dotenv** (for managing environment variables)
 
-```bash
-# For Hugging Face Inference API engine
-set HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx          # Windows CMD
-$env:HF_TOKEN="hf_xxxxxxxxxxxxxxxxxxxx"       # PowerShell
+### 4. Set API keys (Environment Variables)
 
-# For Gemini API engine
-set GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxx
+You only need API keys if you plan to use the cloud engines (Hugging Face API or Gemini). 
+
+**Option A: Using a `.env` file (Recommended)**
+Create a file named `.env` in the root of the project and add your keys:
+```env
+HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx
+GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxx
 ```
 
-### 5. Start the server
+**Option B: Using Terminal Commands**
+```bash
+# Windows CMD
+set HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx
+set GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxx
+
+# PowerShell
+$env:HF_TOKEN="hf_xxxxxxxxxxxxxxxxxxxx"
+$env:GEMINI_API_KEY="AIzaxxxxxxxxxxxxxxxx"
+```
+
+### 5. Start the server (Run on Localhost)
 
 ```bash
 python run.py
 ```
 
-The server starts at **http://127.0.0.1:8000** with hot-reload enabled.
+The server will start locally on your machine. Open your web browser and navigate to:
+**http://localhost:8000** (or **http://127.0.0.1:8000**)
 
 > **Note:** On first run the server will automatically download the SLAKE dataset metadata and `imgs.zip` (~640 MB) from Hugging Face, extract images, and build the FAISS index in a background thread. Progress is tracked in real time on the dashboard.
 
@@ -131,7 +151,7 @@ The server starts at **http://127.0.0.1:8000** with hot-reload enabled.
 
 ## 🚀 Using the Application
 
-Open **http://127.0.0.1:8000** in your browser. You will see:
+Open **http://localhost:8000** in your browser. You will see:
 
 - **Welcome screen** with preset example queries
 - **Chat window** — type a clinical question, optionally upload a radiology image
