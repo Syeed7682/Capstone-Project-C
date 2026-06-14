@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+
+  # ── MLflow Tracking Server ─────────────────────────────────────────────────
+  mlflow:
+    image: python:3.11-slim
+    container_name: mlflow_server
+    working_dir: /app
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./models:/app/models
+    ports:
+      - "5000:5000"
+    command: >
+      sh -c "pip install mlflow --quiet &&
+             mlflow server
+               --backend-store-uri /app/mlruns
+               --default-artifact-root /app/mlruns
+               --host 0.0.0.0
+               --port 5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ── FastAPI Prediction Service ─────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fraud_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./mlruns:/app/mlruns
+      - ./data:/app/data
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  mlruns_data:
+  model_data:

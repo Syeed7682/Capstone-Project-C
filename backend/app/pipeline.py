@@ -436,18 +436,56 @@ def _generate_via_local_moondream(prompt: str, pil_image: Optional[Image.Image],
     """Loads and runs tiny Moondream2 model locally on CPU."""
     global _local_gen_model, _local_gen_tokenizer
     
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
     
     # Load model if not cached
     if _local_gen_model is None:
         print(f"Loading local Moondream2 model onto {config.DEVICE}...")
+        
+        # Load tokenizer first to get the correct EOS token ID
+        _local_gen_tokenizer = AutoTokenizer.from_pretrained(config.GEN_MODEL_MOONDREAM, revision="2024-08-26")
+        
+        # Load configuration and patch the missing pad_token_id
+        moondream_config = AutoConfig.from_pretrained(
+            config.GEN_MODEL_MOONDREAM, 
+            revision="2024-08-26", 
+            trust_remote_code=True
+        )
+        
+        # 1. Patch outer config
+        moondream_config.pad_token_id = _local_gen_tokenizer.eos_token_id
+        if hasattr(moondream_config, "rope_scaling") and isinstance(moondream_config.rope_scaling, dict):
+            if "type" not in moondream_config.rope_scaling:
+                moondream_config.rope_scaling["type"] = moondream_config.rope_scaling.get("rope_type", "linear")
+        
+        # 2. Patch nested text/phi configs
+        for sub_config_name in ["phi_config", "text_config"]:
+            if hasattr(moondream_config, sub_config_name):
+                sub_config = getattr(moondream_config, sub_config_name)
+                
+                # pad_token_id fix
+                if isinstance(sub_config, dict):
+                    sub_config["pad_token_id"] = _local_gen_tokenizer.eos_token_id
+                    r_scale = sub_config.get("rope_scaling")
+                    if isinstance(r_scale, dict) and "type" not in r_scale:
+                        r_scale["type"] = r_scale.get("rope_type", "linear")
+                else:
+                    sub_config.pad_token_id = _local_gen_tokenizer.eos_token_id
+                    if hasattr(sub_config, "rope_scaling") and isinstance(sub_config.rope_scaling, dict):
+                        if "type" not in sub_config.rope_scaling:
+                            sub_config.rope_scaling["type"] = sub_config.rope_scaling.get("rope_type", "linear")
+                    
+        # 3. Just in case, inject it into kwargs to override during initialization
+        moondream_config.update({"pad_token_id": _local_gen_tokenizer.eos_token_id})
+            
         _local_gen_model = AutoModelForCausalLM.from_pretrained(
             config.GEN_MODEL_MOONDREAM,
             revision="2024-08-26",
             trust_remote_code=True,
+            config=moondream_config,
             torch_dtype=torch.float32 if config.DEVICE == "cpu" else torch.float16
         ).to(config.DEVICE)
-        _local_gen_tokenizer = AutoTokenizer.from_pretrained(config.GEN_MODEL_MOONDREAM)
+            
         print("Moondream2 loaded successfully.")
 
     if pil_image is None:

@@ -86,8 +86,8 @@ Capstone_Project/
 ### 1. Clone & enter the project
 
 ```bash
-git clone https://github.com/Syeed7682/Capstone_Project.git
-cd Capstone_Project
+git clone https://github.com/Syeed7682/Capstone-Project-C.git
+cd Capstone-Project-C
 ```
 
 ### 2. Create & activate a virtual environment

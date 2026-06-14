@@ -1,0 +1,220 @@
+name: ML Platform CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:       # Allow manual runs
+
+env:
+  PYTHON_VERSION: "3.11"
+  IMAGE_NAME: fraud-detection-api
+
+jobs:
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 1: Generate Data + Validate
+  # ────────────────────────────────────────────────────────────────────────────
+  generate-and-validate:
+    name: 📊 Generate & Validate Data
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate synthetic data
+        run: python src/data_generation.py
+
+      - name: Validate data
+        run: python src/data_validation.py
+
+      - name: Upload validated data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-data
+          path: data/validated/
+          retention-days: 7
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 2: Train Model
+  # ────────────────────────────────────────────────────────────────────────────
+  train:
+    name: 🎓 Train Model
+    runs-on: ubuntu-latest
+    needs: generate-and-validate
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download validated data
+        uses: actions/download-artifact@v4
+        with:
+          name: validated-data
+          path: data/validated/
+
+      - name: Train model (with MLflow tracking)
+        run: python src/train.py --n-estimators 100 --max-depth 10
+
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model
+          path: |
+            models/
+            mlruns/
+            data/reference/
+          retention-days: 30
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 3: Run Tests
+  # ────────────────────────────────────────────────────────────────────────────
+  test:
+    name: 🧪 Run Tests
+    runs-on: ubuntu-latest
+    needs: train
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download validated data
+        uses: actions/download-artifact@v4
+        with:
+          name: validated-data
+          path: data/validated/
+
+      - name: Download trained model
+        uses: actions/download-artifact@v4
+        with:
+          name: trained-model
+
+      - name: Run pytest suite
+        run: |
+          pytest tests/ -v \
+            --tb=short \
+            --junitxml=test-results.xml \
+            -p no:cacheprovider
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test-results.xml
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 4: Build Docker Image
+  # ────────────────────────────────────────────────────────────────────────────
+  build:
+    name: 🐳 Build Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download trained model
+        uses: actions/download-artifact@v4
+        with:
+          name: trained-model
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --tag ${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            --tag ${{ env.IMAGE_NAME }}:latest \
+            --file Dockerfile \
+            .
+
+      - name: Smoke test the container
+        run: |
+          docker run -d --name test_api \
+            -p 8000:8000 \
+            ${{ env.IMAGE_NAME }}:latest
+          sleep 20
+          curl --retry 5 --retry-delay 3 -f http://localhost:8000/health
+          docker stop test_api
+
+      - name: Save image as artifact
+        run: docker save ${{ env.IMAGE_NAME }}:latest | gzip > fraud-api-image.tar.gz
+
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: fraud-api-image.tar.gz
+          retention-days: 7
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 5: Deploy (Docker Hub — placeholder, runs on main branch only)
+  # ────────────────────────────────────────────────────────────────────────────
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+
+      - name: Load Docker image
+        run: gunzip -c fraud-api-image.tar.gz | docker load
+
+      # Uncomment and configure secrets to push to Docker Hub:
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #
+      # - name: Push to Docker Hub
+      #   run: |
+      #     docker tag ${{ env.IMAGE_NAME }}:latest \
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+      #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Deployment summary
+        run: |
+          echo "✅ Deployment pipeline complete!"
+          echo "   Image: ${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          echo "   Branch: ${{ github.ref_name }}"
+          echo "   Commit: ${{ github.sha }}"
+          echo ""
+          echo "   To push to Docker Hub, uncomment the docker/login-action steps"
+          echo "   and set DOCKERHUB_USERNAME + DOCKERHUB_TOKEN in repository secrets."
