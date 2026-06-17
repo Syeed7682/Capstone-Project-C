@@ -87,7 +87,16 @@ Capstone_Project/
 
 ```bash
 git clone https://github.com/Syeed7682/Capstone-Project-C.git
+cd /d "e:\New folder\Capstone_Project"
+rmdir /s /q .venv
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r backend/requirements.txt
+python run.py
+```
+```bash
 cd Capstone-Project-C
+
 ```
 
 ### 2. Create & activate a virtual environment
@@ -104,6 +113,11 @@ source .venv/bin/activate
 
 ```bash
 pip install -r backend/requirements.txt
+
+
+
+
+
 ```
 
 This will install the necessary core libraries for the project, including:
