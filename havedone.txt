@@ -2,6 +2,22 @@
 Date: 2026-06-11
 Workspace: e:\New folder\Capstone_Project
 
+================================================================================
+🚀 QUICK START COMMANDS
+================================================================================
+To run the web application locally, use ONE of the following methods:
+
+Method 1 (Automated - Recommended):
+  cd "e:\New folder\Capstone_Project"
+  .\run_all.bat
+
+Method 2 (Manual Terminal):
+  cd "e:\New folder\Capstone_Project\backend"
+  uvicorn app.main:app --reload
+
+(Ensure you have activated your virtual environment and installed requirements first!)
+================================================================================
+
 We have successfully migrated the Jupyter Notebook code into a fully functional
 production-ready web application. The following actions have been executed:
 
