@@ -596,10 +596,11 @@ def build_medical_prompt(query_text: str, retrieved: List[Dict[str, Any]]) -> st
 
     prompt = (
         "You are a medical AI assistant trained in radiology.\n"
-        "Use the retrieved context below to answer the question.\n"
-        "Give a concise, direct answer. "
+        "IMPORTANT: You are provided with a medical image. You MUST analyze the image carefully yourself first.\n"
+        "The retrieved context below contains SIMILAR past cases for reference, but DO NOT blindly copy their answers. The current image may have a different condition (e.g., a visible fracture or abnormality).\n"
+        "Give a concise, direct answer based on what you actually see in the image.\n"
         "If it is a yes/no question, answer Yes or No first.\n\n"
-        "══ RETRIEVED CONTEXT ══\n"
+        "══ RETRIEVED CONTEXT (For reference only) ══\n"
         f"{''.join(context_lines)}\n"
         "══ QUESTION ══\n"
         f"{query_text}\n\n"
@@ -637,9 +638,10 @@ def build_medical_prompt_with_history(
 
     prompt = (
         "You are a medical AI assistant trained in radiology.\n"
-        "Use the retrieved context below to answer the user's new question.\n"
-        "Be concise and direct. If it is a yes/no question, answer Yes or No first.\n\n"
-        "══ RETRIEVED CONTEXT ══\n"
+        "IMPORTANT: You are provided with a medical image. You MUST analyze the image carefully yourself first.\n"
+        "The retrieved context below contains SIMILAR past cases for reference, but DO NOT blindly copy their answers. The current image may have a different condition (e.g., a visible fracture or abnormality).\n"
+        "Be concise and direct. If it is a yes/no question, answer Yes or No first based on visual evidence.\n\n"
+        "══ RETRIEVED CONTEXT (For reference only) ══\n"
         f"{''.join(context_lines)}\n\n"
     )
     if history_str:
@@ -651,7 +653,7 @@ def build_medical_prompt_with_history(
 # ── Generative VQA engines ────────────────────────────────────────────────────
 
 def _generate_via_hf_api(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:
-    """Uses Hugging Face Serverless Inference API to call LLaVA 1.5 7B."""
+    """Uses Hugging Face Serverless Inference API to call the specified vision model."""
     if not config.HF_TOKEN:
         raise ValueError("HF_TOKEN environment variable is missing for the huggingface_api engine.")
 
@@ -681,18 +683,8 @@ def _generate_via_hf_api(prompt: str, pil_image: Optional[Image.Image], max_toke
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        print(f"HuggingFace API Chat Completion error: {e}. Trying raw text-generation fallback...")
-        try:
-            llava_prompt = f"USER: <image>\n{prompt}\nASSISTANT:"
-            response = client.text_generation(
-                prompt=llava_prompt,
-                model=config.GEN_MODEL_LLAVA,
-                max_new_tokens=max_tokens,
-                temperature=0.3,
-            )
-            return response.strip()
-        except Exception as e2:
-            return f"Error calling Hugging Face Inference API: {str(e2)}"
+        print(f"HuggingFace API Chat Completion error: {e}")
+        return f"Error: HuggingFace API failed to process the image. (Detail: {e}). Please switch Engine Settings to Gemini Pro."
 
 
 def _generate_via_gemini_api(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:

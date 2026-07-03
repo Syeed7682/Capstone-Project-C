@@ -61,17 +61,22 @@ Capstone_Project/
 
 ## 🧠 Models & Components
 
-| Component | Model / Tool |
-|---|---|
-| Image + Text Encoder | [`microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224`](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224) |
-| Vector Index | Pinecone Cloud (primary) / FAISS `IndexFlatIP` (fallback) |
-| Dataset | [`BoKelvin/SLAKE`](https://huggingface.co/datasets/BoKelvin/SLAKE) — structured medical VQA |
-| Engine A (default) | Hugging Face Serverless Inference API — `llava-hf/llava-1.5-7b-hf` |
-| Engine B | Google Gemini 1.5 Flash API |
-| Engine C | Local Moondream2 1.6B (CPU-friendly, ~2 GB RAM) |
-| Engine D | Local LLaVA-1.5-7B (4-bit NF4, GPU only) |
+This system uses a **multi-model architecture** where two distinct types of AI models work together in a pipeline:
 
-**BiomedCLIP** is pretrained on 15 M biomedical image-caption pairs from PubMed Central — far more suited for medical retrieval than generic CLIP.
+### 1. The Retrieval Model (The "Search Engine")
+Before answering, the system needs to find similar past medical cases from the SLAKE database to use as reference.
+*   **Model Used:** [`microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224`](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224)
+*   **What it does:** It takes the uploaded X-ray and text question, converts them both into numerical coordinates (vectors), and searches the FAISS or Pinecone database for the most similar past clinical cases. BiomedCLIP is pretrained on 15 M biomedical image-caption pairs from PubMed Central — far more suited for medical retrieval than generic CLIP.
+
+### 2. The Generative Model (The "Doctor")
+Once the similar past cases are retrieved, a Vision-Language Model (VLM) looks at the actual image, reads the question, reads the retrieved past cases, and writes out the final grounded answer. 
+
+| Generative Engine | Model | Note |
+|---|---|---|
+| Hugging Face API | `Qwen/Qwen2.5-VL-72B-Instruct` | Default fallback. Can be unreliable with large images on the free tier. |
+| **Gemini API** | `gemini-1.5-flash` | **Highly Recommended**. Extremely reliable, fast, and excellent at medical imaging. |
+| Local Moondream | `vikhyatk/moondream2` | Runs locally on CPU (~2 GB RAM). High privacy, lower reasoning. |
+| Local LLaVA | `llava-hf/llava-1.5-7b-hf` | Runs locally (4-bit NF4) but requires a dedicated GPU (≥12 GB VRAM). |
 
 ---
 
