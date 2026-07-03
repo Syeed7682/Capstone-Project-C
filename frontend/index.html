@@ -4,30 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClinicaRAG Chatbot - Multimodal Medical VQA</title>
+    <meta name="description" content="ClinicaRAG — An AI-powered multimodal medical image VQA assistant grounded on the SLAKE dataset.">
+    <title>ClinicaRAG — Medical AI Assistant</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body class="dark-theme">
+
+    <!-- Ambient background orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
     <div class="app-container">
 
         <!-- Header -->
         <header class="main-header">
             <div class="logo-area">
                 <div class="pulse-ring"></div>
-                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <div class="logo-icon-wrap">
+                    <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                </div>
                 <div class="logo-text">
                     <h1>Clinica<span>RAG</span></h1>
-                    <p>Interactive Clinical Assistant</p>
+                    <p>Multimodal Medical VQA · SLAKE Grounded</p>
                 </div>
             </div>
 
@@ -35,19 +42,15 @@
             <div id="index-status-card" class="index-status-bar status-not-started">
                 <div class="status-indicator">
                     <span class="status-dot"></span>
-                    <span id="status-text">Checking FAISS index...</span>
+                    <span id="status-text">Checking index...</span>
                 </div>
                 <div class="progress-container hidden" id="status-progress-container">
                     <div class="progress-bar" id="status-progress-bar" style="width: 0%"></div>
                 </div>
                 <span id="status-percentage" class="percentage-badge hidden">0%</span>
-                <button id="rebuild-index-btn" class="rebuild-btn" title="Force rebuild index">
-                    <i class="fa-solid fa-sync"></i> Rebuild
-                </button>
-                <button id="new-chat-btn" class="rebuild-btn"
-                    style="background: rgba(0, 242, 254, 0.12); border-color: rgba(0, 242, 254, 0.25); color: var(--primary-cyan);"
-                    title="Start a new chat session">
-                    <i class="fa-solid fa-plus"></i> New Chat
+                <button id="rebuild-index-btn" class="header-action-btn" title="Force rebuild index">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>Rebuild</span>
                 </button>
             </div>
         </header>
@@ -55,149 +58,243 @@
         <!-- Main Body Grid -->
         <main class="dashboard-grid">
 
-            <!-- Sidebar: Configs -->
-            <aside class="config-sidebar glass-panel">
-                <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> Engine Settings</h3>
-
-                <form id="config-form">
-                    <!-- Engine Select -->
-                    <div class="form-group">
-                        <label for="engine-select">Generative LLM Engine</label>
-                        <select id="engine-select" class="custom-select">
-                            <option value="huggingface_api">Hugging Face API (LLaVA-7B)</option>
-                            <option value="gemini_api">Gemini API (1.5 Flash)</option>
-                            <option value="local_moondream">Local Moondream (CPU/1.6B)</option>
-                            <option value="local_llava">Local LLaVA-7B (CUDA/16GB)</option>
-                        </select>
-                    </div>
-
-                    <!-- HF Token (for HF API) -->
-                    <div class="form-group config-api-key" id="hf-token-group">
-                        <label for="hf-token-input">Hugging Face API Token</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="hf-token-input" placeholder="hf_xxxxxxxxxxxxxxxxxxxxxx"
-                                class="custom-input">
-                            <button type="button" class="toggle-password" tabindex="-1">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                        <small class="help-text">Required for the Hugging Face Serverless API</small>
-                    </div>
-
-                    <!-- Gemini Key (for Gemini API) -->
-                    <div class="form-group config-api-key hidden" id="gemini-key-group">
-                        <label for="gemini-key-input">Gemini API Key</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="gemini-key-input" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxx"
-                                class="custom-input">
-                            <button type="button" class="toggle-password" tabindex="-1">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                        <small class="help-text">Required for Google Gemini 1.5 Flash</small>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- RAG parameters -->
-                    <h4 class="sub-panel-title">Retrieval Parameters</h4>
-
-                    <!-- Top-K Slider -->
-                    <div class="form-group">
-                        <div class="slider-header">
-                            <label for="top-k-slider">Context Top-K</label>
-                            <span class="slider-value" id="top-k-val">5</span>
-                        </div>
-                        <input type="range" id="top-k-slider" min="1" max="10" value="5" class="custom-slider">
-                        <small class="help-text">Number of retrieved samples from SLAKE</small>
-                    </div>
-
-                    <!-- Alpha Slider -->
-                    <div class="form-group">
-                        <div class="slider-header">
-                            <label for="alpha-slider">Embedding Fusion (&alpha;)</label>
-                            <span class="slider-value" id="alpha-val">0.60</span>
-                        </div>
-                        <input type="range" id="alpha-slider" min="0.0" max="1.0" step="0.05" value="0.60"
-                            class="custom-slider">
-                        <div class="slider-labels">
-                            <span>Text-Heavy</span>
-                            <span>Balanced</span>
-                            <span>Image-Heavy</span>
-                        </div>
-                    </div>
-
-                    <!-- Max Tokens -->
-                    <div class="form-group">
-                        <div class="slider-header">
-                            <label for="tokens-slider">Max New Tokens</label>
-                            <span class="slider-value" id="tokens-val">128</span>
-                        </div>
-                        <input type="range" id="tokens-slider" min="32" max="512" step="16" value="128"
-                            class="custom-slider">
-                    </div>
-
-                    <button type="button" id="save-config-btn" class="primary-btn full-width">
-                        <i class="fa-solid fa-check"></i> Apply Configuration
+            <!-- Left Sidebar: Chat History -->
+            <aside class="history-sidebar glass-panel">
+                <div class="history-header">
+                    <button id="new-chat-sidebar-btn" class="new-chat-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>New Chat</span>
                     </button>
-                </form>
+                </div>
 
-                <!-- Hardware info -->
-                <div class="hw-info-card">
-                    <h4><i class="fa-solid fa-microchip"></i> System Environment</h4>
-                    <div class="hw-grid">
-                        <div class="hw-item">
-                            <span>Device:</span>
-                            <strong id="device-info">CPU</strong>
-                        </div>
-                        <div class="hw-item">
-                            <span>Encoder:</span>
-                            <strong id="encoder-info">BiomedCLIP</strong>
-                        </div>
+                <div class="history-list-container">
+                    <p class="sidebar-section-label">
+                        <i class="fa-regular fa-clock-rotate-left"></i>
+                        Recent Sessions
+                    </p>
+                    <div id="history-list" class="history-list">
+                        <!-- injected by JS -->
                     </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <button id="open-settings-btn" class="settings-btn" title="Open Engine Settings">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Engine Settings</span>
+                    </button>
                 </div>
             </aside>
 
-            <!-- Chatbot Workspace Area -->
+            <!-- Settings Modal -->
+            <div id="settings-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+                <div class="modal-content glass-panel">
+                    <div class="modal-header">
+                        <div class="modal-title-group">
+                            <div class="modal-icon-badge">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <div>
+                                <h3 class="modal-title">Engine Settings</h3>
+                                <p class="modal-subtitle">Configure the AI engine and retrieval parameters</p>
+                            </div>
+                        </div>
+                        <button id="close-settings-btn" class="close-btn" title="Close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="config-form">
+                            <!-- Engine Select -->
+                            <div class="form-section">
+                                <div class="form-section-label">
+                                    <i class="fa-solid fa-brain"></i> Generative Engine
+                                </div>
+                                <div class="engine-options">
+                                    <label class="engine-option">
+                                        <input type="radio" name="engine" value="huggingface_api">
+                                        <div class="engine-card">
+                                            <div class="engine-card-icon"><i class="fa-brands fa-hubspot"></i></div>
+                                            <div class="engine-card-info">
+                                                <strong>Hugging Face API</strong>
+                                                <small>LLaVA-1.5 7B · Cloud</small>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="engine-option">
+                                        <input type="radio" name="engine" value="gemini_api">
+                                        <div class="engine-card">
+                                            <div class="engine-card-icon"><i class="fa-solid fa-gem"></i></div>
+                                            <div class="engine-card-info">
+                                                <strong>Gemini Flash</strong>
+                                                <small>1.5 Flash · Cloud</small>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="engine-option">
+                                        <input type="radio" name="engine" value="local_moondream">
+                                        <div class="engine-card">
+                                            <div class="engine-card-icon"><i class="fa-solid fa-moon"></i></div>
+                                            <div class="engine-card-info">
+                                                <strong>Moondream</strong>
+                                                <small>1.6B · Local CPU</small>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="engine-option">
+                                        <input type="radio" name="engine" value="local_llava">
+                                        <div class="engine-card">
+                                            <div class="engine-card-icon"><i class="fa-solid fa-microchip"></i></div>
+                                            <div class="engine-card-info">
+                                                <strong>Local LLaVA</strong>
+                                                <small>7B · CUDA 16GB</small>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <!-- Hidden select for backwards compat -->
+                                <select id="engine-select" class="hidden" aria-hidden="true">
+                                    <option value="huggingface_api">Hugging Face API (LLaVA-7B)</option>
+                                    <option value="gemini_api">Gemini API (1.5 Flash)</option>
+                                    <option value="local_moondream">Local Moondream (CPU/1.6B)</option>
+                                    <option value="local_llava">Local LLaVA-7B (CUDA/16GB)</option>
+                                </select>
+                            </div>
+
+                            <!-- HF Token -->
+                            <div class="form-group config-api-key" id="hf-token-group">
+                                <label for="hf-token-input">
+                                    <i class="fa-solid fa-key"></i> Hugging Face API Token
+                                </label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="hf-token-input" placeholder="hf_xxxxxxxxxxxxxxxx" class="custom-input">
+                                    <button type="button" class="toggle-password" tabindex="-1">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="help-text"><i class="fa-solid fa-circle-info"></i> Required for Hugging Face Serverless Inference API</small>
+                            </div>
+
+                            <!-- Gemini Key -->
+                            <div class="form-group config-api-key hidden" id="gemini-key-group">
+                                <label for="gemini-key-input">
+                                    <i class="fa-solid fa-key"></i> Gemini API Key
+                                </label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="gemini-key-input" placeholder="AIzaSy..." class="custom-input">
+                                    <button type="button" class="toggle-password" tabindex="-1">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="help-text"><i class="fa-solid fa-circle-info"></i> Required for Google Gemini 1.5 Flash</small>
+                            </div>
+
+                            <div class="divider"><span>Retrieval Parameters</span></div>
+
+                            <!-- Top-K Slider -->
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <label for="top-k-slider"><i class="fa-solid fa-database"></i> Context Top-K</label>
+                                    <span class="slider-value" id="top-k-val">5</span>
+                                </div>
+                                <input type="range" id="top-k-slider" min="1" max="10" value="5" class="custom-slider">
+                                <small class="help-text">Retrieved SLAKE samples per query</small>
+                            </div>
+
+                            <!-- Alpha Slider -->
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <label for="alpha-slider"><i class="fa-solid fa-arrows-left-right"></i> Embedding Fusion (&alpha;)</label>
+                                    <span class="slider-value" id="alpha-val">0.60</span>
+                                </div>
+                                <input type="range" id="alpha-slider" min="0.0" max="1.0" step="0.05" value="0.60" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Text</span><span>Balanced</span><span>Image</span>
+                                </div>
+                            </div>
+
+                            <!-- Max Tokens -->
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <label for="tokens-slider"><i class="fa-solid fa-align-left"></i> Max New Tokens</label>
+                                    <span class="slider-value" id="tokens-val">128</span>
+                                </div>
+                                <input type="range" id="tokens-slider" min="32" max="512" step="16" value="128" class="custom-slider">
+                            </div>
+
+                            <button type="button" id="save-config-btn" class="primary-btn full-width apply-btn">
+                                <i class="fa-solid fa-check"></i> Apply Configuration
+                            </button>
+                        </form>
+
+                        <!-- Hardware info -->
+                        <div class="hw-info-card">
+                            <div class="hw-info-row">
+                                <div class="hw-badge">
+                                    <i class="fa-solid fa-microchip"></i>
+                                    <div>
+                                        <span class="hw-label">Device</span>
+                                        <strong id="device-info">CPU</strong>
+                                    </div>
+                                </div>
+                                <div class="hw-badge">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <div>
+                                        <span class="hw-label">Encoder</span>
+                                        <strong id="encoder-info">BiomedCLIP</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot Workspace -->
             <section class="chat-workspace glass-panel">
 
-                <!-- Chat Window -->
                 <div class="chat-container">
 
-                    <!-- Welcome Page / Welcome Card (hidden once messages exist) -->
+                    <!-- Welcome Screen -->
                     <div class="welcome-container" id="welcome-view">
-                        <div class="welcome-header">
-                            <div class="welcome-logo">
-                                <i class="fa-solid fa-user-doctor"></i>
+                        <div class="welcome-hero">
+                            <div class="welcome-logo-wrap">
+                                <div class="welcome-logo-glow"></div>
+                                <i class="fa-solid fa-stethoscope welcome-logo-icon"></i>
                             </div>
-                            <h2>Welcome to ClinicaRAG</h2>
-                            <p>An AI medical visual assistant grounded on the SLAKE dataset. Upload a medical scan (MRI,
-                                CT, X-ray) and ask clinical questions to begin.</p>
+                            <h2>How can I assist you today?</h2>
+                            <p>Upload a medical scan (MRI, CT, X-ray) and ask a clinical question. I'm grounded on the <strong>SLAKE</strong> medical VQA dataset.</p>
                         </div>
 
-                        <!-- Preset Prompts Section -->
                         <div class="presets-section">
-                            <h3><i class="fa-solid fa-lightbulb"></i> Select a Clinical Demo Question</h3>
-
                             <div class="welcome-tabs">
-                                <button class="preset-tab-btn active" data-tab="closed">Closed-ended (Yes/No)</button>
-                                <button class="preset-tab-btn" data-tab="open">Open-ended (Factual)</button>
-                                <button class="preset-tab-btn" data-tab="ood">Anti-Hallucination (OOD)</button>
+                                <button class="preset-tab-btn active" data-tab="closed">
+                                    <i class="fa-solid fa-circle-check"></i> Yes/No
+                                </button>
+                                <button class="preset-tab-btn" data-tab="open">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Factual
+                                </button>
+                                <button class="preset-tab-btn" data-tab="ood">
+                                    <i class="fa-solid fa-shield-halved"></i> Anti-Hallucination
+                                </button>
                             </div>
 
                             <div class="preset-content active" id="tab-closed">
                                 <div class="presets-grid">
-                                    <button class="preset-query-btn"
-                                        data-q="Is there any abnormality visible in the lung area?">
+                                    <button class="preset-query-btn" data-q="Is there any abnormality visible in the lung area?">
+                                        <i class="fa-solid fa-lungs"></i>
                                         Is there any abnormality visible in the lung area?
                                     </button>
                                     <button class="preset-query-btn" data-q="Is this a chest X-ray?">
+                                        <i class="fa-solid fa-x-ray"></i>
                                         Is this a chest X-ray?
                                     </button>
                                     <button class="preset-query-btn" data-q="Is the liver visible in this image?">
+                                        <i class="fa-solid fa-disease"></i>
                                         Is the liver visible in this image?
                                     </button>
                                     <button class="preset-query-btn" data-q="Is this image taken from an MRI scan?">
+                                        <i class="fa-solid fa-ring"></i>
                                         Is this image taken from an MRI scan?
                                     </button>
                                 </div>
@@ -205,19 +302,20 @@
 
                             <div class="preset-content" id="tab-open">
                                 <div class="presets-grid">
-                                    <button class="preset-query-btn"
-                                        data-q="What organ is shown in this medical image?">
+                                    <button class="preset-query-btn" data-q="What organ is shown in this medical image?">
+                                        <i class="fa-solid fa-heart"></i>
                                         What organ is shown in this medical image?
                                     </button>
-                                    <button class="preset-query-btn"
-                                        data-q="What body part is highlighted in the image?">
+                                    <button class="preset-query-btn" data-q="What body part is highlighted in the image?">
+                                        <i class="fa-solid fa-person"></i>
                                         What body part is highlighted in the image?
                                     </button>
                                     <button class="preset-query-btn" data-q="What type of scan is this?">
+                                        <i class="fa-solid fa-images"></i>
                                         What type of scan is this?
                                     </button>
-                                    <button class="preset-query-btn"
-                                        data-q="What abnormality is present in this image?">
+                                    <button class="preset-query-btn" data-q="What abnormality is present in this image?">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
                                         What abnormality is present in this image?
                                     </button>
                                 </div>
@@ -226,16 +324,19 @@
                             <div class="preset-content" id="tab-ood">
                                 <div class="presets-grid">
                                     <button class="preset-query-btn" data-q="What is the patient's age?">
+                                        <i class="fa-solid fa-user"></i>
                                         What is the patient's age?
                                     </button>
                                     <button class="preset-query-btn" data-q="What medication is the patient taking?">
+                                        <i class="fa-solid fa-pills"></i>
                                         What medication is the patient taking?
                                     </button>
                                     <button class="preset-query-btn" data-q="What is the patient's blood pressure?">
+                                        <i class="fa-solid fa-heart-pulse"></i>
                                         What is the patient's blood pressure?
                                     </button>
-                                    <button class="preset-query-btn"
-                                        data-q="What is the patient's diagnosis from the blood report?">
+                                    <button class="preset-query-btn" data-q="What is the patient's diagnosis from the blood report?">
+                                        <i class="fa-solid fa-vial"></i>
                                         What is the patient's diagnosis from the blood report?
                                     </button>
                                 </div>
@@ -244,35 +345,37 @@
                     </div>
 
                     <!-- Chat Message Area -->
-                    <div class="chat-messages-area hidden" id="chat-messages">
-                        <!-- Messages will be injected here -->
-                    </div>
+                    <div class="chat-messages-area hidden" id="chat-messages"></div>
 
-                    <!-- Image Attachment Preview Thumbnail Bar -->
+                    <!-- Image Attachment Preview Bar -->
                     <div class="attachment-preview-bar hidden" id="attachment-bar">
                         <div class="attachment-thumbnail">
                             <img src="" alt="Thumbnail preview" id="attachment-img">
-                            <button type="button" class="remove-attachment" id="clear-attachment-btn"
-                                title="Remove attachment">
+                            <button type="button" class="remove-attachment" id="clear-attachment-btn" title="Remove attachment">
                                 <i class="fa-solid fa-times"></i>
                             </button>
                         </div>
-                        <span class="attachment-name" id="attachment-filename">image.jpg</span>
+                        <div class="attachment-meta">
+                            <span class="attachment-name" id="attachment-filename">image.jpg</span>
+                            <small>Medical image attached</small>
+                        </div>
                     </div>
 
-                    <!-- Chat Input Controls -->
-                    <div class="chat-input-container">
+                    <!-- Chat Input Bar -->
+                    <div class="chat-input-wrapper">
                         <input type="file" id="image-file-input" accept="image/*" class="hidden">
-                        <button type="button" class="attach-btn" id="attach-img-btn" title="Attach Medical Image">
-                            <i class="fa-solid fa-paperclip"></i>
-                        </button>
+                        <div class="chat-input-container">
+                            <button type="button" class="attach-btn" id="attach-img-btn" title="Attach Medical Image">
+                                <i class="fa-solid fa-paperclip"></i>
+                            </button>
 
-                        <textarea id="chat-input-text" placeholder="Type a message or clinical question..."
-                            rows="1"></textarea>
+                            <textarea id="chat-input-text" placeholder="Ask a clinical question or describe what you see…" rows="1"></textarea>
 
-                        <button type="button" class="send-btn" id="send-chat-btn" title="Send Message">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
+                            <button type="button" class="send-btn" id="send-chat-btn" title="Send Message">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p class="input-disclaimer">ClinicaRAG answers are AI-generated and grounded on SLAKE. Not for clinical use.</p>
                     </div>
 
                 </div>

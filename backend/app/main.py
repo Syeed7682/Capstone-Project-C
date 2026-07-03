@@ -240,6 +240,61 @@ def clear_session(session_id: str = Form(...)):
     return {"message": f"Session {session_id} cleared successfully."}
 
 
+@app.get("/api/sessions")
+def get_sessions():
+    """List all past chat sessions and their previews."""
+    sessions = []
+    if SESSIONS_DIR.exists():
+        for session_dir in SESSIONS_DIR.iterdir():
+            if session_dir.is_dir():
+                history_path = session_dir / "history.json"
+                if history_path.exists():
+                    try:
+                        with open(history_path, "r") as f:
+                            history = json.load(f)
+                            if history and len(history) > 0:
+                                # Use first user message as title, truncate to 40 chars
+                                title = history[0].get("text", "New Chat")
+                                if len(title) > 40:
+                                    title = title[:37] + "..."
+                                # Get modified time
+                                mtime = history_path.stat().st_mtime
+                                sessions.append({
+                                    "session_id": session_dir.name,
+                                    "title": title,
+                                    "timestamp": mtime
+                                })
+                    except Exception:
+                        pass
+    # Sort by most recent first
+    sessions.sort(key=lambda x: x["timestamp"], reverse=True)
+    return {"sessions": sessions}
+
+
+@app.get("/api/session/{session_id}")
+def get_session_history(session_id: str):
+    """Fetch the full chat history for a specific session."""
+    session_dir = SESSIONS_DIR / session_id
+    history_path = session_dir / "history.json"
+    
+    if not history_path.exists():
+        raise HTTPException(status_code=404, detail="Session not found")
+        
+    try:
+        with open(history_path, "r") as f:
+            history = json.load(f)
+            
+        has_image = (session_dir / "active_image.jpg").exists()
+        
+        return {
+            "session_id": session_id,
+            "history": history,
+            "has_image": has_image
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading history: {str(e)}")
+
+
 @app.post("/api/rebuild-index")
 def rebuild_index(background_tasks: BackgroundTasks):
     """Force rebuilding the FAISS index from the SLAKE dataset."""
