@@ -1,6 +1,6 @@
 # 🏥 Medical Image VQA — Multimodal RAG Web Application
 
-A production-ready **Retrieval-Augmented Generation (RAG)** system for medical image Visual Question Answering (VQA). Combines **BiomedCLIP** embeddings, a **FAISS** vector index built from the **SLAKE** dataset, and a choice of four LLM backends — all wrapped in a premium dark-themed chatbot UI served by **FastAPI**.
+A production-ready **Retrieval-Augmented Generation (RAG)** system for medical image Visual Question Answering (VQA). Combines **BiomedCLIP** embeddings, a **Pinecone cloud vector index (with local FAISS fallback)** built from the **SLAKE** dataset, and a choice of four LLM backends — all wrapped in a premium dark-themed chatbot UI served by **FastAPI**.
 
 ---
 
@@ -17,7 +17,7 @@ Query (text + optional medical image)
 BiomedCLIP Encoder  ←  fused image + text embedding (α-blend)
         │
         ▼
-FAISS IndexFlatIP   ←  top-K nearest neighbors from SLAKE
+Pinecone / FAISS    ←  top-K nearest neighbors from SLAKE
         │
         ▼
 Grounded Prompt Builder  ←  retrieved QA pairs + medical facts
@@ -64,7 +64,7 @@ Capstone_Project/
 | Component | Model / Tool |
 |---|---|
 | Image + Text Encoder | [`microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224`](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224) |
-| Vector Index | FAISS `IndexFlatIP` (inner-product / cosine similarity) |
+| Vector Index | Pinecone Cloud (primary) / FAISS `IndexFlatIP` (fallback) |
 | Dataset | [`BoKelvin/SLAKE`](https://huggingface.co/datasets/BoKelvin/SLAKE) — structured medical VQA |
 | Engine A (default) | Hugging Face Serverless Inference API — `llava-hf/llava-1.5-7b-hf` |
 | Engine B | Google Gemini 1.5 Flash API |
@@ -109,6 +109,8 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
+> If activation fails because the virtual environment points to a missing Windows Store Python stub, delete `.venv`, install a real Python 3.9+ from python.org, and recreate it.
+
 ### 3. Install dependencies
 
 ```bash
@@ -126,6 +128,7 @@ This will install the necessary core libraries for the project, including:
 - **FAISS-CPU** (for high-speed vector search)
 - **Hugging Face Transformers & Accelerate** (for local LLMs)
 - **Google GenerativeAI** (for Gemini API backend)
+- **Pinecone Client** (for cloud vector storage)
 - **Python-Dotenv** (for managing environment variables)
 
 ### 4. Set API keys (Environment Variables)
@@ -135,6 +138,12 @@ You only need API keys if you plan to use the cloud engines (Hugging Face API or
 **Option A: Using a `.env` file (Recommended)**
 Create a file named `.env` in the root of the project and add your keys:
 ```env
+# Pinecone Vector Store (Recommended for fast startups)
+PINECONE_API_KEY=pcsk_xxxxxxxxxxxxxxxxxxxx
+PINECONE_INDEX_NAME=slake-index
+PINECONE_HOST=https://your-host.pinecone.io
+
+# Cloud LLM Engines
 HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxx
 GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxx
 ```
@@ -152,14 +161,26 @@ $env:GEMINI_API_KEY="AIzaxxxxxxxxxxxxxxxx"
 
 ### 5. Start the server (Run on Localhost)
 
+There are two recommended ways to start the server to ensure Python resolves the import paths correctly:
+
+**Method 1: Using the automated script (Simplest)**
+Double-click `run_all.bat` in the root folder, or run it from the terminal:
 ```bash
-python run.py
+.\run_all.bat
+```
+*(This script automatically changes to the `backend` directory, starts the server, and opens your browser.)*
+
+**Method 2: Manual terminal commands**
+If you prefer to start it manually, ensure your terminal is inside the `backend` folder:
+```bash
+cd backend
+uvicorn app.main:app --reload
 ```
 
 The server will start locally on your machine. Open your web browser and navigate to:
 **http://localhost:8000** (or **http://127.0.0.1:8000**)
 
-> **Note:** On first run the server will automatically download the SLAKE dataset metadata and `imgs.zip` (~640 MB) from Hugging Face, extract images, and build the FAISS index in a background thread. Progress is tracked in real time on the dashboard.
+> **Note:** On first run the server will automatically download the SLAKE dataset metadata and `imgs.zip` (~640 MB) from Hugging Face, extract images, and upload the vectors to Pinecone (or build the local FAISS index) in a background thread. Once Pinecone is populated, all future server restarts will be nearly instantaneous.
 
 ---
 
@@ -171,7 +192,7 @@ Open **http://localhost:8000** in your browser. You will see:
 - **Chat window** — type a clinical question, optionally upload a radiology image
 - **Settings panel** (left sidebar) — switch engines, adjust Top-K, α, max tokens, and paste API keys on the fly
 - **RAG Context accordion** — expand each assistant reply to inspect the retrieved SLAKE examples that grounded the answer
-- **Index status bar** — shows real-time download/indexing progress until the FAISS index is ready
+- **Index status bar** — shows real-time download/indexing progress until the Pinecone/FAISS index is ready
 
 ### Conversational Multi-turn
 
@@ -184,7 +205,7 @@ The chatbot maintains full conversation history per `session_id`. Uploaded image
 | Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/api/query` | Submit text + optional image, returns answer + retrieved contexts |
-| `GET` | `/api/index-status` | Real-time FAISS build progress |
+| `GET` | `/api/index-status` | Real-time Pinecone/FAISS build progress |
 | `GET` | `/api/config` | Inspect active engine, alpha, top_k, token counts |
 | `POST` | `/api/config` | Hot-swap engine, inject API keys, update hyperparameters |
 | `POST` | `/api/rebuild-index` | Force a fresh SLAKE index rebuild |
@@ -224,7 +245,7 @@ The FAISS index is built with **batched BiomedCLIP inference** (`BATCH_SIZE=64`)
 
 - Images and texts for each batch are stacked into a single tensor and passed through the encoder in one forward pass.
 - This is **10–20× faster** than the naïve one-sample-at-a-time approach, especially on CPU.
-- Index is saved to disk after the first build; subsequent server restarts load it instantly from cache.
+- When using Pinecone, vectors are permanently stored in the cloud. After the initial 10-15 minute upload, **subsequent server restarts load instantly in < 5 seconds**.
 
 ---
 

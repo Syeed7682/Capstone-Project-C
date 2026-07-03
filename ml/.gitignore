@@ -3,3 +3,22 @@ venv/
 __pycache__/
 *.pyc
 .gemini/
+
+# Model files (too large for Git)
+models/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.onnx
+
+# Data files (use DVC or cloud storage instead)
+data/raw/
+data/processed/
+*.csv
+*.parquet
+*.json.gz
+
+# MLflow runs
+mlruns/

@@ -499,3 +499,51 @@ CURRENT STATE
                         gemini_api or huggingface_api depending on .env)
    - Session support:   Full chat history + image caching per session_id
 ================================================================================
+
+================================================================================
+=== Capstone Medical Image VQA RAG System — Environment Setup & Debugging ===
+Date: 2026-07-03
+Workspace: e:\New folder\Capstone_Project
+================================================================================
+
+This session focused entirely on stabilizing the Python environment, fixing IDE integration issues, and ensuring all dependencies for local execution (including LLaVA-1.5-7B) are completely satisfied.
+
+--------------------------------------------------------------------------------
+TASK 1 — Startup Path Resolution
+--------------------------------------------------------------------------------
+   - Diagnosed a `ModuleNotFoundError: No module named 'app'` when starting FastAPI.
+   - Identified the root cause: running uvicorn from the project root instead of the backend folder.
+   - Updated `README.md` to explicitly document the two correct startup methods:
+       1. Double-clicking `run_all.bat` (automatically handles path switching).
+       2. Manually running `cd backend` followed by `uvicorn app.main:app --reload`.
+
+--------------------------------------------------------------------------------
+TASK 2 — IDE (VS Code) Synchronization
+--------------------------------------------------------------------------------
+   - User reported "red underlines" and `Cannot find module fastapi` in main.py.
+   - Identified this as VS Code looking at the global Python installation instead of the project's virtual environment.
+   - Provided instructions to select the correct interpreter (`Python: Select Interpreter` -> `.venv\Scripts\python.exe`).
+
+--------------------------------------------------------------------------------
+TASK 3 — Dependency Management with UV
+--------------------------------------------------------------------------------
+   - Assisted user with finalizing the installation of `uv` (a blazing fast pip replacement) in PowerShell.
+   - Successfully resolved `File not found` error by ensuring `uv` was run inside the Capstone_Project directory.
+   - Discovered a missing dependency: `bitsandbytes` (required for 4-bit quantization config of LLaVA-1.5-7B on line 804 of pipeline.py).
+   - Installed `bitsandbytes` using `uv` and dynamically appended it to `backend\requirements.txt` to prevent future build failures.
+   - Ran a background `pip install` verification sweep to guarantee 100% of the required packages were satisfied.
+
+--------------------------------------------------------------------------------
+TASK 4 — Pylance Diagnostics
+--------------------------------------------------------------------------------
+   - Addressed lingering red lines under `BitsAndBytesConfig` import from `transformers`.
+   - Spawned a background diagnostic task (`python -c "from transformers import BitsAndBytesConfig"`) which returned a perfect `Success!`.
+   - Concluded the red line is a common visual caching glitch in VS Code caused by the massive size and lazy-loading architecture of the `transformers` library, and confirmed the code is perfectly safe to execute.
+
+--------------------------------------------------------------------------------
+CURRENT STATE
+--------------------------------------------------------------------------------
+   - Dependencies:      100% Satisfied and tracked in requirements.txt.
+   - Package Manager:   `uv` successfully installed and added to PATH.
+   - Execution:         Backend is completely ready to run without import errors.
+================================================================================

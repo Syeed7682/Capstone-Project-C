@@ -2,8 +2,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Always load .env from the backend directory (where this config.py lives)
+_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=_ENV_PATH, override=True)
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,6 @@ DIM = 512
 
 # Generative Engine Settings
 # Available engines: 'huggingface_api', 'gemini_api', 'local_moondream', 'local_llava'
-# Default to 'huggingface_api' if HF_TOKEN is configured, else fallback to 'local_moondream' (CPU friendly)
 HF_TOKEN = os.getenv("HF_TOKEN", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
@@ -34,13 +34,25 @@ else:
 GENERATIVE_ENGINE = os.getenv("GENERATIVE_ENGINE", DEFAULT_ENGINE)
 
 # Model IDs
-GEN_MODEL_LLAVA = "llava-hf/llava-1.5-7b-hf"
+GEN_MODEL_LLAVA = "Qwen/Qwen2.5-VL-72B-Instruct"  # Cloud VLM via HF Inference API
 GEN_MODEL_MOONDREAM = "vikhyatk/moondream2"
 
-# Dataset and FAISS paths
+# Dataset and FAISS paths (used as local fallback when Pinecone is not configured)
 SLAKE_IMG_DIR = DATA_DIR / "slake_images"
 INDEX_PATH = DATA_DIR / "slake_index.faiss"
 META_PATH = DATA_DIR / "slake_meta.json"
+
+# ── Pinecone Cloud Vector Store ──────────────────────────────────────────────
+# Set PINECONE_API_KEY in your .env file to enable cloud vector storage.
+# When enabled, vectors are stored permanently in Pinecone — no local rebuild needed.
+# Falls back to local FAISS if the key is not set.
+PINECONE_API_KEY   = os.getenv("PINECONE_API_KEY", "")
+PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "slake-index")
+PINECONE_HOST      = os.getenv("PINECONE_HOST", "https://slake-index-gmci4oc.svc.aped-4627-b74a.pinecone.io")
+PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "slake-vqa")
+
+# Auto-detect which vector store to use
+USE_PINECONE = bool(PINECONE_API_KEY)
 
 # RAG Hyperparameters
 TOP_K = 5

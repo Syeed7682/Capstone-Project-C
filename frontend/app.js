@@ -2,6 +2,7 @@
 let selectedImageFile = null;
 let currentConfig = {};
 let pollingInterval = null;
+let sessionId = crypto.randomUUID();
 
 // DOM Elements
 const engineSelect = document.getElementById('engine-select');
@@ -39,6 +40,7 @@ const statusProgressContainer = document.getElementById('status-progress-contain
 const statusProgressBar = document.getElementById('status-progress-bar');
 const statusPercentage = document.getElementById('status-percentage');
 const rebuildIndexBtn = document.getElementById('rebuild-index-btn');
+const newChatBtn = document.getElementById('new-chat-btn');
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tokensSlider.addEventListener('input', () => tokensVal.textContent = tokensSlider.value);
     saveConfigBtn.addEventListener('click', applyConfig);
     rebuildIndexBtn.addEventListener('click', rebuildIndex);
+    newChatBtn.addEventListener('click', startNewChat);
     
     // Send message events
     sendChatBtn.addEventListener('click', sendMessage);
@@ -364,6 +367,7 @@ async function sendMessage() {
     }
     
     // Add configurations parameters overrides
+    formData.append('session_id', sessionId);
     formData.append('engine', engineSelect.value);
     formData.append('top_k', topKSlider.value);
     formData.append('alpha', alphaSlider.value);
@@ -459,6 +463,37 @@ function renderErrorMessage(errorMsg) {
     `;
     chatMessages.appendChild(errorMsgDiv);
     scrollToBottom();
+}
+
+async function startNewChat() {
+    try {
+        const formData = new FormData();
+        formData.append('session_id', sessionId);
+        await fetch('/api/session/clear', {
+            method: 'POST',
+            body: formData
+        });
+    } catch (e) {
+        console.error("Error clearing session on server", e);
+    }
+    
+    // Generate new session ID
+    sessionId = crypto.randomUUID();
+    
+    // Clear chat UI
+    chatMessages.innerHTML = '';
+    
+    // Reset UI view
+    chatMessages.classList.add('hidden');
+    welcomeView.classList.remove('hidden');
+    
+    // Clear inputs
+    chatInputText.value = "";
+    selectedImageFile = null;
+    imageFileInput.value = "";
+    attachmentImg.src = "";
+    attachmentBar.classList.add('hidden');
+    attachImgBtn.classList.remove('attached');
 }
 
 // ── Utility Helpers ─────────────────────────────────────────────────────────

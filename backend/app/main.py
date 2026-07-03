@@ -1,4 +1,5 @@
 import os
+import json
 from io import BytesIO
 from typing import Optional
 from pathlib import Path
@@ -14,8 +15,8 @@ from app import config, pipeline
 
 app = FastAPI(
     title="Medical Image VQA Multimodal RAG Backend",
-    description="FastAPI backend for medical VQA grounded on the SLAKE dataset using BiomedCLIP + FAISS + LLMs",
-    version="1.0.0"
+    description="FastAPI backend for medical VQA grounded on the SLAKE dataset using BiomedCLIP + Pinecone/FAISS + LLMs",
+    version="2.0.0"
 )
 
 # Enable CORS for local development
@@ -70,7 +71,11 @@ def get_server_config():
         "top_k": config.TOP_K,
         "alpha": config.ALPHA,
         "max_new_tokens": config.MAX_NEW_TOKENS,
-        "available_engines": ["huggingface_api", "gemini_api", "local_moondream", "local_llava"]
+        "available_engines": ["huggingface_api", "gemini_api", "local_moondream", "local_llava"],
+        # Vector store info
+        "vector_store": "pinecone" if config.USE_PINECONE else "faiss",
+        "pinecone_index": config.PINECONE_INDEX_NAME if config.USE_PINECONE else None,
+        "has_pinecone_key": bool(config.PINECONE_API_KEY),
     }
 
 
@@ -129,11 +134,15 @@ def run_vqa_query(
     Submit a text query and optional medical image.
     Retrieves contexts from SLAKE and generates a medical VQA answer, supporting conversational history.
     """
-    # Verify index is loaded/ready before accepting queries
-    if pipeline.faiss_index is None:
+    # Verify the active vector store (Pinecone or FAISS) is ready
+    if not pipeline.is_index_ready():
+        store = "Pinecone" if config.USE_PINECONE else "FAISS"
         raise HTTPException(
-            status_code=503, 
-            detail=f"FAISS index is not loaded. Current status: {pipeline.index_status.status} ({pipeline.index_status.message})"
+            status_code=503,
+            detail=(
+                f"{store} index is not ready. "
+                f"Status: {pipeline.index_status.status} — {pipeline.index_status.message}"
+            )
         )
 
     pil_image = None
