@@ -563,3 +563,56 @@ CURRENT STATE
    - Package Manager:   `uv` successfully installed and added to PATH.
    - Execution:         Backend is completely ready to run without import errors.
 ================================================================================
+
+================================================================================
+=== Capstone Medical Image VQA RAG System — Full-Stack Feature Expansion ===
+Date: 2026-08-08
+Workspace: e:\New folder\Capstone_Project
+================================================================================
+
+This session heavily expanded the application's capabilities, transforming it from a local-only prototype into a full-stack, authenticated web platform backed by MongoDB Atlas.
+
+--------------------------------------------------------------------------------
+TASK 1 — User Authentication & MongoDB Integration
+--------------------------------------------------------------------------------
+   - Created `backend/app/db.py` to interface with MongoDB Atlas (via `pymongo`) using the `MONGO_URI` environment variable, falling back to a local JSON file if offline.
+   - Implemented a complete Authentication system with new API endpoints:
+       * `POST /api/auth/register`: Securely creates a new user account with hashed passwords.
+       * `POST /api/auth/login`: Authenticates users and returns the user profile.
+   - Updated the frontend UI (`LandingPage.tsx`) to support Login and Sign-up flows, protecting the main application from unauthorized access.
+   - Tied chat history, sessions, and system metadata specifically to the authenticated user's email address in the database, allowing for secure multi-user support.
+
+--------------------------------------------------------------------------------
+TASK 2 — User Profile Management & Avatar Customization
+--------------------------------------------------------------------------------
+   - Built a comprehensive `ProfileModal` component allowing users to edit their:
+       * Name
+       * Email address
+       * Password
+   - Added support for Avatar Customization:
+       * Users can select from 5 premium "Avatar Gradient Themes" to stylize their profile initials.
+       * Users can upload a custom **Profile Image** (Base64 encoded, max 2MB).
+   - Created `POST /api/auth/update` in the backend to securely process these updates, automatically splitting the single display name into first/last name for database storage, and handling image storage.
+   - Enhanced the Sidebar to display the uploaded profile image or the dynamic gradient fallback.
+
+--------------------------------------------------------------------------------
+TASK 3 — Clinical Reports Generation
+--------------------------------------------------------------------------------
+   - Implemented a new feature for clinicians to export their consultation history.
+   - Created a `ReportModal` component in the frontend to trigger report generation.
+   - Added `POST /api/reports/generate` and `GET /api/reports/list` endpoints.
+   - Reports are synthesized server-side and securely stored in the MongoDB `reports` collection, linked to the user's account.
+
+--------------------------------------------------------------------------------
+TASK 4 — System Documentation Sync
+--------------------------------------------------------------------------------
+   - Updated `README.md` to reflect the new Architecture (MongoDB, Auth, Reports).
+   - Updated `diagram.md` Use Cases, Sequence, and Class diagrams to map out the new `db.py` persistence layer and profile endpoints.
+   - Re-compiled the frontend using `npm run build` via Vite, ensuring a seamless, production-ready bundle.
+
+--------------------------------------------------------------------------------
+CURRENT STATE
+--------------------------------------------------------------------------------
+   - Backend:  Fully authenticated, serving RAG via Pinecone/FAISS + LLMs, persisting to MongoDB Atlas.
+   - Frontend: Polished React/Vite UI with personalized profiles, custom avatars, and secure authentication flows.
+================================================================================

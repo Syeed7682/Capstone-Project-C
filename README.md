@@ -1,12 +1,12 @@
 # 🏥 Medical Image VQA — Multimodal RAG Web Application
 
-A production-ready **Retrieval-Augmented Generation (RAG)** system for medical image Visual Question Answering (VQA). Combines **BiomedCLIP** embeddings, a **Pinecone cloud vector index (with local FAISS fallback)** built from the **SLAKE** dataset, and a choice of four LLM backends — all wrapped in a premium dark-themed chatbot UI served by **FastAPI**.
+A production-ready **Retrieval-Augmented Generation (RAG)** system for medical image Visual Question Answering (VQA). Combines **BiomedCLIP** embeddings, a **Pinecone cloud vector index (with local FAISS fallback)** built from the **SLAKE** dataset, and a choice of four LLM backends — all wrapped in a premium dark-themed chatbot UI served by **FastAPI** with **MongoDB Atlas** for secure user management and persistence.
 
 ---
 
 ## 📌 Overview
 
-The system answers clinical questions about radiology images (X-rays, MRIs, CT scans) by first retrieving the most relevant question-answer pairs from the SLAKE knowledge base and then generating a grounded, anti-hallucination answer using the configured LLM engine.
+The system answers clinical questions about radiology images (X-rays, MRIs, CT scans) by first retrieving the most relevant question-answer pairs from the SLAKE knowledge base and then generating a grounded, anti-hallucination answer using the configured LLM engine. It features full user authentication, session persistence, profile customization, and automated clinical report generation.
 
 **Full pipeline:**
 
@@ -38,6 +38,7 @@ Capstone_Project/
 ├── run.py                          # Master startup script (uvicorn on :8000)
 ├── havedone.txt                    # Detailed session-by-session progress log
 ├── README.md                       # This file
+├── diagram.md                      # Architecture and flow diagrams
 ├── System_Architecture.png         # Architecture diagram
 ├── Capstone_B.ipynb                # Original research notebook (reference only)
 │
@@ -46,15 +47,21 @@ Capstone_Project/
 │   └── app/
 │       ├── __init__.py
 │       ├── config.py               # Device detection, paths, engine defaults
+│       ├── db.py                   # MongoDB Atlas & local JSON persistence manager
 │       ├── pipeline.py             # BiomedCLIP, FAISS indexing, retrieval, VQA
-│       ├── main.py                 # FastAPI app: all REST endpoints + static serving
+│       ├── main.py                 # FastAPI app: REST endpoints, auth, and static serving
 │       ├── test_pipeline.py        # Smoke test for imports and hardware config
 │       └── static/                 # (reserved for future static assets)
 │
 └── frontend/
-    ├── index.html                  # Single-page chatbot dashboard
-    ├── style.css                   # Dark clinical theme, glassmorphism, animations
-    └── app.js                      # Chat logic, session state, RAG context accordion
+    ├── index.html                  # Single-page application entry point
+    ├── package.json                # Frontend dependencies and scripts
+    ├── vite.config.ts              # Vite bundler configuration
+    └── src/
+        ├── App.tsx                 # Main React component, routing & state
+        ├── index.css               # Tailwind & custom CSS, clinical dark theme
+        ├── types.ts                # TypeScript interfaces (User, Session, etc.)
+        └── components/             # Reusable UI components (Sidebar, Chat, ProfileModal, ReportModal, etc.)
 ```
 
 ---
@@ -134,6 +141,7 @@ This will install the necessary core libraries for the project, including:
 - **Hugging Face Transformers & Accelerate** (for local LLMs)
 - **Google GenerativeAI** (for Gemini API backend)
 - **Pinecone Client** (for cloud vector storage)
+- **Pymongo** (for MongoDB Atlas integration)
 - **Python-Dotenv** (for managing environment variables)
 
 ### 4. Set API keys (Environment Variables)
@@ -143,6 +151,9 @@ You only need API keys if you plan to use the cloud engines (Hugging Face API or
 **Option A: Using a `.env` file (Recommended)**
 Create a file named `.env` in the root of the project and add your keys:
 ```env
+# MongoDB Atlas (User Accounts & Chat History)
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0...
+
 # Pinecone Vector Store (Recommended for fast startups)
 PINECONE_API_KEY=pcsk_xxxxxxxxxxxxxxxxxxxx
 PINECONE_INDEX_NAME=slake-index
@@ -193,10 +204,12 @@ The server will start locally on your machine. Open your web browser and navigat
 
 Open **http://localhost:8000** in your browser. You will see:
 
-- **Welcome screen** with preset example queries
+- **Welcome screen** with preset example queries and authentication (Login/Signup)
 - **Chat window** — type a clinical question, optionally upload a radiology image
 - **Settings panel** (left sidebar) — switch engines, adjust Top-K, α, max tokens, and paste API keys on the fly
+- **Profile Settings** — click your avatar in the sidebar to update your name, email, password, and profile image (or avatar gradient theme)
 - **RAG Context accordion** — expand each assistant reply to inspect the retrieved SLAKE examples that grounded the answer
+- **Clinical Reports** — generate and download PDF/Markdown consultation reports based on session history
 - **Index status bar** — shows real-time download/indexing progress until the Pinecone/FAISS index is ready
 
 ### Conversational Multi-turn
@@ -209,12 +222,18 @@ The chatbot maintains full conversation history per `session_id`. Uploaded image
 
 | Method | Endpoint | Description |
 |---|---|---|
+| `POST` | `/api/auth/register` | Register a new user in MongoDB |
+| `POST` | `/api/auth/login` | Authenticate and login user |
+| `POST` | `/api/auth/update` | Update user profile (name, email, password, avatar/image) |
 | `POST` | `/api/query` | Submit text + optional image, returns answer + retrieved contexts |
 | `GET` | `/api/index-status` | Real-time Pinecone/FAISS build progress |
 | `GET` | `/api/config` | Inspect active engine, alpha, top_k, token counts |
 | `POST` | `/api/config` | Hot-swap engine, inject API keys, update hyperparameters |
 | `POST` | `/api/rebuild-index` | Force a fresh SLAKE index rebuild |
 | `POST` | `/api/session/clear` | Clear session history and cached image |
+| `GET` | `/api/session/history` | Fetch chat history for a given session ID |
+| `GET` | `/api/reports/list` | List generated clinical reports |
+| `POST` | `/api/reports/generate` | Generate a new clinical report from session history |
 | `GET` | `/docs` | Interactive Swagger UI |
 
 ### Example curl

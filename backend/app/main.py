@@ -59,6 +59,15 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class UpdateUserRequest(BaseModel):
+    currentEmail: str
+    name: str
+    newEmail: str
+    password: Optional[str] = None
+    avatarColor: Optional[str] = None
+    profileImage: Optional[str] = None
+
+
 class ReportGenerateRequest(BaseModel):
     session_id: str
     user_email: Optional[str] = None
@@ -105,6 +114,32 @@ def get_current_user_info(email: str):
     if not user:
         raise HTTPException(status_code=404, detail="User not found.")
     return {"user": user}
+
+
+@app.post("/api/auth/update")
+def update_user_profile(req: UpdateUserRequest):
+    """Update user profile (name, email, password, avatar, image) in MongoDB and local store."""
+    try:
+        # Split the single name into firstName / lastName for DB storage
+        name_parts = req.name.strip().rsplit(" ", 1)
+        first_name = name_parts[0]
+        last_name = name_parts[1] if len(name_parts) > 1 else ""
+
+        updated_user = db_manager.update_user(
+            current_email=req.currentEmail,
+            first_name=first_name,
+            last_name=last_name,
+            new_email=req.newEmail,
+            new_password=req.password,
+            avatar_color=req.avatarColor,
+            profile_image=req.profileImage
+        )
+        db_manager.log_metadata("user_profile_updated", {"email": req.newEmail}, user_email=req.newEmail)
+        return {"user": updated_user, "message": "Profile updated successfully."}
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Update profile error: {str(e)}")
 
 
 # ── Endpoints ───────────────────────────────────────────────────────────────

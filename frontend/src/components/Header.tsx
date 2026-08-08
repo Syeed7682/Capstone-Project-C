@@ -1,5 +1,5 @@
 import React from 'react';
-import { RotateCw, ShieldCheck, Database, Cpu, FileText } from 'lucide-react';
+import { RotateCw, ShieldCheck, Database, Cpu, FileText, PanelLeft, PanelRight } from 'lucide-react';
 import { IndexStatus } from '../types';
 
 interface HeaderProps {
@@ -8,6 +8,10 @@ interface HeaderProps {
   isRebuilding: boolean;
   deviceInfo: string;
   onOpenReports: () => void;
+  leftSidebarOpen?: boolean;
+  onToggleLeftSidebar?: () => void;
+  rightSidebarOpen?: boolean;
+  onToggleRightSidebar?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +20,10 @@ export const Header: React.FC<HeaderProps> = ({
   isRebuilding,
   deviceInfo,
   onOpenReports,
+  leftSidebarOpen,
+  onToggleLeftSidebar,
+  rightSidebarOpen,
+  onToggleRightSidebar,
 }) => {
   const isReady = indexStatus.status === 'ready';
   const isIndexing = indexStatus.status === 'indexing' || isRebuilding;
@@ -24,6 +32,16 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md flex items-center justify-between px-6 shrink-0 z-20">
       {/* Left Logo / Title */}
       <div className="flex items-center gap-3">
+        {onToggleLeftSidebar && (
+          <button
+            onClick={onToggleLeftSidebar}
+            className="md:hidden p-1.5 rounded-lg border border-slate-700 bg-slate-800/60 hover:bg-slate-700/80 text-slate-400 hover:text-cyan-400 transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-cyan-500"
+            aria-label={leftSidebarOpen ? "Collapse configuration sidebar" : "Expand configuration sidebar"}
+            title={leftSidebarOpen ? "Collapse configuration sidebar" : "Expand configuration sidebar"}
+          >
+            <PanelLeft className="w-4 h-4" />
+          </button>
+        )}
         <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold">
           <ShieldCheck className="w-5 h-5 text-white" />
         </div>
@@ -86,6 +104,17 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <RotateCw className={`w-3.5 h-3.5 ${isIndexing ? 'animate-spin text-cyan-400' : ''}`} />
         </button>
+
+        {onToggleRightSidebar && (
+          <button
+            onClick={onToggleRightSidebar}
+            className="lg:hidden p-1.5 rounded-lg border border-slate-700 bg-slate-800/60 hover:bg-slate-700/80 text-slate-400 hover:text-cyan-400 transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-cyan-500"
+            aria-label={rightSidebarOpen ? "Collapse context sidebar" : "Expand context sidebar"}
+            title={rightSidebarOpen ? "Collapse context sidebar" : "Expand context sidebar"}
+          >
+            <PanelRight className="w-4 h-4" />
+          </button>
+        )}
       </div>
     </header>
   );

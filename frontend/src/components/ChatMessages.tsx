@@ -14,7 +14,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({
   messagesEndRef,
 }) => {
   return (
-    <div className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth w-full max-w-4xl mx-auto scrollbar-thin" ref={messagesEndRef}>
+    <div className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth w-full max-w-[92%] 2xl:max-w-[85%] mx-auto scrollbar-none" ref={messagesEndRef}>
       {messages.map((msg) => {
         const isUser = msg.role === 'user';
 

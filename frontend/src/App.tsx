@@ -6,13 +6,14 @@ import { ChatMessages } from './components/ChatMessages';
 import { ChatInput } from './components/ChatInput';
 import { RagInspector } from './components/RagInspector';
 import { SettingsModal } from './components/SettingsModal';
+import { ProfileModal } from './components/ProfileModal';
 import { ToastNotification, ToastProps } from './components/Toast';
 import { LandingPage } from './components/LandingPage';
 import { ReportModal } from './components/ReportModal';
-import { AppConfig, IndexStatus, Session, ChatMessage, RetrievedContext } from './types';
+import { AppConfig, IndexStatus, Session, ChatMessage, RetrievedContext, User } from './types';
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<{ firstName: string; lastName: string; email: string } | null>(() => {
+  const [currentUser, setCurrentUser] = useState<User | null>(() => {
     try {
       const saved = localStorage.getItem('mvqa_session');
       return saved ? JSON.parse(saved) : null;
@@ -52,8 +53,43 @@ export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isRebuilding, setIsRebuilding] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isReportsOpen, setIsReportsOpen] = useState<boolean>(false);
   const [toasts, setToasts] = useState<Omit<ToastProps, 'onClose'>[]>([]);
+
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('mvqa_left_sidebar_open');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch (e) {
+      return true;
+    }
+  });
+
+  const [rightSidebarOpen, setRightSidebarOpen] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('mvqa_right_sidebar_open');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch (e) {
+      return true;
+    }
+  });
+
+  const toggleLeftSidebar = () => {
+    setLeftSidebarOpen((prev) => {
+      const next = !prev;
+      localStorage.setItem('mvqa_left_sidebar_open', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const toggleRightSidebar = () => {
+    setRightSidebarOpen((prev) => {
+      const next = !prev;
+      localStorage.setItem('mvqa_right_sidebar_open', JSON.stringify(next));
+      return next;
+    });
+  };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -305,6 +341,83 @@ export default function App() {
     addToast('Signed out successfully', 'info');
   };
 
+  const handleUpdateProfile = async (updated: { name: string; email: string; password?: string; avatarColor?: string; profileImage?: string | null }) => {
+    if (!currentUser) return;
+    const oldEmail = currentUser.email;
+
+    // Split the single name into firstName/lastName
+    const nameParts = updated.name.trim().split(/\s+/);
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ');
+
+    try {
+      const res = await fetch('/api/auth/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentEmail: oldEmail,
+          name: updated.name,
+          newEmail: updated.email,
+          password: updated.password || null,
+          avatarColor: updated.avatarColor || null,
+          profileImage: updated.profileImage !== undefined ? updated.profileImage : null,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const newUser: User = data.user;
+        setCurrentUser(newUser);
+        localStorage.setItem('mvqa_session', JSON.stringify(newUser));
+        addToast('Profile updated successfully', 'success');
+        return;
+      } else if (res.status === 400) {
+        const errData = await res.json().catch(() => ({}));
+        if (errData.detail) {
+          throw new Error(errData.detail);
+        }
+      }
+      // Any other status (405, 500, etc.) — fall through to localStorage
+    } catch (e: any) {
+      // Re-throw only real validation errors (status 400 from the backend)
+      if (e.message && !e.message.includes('Failed to fetch') && !e.message.includes('Method Not Allowed') && !e.message.includes('NetworkError')) {
+        throw e;
+      }
+      console.warn('Backend update fallback to localStorage', e);
+    }
+
+    // LocalStorage fallback
+    const newUser: User = {
+      firstName,
+      lastName,
+      email: updated.email,
+      avatarColor: updated.avatarColor,
+      profileImage: updated.profileImage || undefined,
+    };
+
+    // Update mvqa_users store
+    try {
+      const users = JSON.parse(localStorage.getItem('mvqa_users') || '{}');
+      if (oldEmail !== updated.email && users[updated.email]) {
+        throw new Error('The new email is already registered by another user.');
+      }
+      const oldUserData = users[oldEmail] || {};
+      delete users[oldEmail];
+      users[updated.email] = {
+        ...oldUserData,
+        ...newUser,
+        password: updated.password || oldUserData.password,
+      };
+      localStorage.setItem('mvqa_users', JSON.stringify(users));
+    } catch (e: any) {
+      if (e.message?.includes('already registered')) throw e;
+    }
+
+    setCurrentUser(newUser);
+    localStorage.setItem('mvqa_session', JSON.stringify(newUser));
+    addToast('Profile updated successfully', 'success');
+  };
+
   if (!currentUser) {
     return (
       <>
@@ -335,12 +448,32 @@ export default function App() {
         isRebuilding={isRebuilding}
         deviceInfo={config.device}
         onOpenReports={() => setIsReportsOpen(true)}
+        leftSidebarOpen={leftSidebarOpen}
+        onToggleLeftSidebar={toggleLeftSidebar}
+        rightSidebarOpen={rightSidebarOpen}
+        onToggleRightSidebar={toggleRightSidebar}
       />
 
+      {/* Drawer Backdrops for Mobile */}
+      {leftSidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-slate-950/60 backdrop-blur-sm md:hidden"
+          onClick={toggleLeftSidebar}
+        />
+      )}
+      {rightSidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-slate-950/60 backdrop-blur-sm lg:hidden"
+          onClick={toggleRightSidebar}
+        />
+      )}
+
       {/* Main Body */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         {/* Sidebar */}
         <Sidebar
+          isOpen={leftSidebarOpen}
+          onToggle={toggleLeftSidebar}
           sessions={sessions}
           activeSessionId={sessionId}
           onSelectSession={setSessionId}
@@ -357,10 +490,11 @@ export default function App() {
           hasHfToken={config.has_hf_token}
           currentUser={currentUser}
           onLogout={handleLogout}
+          onOpenProfile={() => setIsProfileOpen(true)}
         />
 
         {/* Main Chat Feed */}
-        <main className="flex-1 flex flex-col bg-slate-900/10 min-w-0">
+        <main className="flex-1 flex flex-col bg-slate-900/10 min-w-0 h-full">
           {messages.length === 0 ? (
             <WelcomeView onSelectQuery={(q) => setInputText(q)} />
           ) : (
@@ -385,6 +519,8 @@ export default function App() {
 
         {/* Right RAG Context Inspector */}
         <RagInspector
+          isOpen={rightSidebarOpen}
+          onToggle={toggleRightSidebar}
           retrievedItems={latestRetrievedItems}
           vectorCount={indexStatus.vector_count}
         />
@@ -410,6 +546,16 @@ export default function App() {
         config={config}
         onSaveConfig={handleSaveConfig}
       />
+
+      {/* Profile Settings Modal */}
+      {currentUser && (
+        <ProfileModal
+          isOpen={isProfileOpen}
+          onClose={() => setIsProfileOpen(false)}
+          user={currentUser}
+          onSave={handleUpdateProfile}
+        />
+      )}
 
       {/* MongoDB Clinical Reports Modal */}
       <ReportModal

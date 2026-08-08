@@ -30,7 +30,7 @@
       "title": "what is the abnormality of this image?",
       "user_email": "anonymous",
       "createdAt": 1786032009.4566336,
-      "updatedAt": 1786210863.5653481
+      "updatedAt": 1786214079.618575
     }
   ],
   "messages": [
@@ -531,6 +531,142 @@
         }
       ],
       "timestamp": 1786210863565
+    },
+    {
+      "id": "user-1786214027331-f63f",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786214027331
+    },
+    {
+      "id": "assistant-1786214027343-9dc5",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "The abnormality in the image is a fracture of the femur at the knee joint. The red area highlights the site of the fracture.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "White",
+          "answer_type": "OPEN",
+          "content_type": "Color",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the color of abnormality in this image?",
+          "score": 0.691204071
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "In what plane is this image scanned?",
+          "score": 0.682523787
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the scanning plane of this image?",
+          "score": 0.677398741
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.676857054
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.673791885
+        }
+      ],
+      "timestamp": 1786214027343
+    },
+    {
+      "id": "user-1786214079595-1b87",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786214079595
+    },
+    {
+      "id": "assistant-1786214079618-048e",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "The abnormality in the image is a fracture of the femur at the knee joint. The red area highlights the site of the fracture.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "White",
+          "answer_type": "OPEN",
+          "content_type": "Color",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the color of abnormality in this image?",
+          "score": 0.691204071
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "In what plane is this image scanned?",
+          "score": 0.682523787
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the scanning plane of this image?",
+          "score": 0.677398741
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.676857054
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.673791885
+        }
+      ],
+      "timestamp": 1786214079618
     }
   ],
   "reports": [
@@ -736,6 +872,43 @@
         "retrieved_count": 5
       },
       "timestamp": 1786210863.610598
+    },
+    {
+      "id": "meta-78f761a3",
+      "event_type": "user_login",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "email": "kmsyeedasif@gmail.com"
+      },
+      "timestamp": 1786212601.4044447
+    },
+    {
+      "id": "meta-423bb569",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786214027.356474
+    },
+    {
+      "id": "meta-9e34145c",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786214079.6479442
     }
   ]
 }

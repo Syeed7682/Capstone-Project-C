@@ -57,3 +57,11 @@ export interface IndexStatus {
   vector_count: number;
   index_name: string;
 }
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarColor?: string;
+  profileImage?: string;
+}

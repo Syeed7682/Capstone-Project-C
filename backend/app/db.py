@@ -149,6 +149,93 @@ class MongoDBManager:
                 return safe
         return None
 
+    def update_user(self, current_email: str, first_name: str, last_name: str, new_email: str, new_password: Optional[str] = None, avatar_color: Optional[str] = None, profile_image: Optional[str] = None) -> Dict[str, Any]:
+        current_email_clean = current_email.strip().lower()
+        new_email_clean = new_email.strip().lower()
+        
+        # Check if email is changing and if the new email already exists
+        if current_email_clean != new_email_clean:
+            existing = self.get_user_by_email(new_email_clean)
+            if existing:
+                raise ValueError("The new email is already registered by another user.")
+        
+        now = time.time()
+        
+        # Find user doc in local database to get ID
+        store = self._read_local_store()
+        user_idx = -1
+        for idx, u in enumerate(store["users"]):
+            if u["email"] == current_email_clean:
+                user_idx = idx
+                break
+        
+        if user_idx == -1:
+            raise ValueError("User profile not found.")
+            
+        user_doc = store["users"][user_idx]
+        user_doc["firstName"] = first_name.strip()
+        user_doc["lastName"] = last_name.strip()
+        user_doc["email"] = new_email_clean
+        if avatar_color:
+            user_doc["avatarColor"] = avatar_color.strip()
+        if profile_image is not None:
+            user_doc["profileImage"] = profile_image
+        
+        if new_password and new_password.strip():
+            user_doc["password_hash"] = self._hash_password(new_password)
+            
+        # MongoDB Atlas update
+        if self.connected and self.db is not None:
+            try:
+                update_fields = {
+                    "firstName": user_doc["firstName"],
+                    "lastName": user_doc["lastName"],
+                    "email": user_doc["email"],
+                }
+                if new_password and new_password.strip():
+                    update_fields["password_hash"] = user_doc["password_hash"]
+                if avatar_color:
+                    update_fields["avatarColor"] = user_doc["avatarColor"]
+                if profile_image is not None:
+                    update_fields["profileImage"] = profile_image
+                
+                self.db.users.update_one(
+                    {"email": current_email_clean},
+                    {"$set": update_fields}
+                )
+                
+                # If email is changing, we should also update related records in other collections
+                if current_email_clean != new_email_clean:
+                    self.db.sessions.update_many({"user_email": current_email_clean}, {"$set": {"user_email": new_email_clean}})
+                    self.db.messages.update_many({"user_email": current_email_clean}, {"$set": {"user_email": new_email_clean}})
+                    self.db.reports.update_many({"user_email": current_email_clean}, {"$set": {"user_email": new_email_clean}})
+                    self.db.metadata.update_many({"user_email": current_email_clean}, {"$set": {"user_email": new_email_clean}})
+            except Exception as e:
+                print(f"[MongoDB] Atlas update_user error: {e}")
+                
+        # Update related records in local store
+        if current_email_clean != new_email_clean:
+            for s in store["sessions"]:
+                if s.get("user_email") == current_email_clean:
+                    s["user_email"] = new_email_clean
+            for m in store["messages"]:
+                if m.get("user_email") == current_email_clean:
+                    m["user_email"] = new_email_clean
+            for r in store["reports"]:
+                if r.get("user_email") == current_email_clean:
+                    r["user_email"] = new_email_clean
+            for me in store["metadata"]:
+                if me.get("user_email") == current_email_clean:
+                    me["user_email"] = new_email_clean
+                    
+        # Update user list
+        store["users"][user_idx] = user_doc
+        self._write_local_store(store)
+        
+        safe_user = user_doc.copy()
+        safe_user.pop("password_hash", None)
+        return safe_user
+
     # ── 2. SESSIONS & MESSAGES COLLECTIONS ──────────────────────────────────
     def save_message(self, session_id: str, role: str, text: str, user_email: Optional[str] = None, 
                      engine: Optional[str] = None, retrieved: Optional[List[Dict[str, Any]]] = None,
