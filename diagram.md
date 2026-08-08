@@ -11,35 +11,35 @@ This high-level architecture diagram illustrates the logical separation of conce
 
 ```mermaid
 flowchart TD
-    subgraph Presentation ["Presentation Layer"]
+    subgraph Presentation Layer
         UI["React + Vite UI"]
         Dashboard["Chat Dashboard"]
         Profile["Profile & Settings"]
         RAGInspector["RAG Context Inspector"]
     end
 
-    subgraph Application ["Application Layer"]
+    subgraph Application Layer
         API["FastAPI Backend"]
         AuthManager["Authentication Manager"]
         SessionManager["Session & Report Manager"]
         QueryRouter["Query Router"]
     end
 
-    subgraph AI ["AI & ML Layer"]
+    subgraph AI & ML Layer
         Pipeline["RAG Pipeline Engine"]
         Encoder["BiomedCLIP Encoder"]
         Generators["Multi-LLM Generators"]
     end
 
-    subgraph Data ["Data & Storage Layer"]
+    subgraph Data & Storage Layer
         Mongo[("MongoDB Atlas\n(Users, Chats, Reports)")]
         VectorDB[("Pinecone / FAISS\n(SLAKE Embeddings)")]
     end
 
-    Presentation <-->|HTTP/REST| Application
-    Application <--> Data
-    Application <--> AI
-    AI <--> VectorDB
+    Presentation Layer <-->|HTTP/REST| Application Layer
+    Application Layer <--> Data & Storage Layer
+    Application Layer <--> AI & ML Layer
+    AI & ML Layer <--> VectorDB
 ```
 
 ---
@@ -73,7 +73,7 @@ Maps out the primary interactions the user has with the platform.
 flowchart LR
     User((Clinician))
     
-    subgraph MedRAG-AI Platform
+    subgraph Platform ["MedRAG-AI Platform"]
         Auth["Authenticate (Login/Signup)"]
         Profile["Manage Profile (Name, Avatar)"]
         Query["Submit VQA Query (Text + Image)"]
@@ -150,7 +150,7 @@ flowchart TD
     
     User -->|Request Export| P5
     D2 -->|Session History| P5
-    P5 -->|Clinical Report (PDF/MD)| User
+    P5 -->|"Clinical Report (PDF/MD)"| User
 ```
 
 ---
@@ -219,7 +219,7 @@ flowchart LR
         Text["Clinical Question"]
     end
     
-    subgraph Embedding Layer (BiomedCLIP)
+    subgraph Embedding ["Embedding Layer (BiomedCLIP)"]
         ViT["ViT-B/16 Image Encoder"]
         BERT["PubMedBERT Text Encoder"]
         Blend["α-Blending (Fusion)"]
@@ -256,7 +256,7 @@ Shows how the logical software components are structured within the codebase.
 
 ```mermaid
 flowchart TB
-    subgraph Frontend (React/Vite)
+    subgraph Frontend ["Frontend (React/Vite)"]
         App["App.tsx (State)"]
         Components["Components (Chat, Sidebar, Modals)"]
         CSS["index.css (Tailwind)"]
@@ -264,7 +264,7 @@ flowchart TB
         Components --> CSS
     end
 
-    subgraph Backend (FastAPI)
+    subgraph Backend ["Backend (FastAPI)"]
         Main["main.py (Routes)"]
         Config["config.py (Env)"]
         DBManager["db.py (MongoDB)"]
@@ -288,12 +288,12 @@ Illustrates the physical nodes and networking topology.
 flowchart TD
     node1["Client Node\n(Browser / Mobile)"]
     
-    subgraph Application Server (Local / EC2)
+    subgraph AppServer ["Application Server (Local / EC2)"]
         node2["Uvicorn ASGI Server\n(FastAPI Runtime)"]
         node3["Local Disk\n(Images, Caches)"]
     end
     
-    subgraph Cloud Infrastructure
+    subgraph Cloud ["Cloud Infrastructure"]
         node4[("MongoDB Atlas Node\n(Replica Set)")]
         node5[("Pinecone DB Node\n(Serverless)")]
         node6["Hugging Face / Gemini API\n(GPU Clusters)"]
@@ -369,7 +369,7 @@ Details the routing architecture within the FastAPI backend.
 flowchart LR
     Req["HTTP Request"]
     
-    subgraph FastAPI Router
+    subgraph Router ["FastAPI Router"]
         Auth["/api/auth/*\n(login, register, update)"]
         Query["/api/query\n(run_vqa_query)"]
         Report["/api/reports/*\n(list, generate)"]
@@ -414,11 +414,11 @@ Visualizes the multi-model architecture combining retrieval and diverse generati
 
 ```mermaid
 flowchart TB
-    subgraph Retrieval Core
+    subgraph Core ["Retrieval Core"]
         BC["microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224\n(Vision-Language Contrastive Learning)"]
     end
     
-    subgraph Generative Engine Switch
+    subgraph Switch ["Generative Engine Switch"]
         direction LR
         G1["Gemini 1.5 Flash\n(Google API)"]
         G2["Qwen2.5-VL-72B-Instruct\n(HF Inference API)"]
