@@ -1,0 +1,6 @@
+{
+  "name": "ClinicaRAG - Medical Image VQA",
+  "description": "Multimodal Retrieval-Augmented Generation (RAG) system for medical image Visual Question Answering using BiomedCLIP embeddings and SLAKE knowledge base.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

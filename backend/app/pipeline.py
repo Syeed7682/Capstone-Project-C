@@ -874,8 +874,16 @@ def generate_answer(
 
     if engine == "huggingface_api":
         answer = _generate_via_hf_api(prompt, query_image, max_new_tokens)
+        if "Error:" in answer or "401" in answer or "Unauthorized" in answer:
+            if config.GEMINI_API_KEY:
+                print(f"[Pipeline Notice] HuggingFace API returned error. Auto-switching to Gemini Pro Engine...")
+                answer = _generate_via_gemini_api(prompt, query_image, max_new_tokens)
+                engine = "gemini_api"
     elif engine == "gemini_api":
         answer = _generate_via_gemini_api(prompt, query_image, max_new_tokens)
+        if "Error" in answer and "huggingface_api" in config.GENERATIVE_ENGINE:
+            answer = _generate_via_hf_api(prompt, query_image, max_new_tokens)
+            engine = "huggingface_api"
     elif engine == "local_moondream":
         answer = _generate_via_local_moondream(prompt, query_image, max_new_tokens)
     elif engine == "local_llava":

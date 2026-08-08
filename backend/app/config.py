@@ -2,9 +2,28 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Always load .env from the backend directory (where this config.py lives)
-_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
-load_dotenv(dotenv_path=_ENV_PATH, override=True)
+
+def normalize_secret_value(value):
+    """Trim whitespace and optional surrounding quotes from secrets."""
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1].strip()
+        return value
+    return str(value).strip()
+
+
+# Load .env from the backend directory first, then the project root.
+_ENV_CANDIDATES = [
+    Path(__file__).resolve().parent.parent / ".env",  # backend/.env
+    Path(__file__).resolve().parents[2] / ".env",     # project root/.env
+]
+for _env_path in _ENV_CANDIDATES:
+    if _env_path.exists():
+        load_dotenv(dotenv_path=_env_path, override=True)
+        break
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +39,14 @@ CLIP_MODEL = "microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224"
 DIM = 512
 
 # Generative Engine Settings
-# Available engines: 'huggingface_api', 'gemini_api', 'local_moondream', 'local_llava'
-HF_TOKEN = os.getenv("HF_TOKEN", "")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+# Available engines: 'gemini_api', 'huggingface_api', 'local_moondream', 'local_llava'
+HF_TOKEN = normalize_secret_value(os.getenv("HF_TOKEN", ""))
+GEMINI_API_KEY = normalize_secret_value(os.getenv("GEMINI_API_KEY", ""))
 
-if HF_TOKEN:
-    DEFAULT_ENGINE = "huggingface_api"
-elif GEMINI_API_KEY:
+if GEMINI_API_KEY:
     DEFAULT_ENGINE = "gemini_api"
+elif HF_TOKEN:
+    DEFAULT_ENGINE = "huggingface_api"
 else:
     DEFAULT_ENGINE = "local_moondream"
 
@@ -58,3 +77,9 @@ USE_PINECONE = bool(PINECONE_API_KEY)
 TOP_K = 5
 ALPHA = 0.6  # Fusion weight: alpha * image_embedding + (1 - alpha) * text_embedding
 MAX_NEW_TOKENS = 128
+
+# ── MongoDB Atlas Database ──────────────────────────────────────────────────
+MONGODB_API_KEY = os.getenv("MONGODB_API_KEY", "")
+MONGODB_URI     = os.getenv("MONGODB_URI", "")
+MONGODB_DB_NAME = os.getenv("MONGODB_DB_NAME", "medvqa_db")
+

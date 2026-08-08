@@ -1,0 +1,741 @@
+{
+  "users": [
+    {
+      "id": "348aa6c1-4a58-40f8-b30e-afb64e99f9bc",
+      "firstName": "Dr. John",
+      "lastName": "Watson",
+      "email": "watson@hospital.com",
+      "password_hash": "b5692500175fad6bb2b306aa20ff58423c79b130ef310fb3caa924e0f28bc61d",
+      "createdAt": 1786031665.915506
+    },
+    {
+      "id": "8d31c56f-a3fd-4177-b0c6-9cbfbb603600",
+      "firstName": "Kha. Mo. Syeed",
+      "lastName": "Asif",
+      "email": "kmsyeedasif@gmail.com",
+      "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "createdAt": 1786031955.9701674
+    }
+  ],
+  "sessions": [
+    {
+      "session_id": "test-session-mongo-001",
+      "title": "What is the abnormality in this chest X-",
+      "user_email": "watson@hospital.com",
+      "createdAt": 1786031665.9282885,
+      "updatedAt": 1786031665.9282885
+    },
+    {
+      "session_id": "session-1786029243770",
+      "title": "what is the abnormality of this image?",
+      "user_email": "anonymous",
+      "createdAt": 1786032009.4566336,
+      "updatedAt": 1786210863.5653481
+    }
+  ],
+  "messages": [
+    {
+      "id": "user-1786031665928-eb7c",
+      "session_id": "test-session-mongo-001",
+      "user_email": "watson@hospital.com",
+      "role": "user",
+      "text": "What is the abnormality in this chest X-ray?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786031665928
+    },
+    {
+      "id": "assistant-1786031665928-7f73",
+      "session_id": "test-session-mongo-001",
+      "user_email": "watson@hospital.com",
+      "role": "assistant",
+      "text": "Infiltrate observed in right lower lobe.",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [],
+      "timestamp": 1786031665928
+    },
+    {
+      "id": "user-1786032009456-2e3a",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786032009456
+    },
+    {
+      "id": "assistant-1786032009459-eb14",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "timestamp": 1786032009459
+    },
+    {
+      "id": "user-1786032084560-eebc",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786032084560
+    },
+    {
+      "id": "assistant-1786032084566-52e5",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error: HuggingFace API failed to process the image. (Detail: Client error '401 Unauthorized' for url 'https://router.huggingface.co/v1/chat/completions' (Request ID: Root=1-6a74afd4-65bc27844631220c6af49a1c;70ea6d0c-948d-4461-9450-27308ac19eea)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401\n\nInvalid username or password.). Please switch Engine Settings to Gemini Pro.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "timestamp": 1786032084566
+    },
+    {
+      "id": "user-1786033743683-5282",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786033743683
+    },
+    {
+      "id": "assistant-1786033743692-1d0d",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There appears to be a hypodense lesion within the liver, which could represent a variety of conditions such as a cyst, hemangioma, metastasis, or other focal liver lesions. Further clinical correlation and possibly additional imaging sequences or contrast enhancement would be necessary to characterize this finding accurately.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "timestamp": 1786033743692
+    },
+    {
+      "id": "user-1786041766654-5932",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786041766654
+    },
+    {
+      "id": "assistant-1786041766752-0ac5",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "The image shows a fracture in the lower leg, specifically involving the tibia and fibula bones near the ankle joint. The red area highlights the site of the fracture.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "White",
+          "answer_type": "OPEN",
+          "content_type": "Color",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the color of abnormality in this image?",
+          "score": 0.691204071
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "In what plane is this image scanned?",
+          "score": 0.682523787
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the scanning plane of this image?",
+          "score": 0.677398741
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.676857054
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.673791885
+        }
+      ],
+      "timestamp": 1786041766752
+    },
+    {
+      "id": "user-1786042004732-39df",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of the image",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786042004732
+    },
+    {
+      "id": "assistant-1786042004873-c8ca",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "The abnormality in the image is a fracture of the femur at the knee joint. The red area highlights the site of the fracture.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "White",
+          "answer_type": "OPEN",
+          "content_type": "Color",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the color of abnormality in this image?",
+          "score": 0.68154335
+        },
+        {
+          "answer": "Head",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Where does the image represent in the body?",
+          "score": 0.66229254
+        },
+        {
+          "answer": "Transverse Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "In what plane is this image scanned?",
+          "score": 0.648679793
+        },
+        {
+          "answer": "Head",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Where does the image represent in the body?",
+          "score": 0.648159
+        },
+        {
+          "answer": "White",
+          "answer_type": "OPEN",
+          "content_type": "Color",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the color of abnormality in this image?",
+          "score": 0.647445679
+        }
+      ],
+      "timestamp": 1786042004873
+    },
+    {
+      "id": "user-1786201859943-68ae",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786201859943
+    },
+    {
+      "id": "assistant-1786201860016-82a2",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There is no obvious abnormality visible in this image. The structures appear normal without any evident masses, fractures, or other pathologies. However, further clinical information and potentially additional imaging sequences might be needed for a comprehensive evaluation.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "timestamp": 1786201860016
+    },
+    {
+      "id": "user-1786210863550-e952",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786210863550
+    },
+    {
+      "id": "assistant-1786210863565-a323",
+      "session_id": "session-1786029243770",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There is no obvious abnormality visible in this image. The liver, kidneys, pancreas, and surrounding structures appear within normal limits. However, a detailed analysis by a radiologist and correlation with clinical history would be necessary for a definitive interpretation.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "timestamp": 1786210863565
+    }
+  ],
+  "reports": [
+    {
+      "report_id": "rep-e08f990a",
+      "session_id": "test-session-mongo-001",
+      "user_email": "watson@hospital.com",
+      "title": "Chest Radiology Report",
+      "summary": "Right lower lobe infiltrate.",
+      "findings": "Detailed findings: Q: Xray, A: Infiltrate.",
+      "retrieved_cases": [],
+      "createdAt": 1786031665.9494283
+    },
+    {
+      "report_id": "rep-533fafb2",
+      "session_id": "session-1786029243770",
+      "user_email": "kmsyeedasif@gmail.com",
+      "title": "Clinical Consultation Report (08/08/2026)",
+      "summary": "Clinical Consultation session containing 6 user queries. Key clinical topics evaluated: 'what is the abnormality of this image?, what is the abnormality of this image?, what is the abnormality of this image?'.",
+      "findings": "Q: what is the abnormality of this image?\nA: Error calling Gemini API: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.\n\nQ: what is the abnormality of this image?\nA: Error: HuggingFace API failed to process the image. (Detail: Client error '401 Unauthorized' for url 'https://router.huggingface.co/v1/chat/completions' (Request ID: Root=1-6a74afd4-65bc27844631220c6af49a1c;70ea6d0c-948d-4461-9450-27308ac19eea)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401\n\nInvalid username or password.). Please switch Engine Settings to Gemini Pro.\n\nQ: what is the abnormality of this image?\nA: There appears to be a hypodense lesion within the liver, which could represent a variety of conditions such as a cyst, hemangioma, metastasis, or other focal liver lesions. Further clinical correlation and possibly additional imaging sequences or contrast enhancement would be necessary to characterize this finding accurately.\n\nQ: what is the abnormality of this image?\nA: The image shows a fracture in the lower leg, specifically involving the tibia and fibula bones near the ankle joint. The red area highlights the site of the fracture.\n\nQ: what is the abnormality of the image\nA: The abnormality in the image is a fracture of the femur at the knee joint. The red area highlights the site of the fracture.\n\nQ: what is the abnormality of this image?\nA: There is no obvious abnormality visible in this image. The structures appear normal without any evident masses, fractures, or other pathologies. However, further clinical information and potentially additional imaging sequences might be needed for a comprehensive evaluation.",
+      "retrieved_cases": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.948818207
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.91891861
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.914692
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.91135031
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.909347534
+        }
+      ],
+      "createdAt": 1786202007.1091712
+    }
+  ],
+  "metadata": [
+    {
+      "id": "meta-9d71e5cc",
+      "event_type": "system_test",
+      "user_email": "watson@hospital.com",
+      "details": {
+        "status": "ok"
+      },
+      "timestamp": 1786031665.950428
+    },
+    {
+      "id": "meta-46d20a39",
+      "event_type": "user_registered",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "email": "kmsyeedasif@gmail.com"
+      },
+      "timestamp": 1786031955.972162
+    },
+    {
+      "id": "meta-31897496",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786032009.4747746
+    },
+    {
+      "id": "meta-b28590bd",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786032084.6104283
+    },
+    {
+      "id": "meta-e765e136",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786033743.916708
+    },
+    {
+      "id": "meta-c950c12d",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786041766.7933624
+    },
+    {
+      "id": "meta-30475d58",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 36,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786042004.928306
+    },
+    {
+      "id": "meta-c4158714",
+      "event_type": "user_login",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "email": "kmsyeedasif@gmail.com"
+      },
+      "timestamp": 1786201495.0788958
+    },
+    {
+      "id": "meta-a5411ad9",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786201860.2386012
+    },
+    {
+      "id": "meta-b655c891",
+      "event_type": "report_generated",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "report_id": "rep-533fafb2",
+        "session_id": "session-1786029243770"
+      },
+      "timestamp": 1786202007.1568997
+    },
+    {
+      "id": "meta-907adb88",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 38,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786210863.610598
+    }
+  ]
+}

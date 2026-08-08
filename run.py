@@ -11,7 +11,7 @@ if __name__ == "__main__":
     except ImportError:
         print("\n[ERROR] 'uvicorn' is not installed in the active environment.")
         print("Please install dependencies first by running:")
-        print("    pip install -r backend/requirements.txt")
+        print("    pip install -r requirements.txt")
         sys.exit(1)
 
     print("\n" + "=" * 60)
