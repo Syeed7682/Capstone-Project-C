@@ -11,35 +11,35 @@ This high-level architecture diagram illustrates the logical separation of conce
 
 ```mermaid
 flowchart TD
-    subgraph Presentation Layer
+    subgraph Presentation ["Presentation Layer"]
         UI["React + Vite UI"]
         Dashboard["Chat Dashboard"]
         Profile["Profile & Settings"]
         RAGInspector["RAG Context Inspector"]
     end
 
-    subgraph Application Layer
+    subgraph Application ["Application Layer"]
         API["FastAPI Backend"]
         AuthManager["Authentication Manager"]
         SessionManager["Session & Report Manager"]
         QueryRouter["Query Router"]
     end
 
-    subgraph AI & ML Layer
+    subgraph AI ["AI & ML Layer"]
         Pipeline["RAG Pipeline Engine"]
         Encoder["BiomedCLIP Encoder"]
         Generators["Multi-LLM Generators"]
     end
 
-    subgraph Data & Storage Layer
+    subgraph Data ["Data & Storage Layer"]
         Mongo[("MongoDB Atlas\n(Users, Chats, Reports)")]
         VectorDB[("Pinecone / FAISS\n(SLAKE Embeddings)")]
     end
 
-    Presentation Layer <-->|HTTP/REST| Application Layer
-    Application Layer <--> Data & Storage Layer
-    Application Layer <--> AI & ML Layer
-    AI & ML Layer <--> VectorDB
+    Presentation <-->|HTTP/REST| Application
+    Application <--> Data
+    Application <--> AI
+    AI <--> VectorDB
 ```
 
 ---
