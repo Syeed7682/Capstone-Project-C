@@ -93,9 +93,9 @@ flowchart TB
 ```mermaid
 flowchart TD
   A[User submits question] --> B[Frontend POST /api/query]
-  B --> C[Backend run_vqa_query()]
+  B --> C["Backend run_vqa_query()"]
   C --> D[Load session history from MongoDB]
-  C --> E[pipeline.retrieve()] 
+  C --> E["pipeline.retrieve()"] 
   E --> F[BiomedCLIP encode text/image]
   F --> G[Query Pinecone / FAISS]
   G --> H[Retrieved SLAKE contexts]
@@ -241,7 +241,7 @@ flowchart TB
   end
 
   subgraph Local / Server Runtime
-    UI[Frontend (React / Vite)]
+    UI["Frontend (React / Vite)"]
     API[FastAPI Server]
     Pipeline[RAG Pipeline Engine]
     FAISS[(Local FAISS Cache)]
