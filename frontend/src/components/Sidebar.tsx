@@ -69,7 +69,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className={`p-4 border-b border-slate-800/50 flex items-center ${isOpen ? 'justify-between' : 'justify-center'} shrink-0`}>
         {isOpen && (
           <span className="text-[10px] font-bold font-mono tracking-widest text-slate-500 uppercase">
-            MedVQA Config
+            MedRAG-VQA Config
           </span>
         )}
         <button

@@ -1,4 +1,4 @@
-# 🏥 Medical Image VQA — Multimodal RAG Web Application
+# 🏥 MedRAG-VQA — Multimodal Medical RAG Web Application
 
 A production-ready **Retrieval-Augmented Generation (RAG)** system for medical image Visual Question Answering (VQA). Combines **BiomedCLIP** embeddings, a **Pinecone cloud vector index (with local FAISS fallback)** built from the **SLAKE** dataset, and a choice of four LLM backends — all wrapped in a premium dark-themed chatbot UI served by **FastAPI** with **MongoDB Atlas** for secure user management and persistence.
 
@@ -84,6 +84,71 @@ Once the similar past cases are retrieved, a Vision-Language Model (VLM) looks a
 | **Gemini API** | `gemini-1.5-flash` | **Highly Recommended**. Extremely reliable, fast, and excellent at medical imaging. |
 | Local Moondream | `vikhyatk/moondream2` | Runs locally on CPU (~2 GB RAM). High privacy, lower reasoning. |
 | Local LLaVA | `llava-hf/llava-1.5-7b-hf` | Runs locally (4-bit NF4) but requires a dedicated GPU (≥12 GB VRAM). |
+
+---
+
+## 🎛️ System Execution Modes
+
+The MedRAG-AI system features a modular, hybrid architecture that supports multiple operational modes to suit different hardware environments and privacy requirements:
+
+### 1. Vector Database Modes
+*   **Pinecone Cloud Index Mode (Default):** Connects to a cloud-hosted Pinecone vector database. Provides instantaneous server startup (< 5s) once the initial 4,918 vectors from the SLAKE dataset are indexed.
+*   **Local FAISS Fallback Mode:** Operates completely offline on local CPU hardware using FAISS index structures if the Pinecone API key is unconfigured or the cloud index is unreachable.
+
+### 2. Generative VQA Engine Modes
+*   **Google Gemini API Mode (`gemini-1.5-flash`):** *(Recommended)* Cloud-based multimodal inference engine providing fast, high-accuracy answers for complex clinical queries.
+*   **Hugging Face API Mode (`Qwen/Qwen2.5-VL-72B-Instruct`):** Cloud inference API fallback for hosted vision-language models.
+*   **Local Moondream Mode (`vikhyatk/moondream2`):** 100% offline CPU mode requiring only ~2 GB RAM, ideal for strict patient data privacy without cloud transmission.
+*   **Local LLaVA Mode (`llava-hf/llava-1.5-7b-hf`):** 4-bit NF4 quantized local VLM running directly on dedicated NVIDIA GPUs (≥12 GB VRAM).
+
+### 3. Data Storage & Persistence Modes
+*   **MongoDB Atlas Cloud Mode:** Primary user authentication, session chat history, and clinical report database cluster.
+*   **Local File Persistence Fallback Mode (`data/db_local.json`):** Automatic local JSON store fallback if MongoDB Atlas URI is unconfigured or network connectivity is lost.
+
+---
+
+## 📋 Functional & Non-Functional Requirements
+
+### ⚙️ Functional Requirements (FR)
+
+These specify the core features and operations that the MedRAG-AI application must perform.
+
+| Category | Requirement ID | Requirement Description | Technical Implementation & Description |
+| :--- | :--- | :--- | :--- |
+| **Authentication & Profile** | **FR-01** | User Registration & Login | Secure registration and authentication using email/password validation with records stored in MongoDB. |
+| | **FR-02** | Profile Personalization | Allow users to update credentials (name, email, password) and choose gradient avatar themes or custom avatars. |
+| **Session Management** | **FR-03** | Persistent Chat History | Automatically save, retrieve, and load session-based chat histories from MongoDB Atlas upon user login. |
+| | **FR-04** | Session Manipulation | Enable starting new chat sessions, clearing active session history, and clearing cached query images. |
+| **Multimodal Querying** | **FR-05** | Multimodal Image & Text input | Support uploading radiology images (X-rays, MRIs, CT scans) alongside clinical text questions in a single query. |
+| | **FR-06** | Text-Only Clinical Queries | Support querying with text-only questions (applies an internal blank fallback image for models that require visual inputs). |
+| **RAG Retrieval** | **FR-07** | BiomedCLIP Feature Extraction | Convert query text and clinical images into a combined embedding using `microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224`. |
+| | **FR-08** | Vector Database Retrieval | Query Pinecone Cloud Index (with local FAISS fallback) to fetch top-K clinical case context pairs from the SLAKE dataset. |
+| | **FR-09** | Embedding Weight Control | Expose interactive slider to adjust alpha (`α-blend`) weight between text/image embeddings and select the number of neighbors (`top_k`). |
+| **Generative VQA** | **FR-10** | Multi-Engine LLM/VLM Generation | Route grounded prompts to one of four hot-swappable engines: Gemini API, Hugging Face API, local Moondream, or local LLaVA. |
+| | **FR-11** | Live Configuration Updates | Allow users to inject API keys, swap engines, and update parameters like `max_new_tokens` dynamically without restarting the server. |
+| **RAG Explainability** | **FR-12** | Retrieved Context Inspection | Render an expandable RAG Context panel displaying the retrieved reference SLAKE images and historical question-answer pairs. |
+| **Report Generation** | **FR-13** | PDF & Image Clinical Reports | Synthesize chat history and attached medical radiology scans into downloadable Clinical Consultation Reports in PDF format. |
+| **System Operations** | **FR-14** | Real-Time Index Build Status | Provide an endpoint and status bar displaying real-time download and indexing progress of the SLAKE dataset. |
+| | **FR-15** | Manual Index Rebuild | Expose an administration API endpoint/button to force-trigger a complete rebuild of the vector database index. |
+
+### 🔒 Non-Functional Requirements (NFR)
+
+These specify the quality attributes, design constraints, and performance targets of the system.
+
+| Category | Requirement ID | Requirement Description | Target Metric & Implementation Detail |
+| :--- | :--- | :--- | :--- |
+| **Performance** | **NFR-01** | VQA Response Latency | Generative response times must stay under 3 seconds when using cloud APIs (Gemini/HF) or local CPU engines (Moondream). |
+| | **NFR-02** | Vector Search Latency | Retrieval of top-K SLAKE contexts from Pinecone/FAISS database must take less than 200ms. |
+| | **NFR-03** | Start-up Efficiency | Once vectors are populated, subsequent server restarts should load/connect in under 5 seconds. |
+| | **NFR-04** | Fast Embedding Indexing | Speed up vector generation during initial setup by 10-20x through batched BiomedCLIP encoding (`BATCH_SIZE=64`). |
+| **Reliability** | **NFR-05** | Offline Database Fallback | Automatically fall back to a local FAISS index if the Pinecone Cloud index is offline, rate-limited, or unreachable. |
+| | **NFR-06** | Graceful Engine Fallbacks | Handle API outages gracefully; fall back to local models or display descriptive errors to prevent application crashes. |
+| **Security & Privacy** | **NFR-07** | Credential Encrypting | Securely store passwords in MongoDB Atlas by applying modern hashing/encryption techniques. |
+| | **NFR-08** | Offline Clinical Privacy | Clinicians can run the pipeline fully offline (using local Moondream and local FAISS) to ensure sensitive patient data never leaves the facility. |
+| | **NFR-09** | Ephemeral API Key Storage | Keep API keys secure by accepting them dynamically at runtime through configuration states, preventing hardcoded keys. |
+| **Usability & UX** | **NFR-10** | Clinical Theme Design | Deliver a stunning dark-themed dashboard with glassmorphism UI/UX, micro-animations, and responsive layouts. |
+| | **NFR-11** | Live Visual Indicators | Display active download, indexing, and processing states so the user is always aware of background pipeline activity. |
+| **Scalability** | **NFR-12** | Platform Independence | System must run on Windows, Linux, and macOS, adapting dynamically to CPU-only systems and CUDA/MPS GPU systems. |
 
 ---
 

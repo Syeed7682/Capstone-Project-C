@@ -15,7 +15,7 @@ from app import config, pipeline
 from app.db import db_manager
 
 app = FastAPI(
-    title="Medical Image VQA Multimodal RAG Backend",
+    title="MedRAG-VQA Multimodal RAG Backend",
     description="FastAPI backend for medical VQA grounded on the SLAKE dataset using BiomedCLIP + Pinecone/FAISS + LLMs",
     version="2.0.0"
 )
@@ -470,13 +470,26 @@ def generate_clinical_report(req: ReportGenerateRequest):
         [f"Q: {q}\nA: {a}" for q, a in zip(queries, answers)]
     )
 
+    import base64
+    image_base64 = None
+    session_dir = SESSIONS_DIR / req.session_id
+    active_image_path = session_dir / "active_image.jpg"
+    if active_image_path.exists():
+        try:
+            with open(active_image_path, "rb") as img_f:
+                b64_data = base64.b64encode(img_f.read()).decode("utf-8")
+                image_base64 = f"data:image/jpeg;base64,{b64_data}"
+        except Exception as e:
+            print(f"Error loading active image for report generation: {e}")
+
     report = db_manager.save_report(
         session_id=req.session_id,
         title=req.title or "Clinical VQA Consultation Report",
         summary=summary,
         findings=findings,
         user_email=req.user_email,
-        retrieved_cases=retrieved_items[:5]
+        retrieved_cases=retrieved_items[:5],
+        image_url=image_base64
     )
 
     db_manager.log_metadata("report_generated", {"report_id": report["report_id"], "session_id": req.session_id}, user_email=req.user_email)
@@ -487,7 +500,28 @@ def generate_clinical_report(req: ReportGenerateRequest):
 def get_user_reports(user_email: Optional[str] = None):
     """Get all saved clinical reports from MongoDB."""
     reports = db_manager.get_reports(user_email)
+    import base64
+    for rep in reports:
+        if not rep.get("image_url") and rep.get("session_id"):
+            session_dir = SESSIONS_DIR / rep["session_id"]
+            active_image_path = session_dir / "active_image.jpg"
+            if active_image_path.exists():
+                try:
+                    with open(active_image_path, "rb") as img_f:
+                        b64_data = base64.b64encode(img_f.read()).decode("utf-8")
+                        rep["image_url"] = f"data:image/jpeg;base64,{b64_data}"
+                except Exception:
+                    pass
     return {"reports": reports}
+
+
+@app.delete("/api/reports/{report_id}")
+def delete_clinical_report(report_id: str):
+    """Delete a saved clinical report from MongoDB Atlas or local storage."""
+    success = db_manager.delete_report(report_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Report not found.")
+    return {"message": f"Report {report_id} deleted successfully.", "success": True}
 
 
 @app.get("/api/metadata")

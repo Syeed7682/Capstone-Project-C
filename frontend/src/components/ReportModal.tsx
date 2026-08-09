@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, X, Loader2, Check, Sparkles, Calendar } from 'lucide-react';
+import { FileText, Download, X, Loader2, Check, Sparkles, Calendar, Trash2 } from 'lucide-react';
+import { jsPDF } from 'jspdf';
 
 interface Report {
   report_id: string;
@@ -8,6 +9,7 @@ interface Report {
   title: string;
   summary: string;
   findings: string;
+  image_url?: string;
   createdAt: number;
 }
 
@@ -48,10 +50,41 @@ export const ReportModal: React.FC<ReportModalProps> = ({
           // Select most recent report or matching session report
           const matching = data.reports.find((r: Report) => r.session_id === activeSessionId);
           setActiveReport(matching || data.reports[0]);
+        } else {
+          setActiveReport(null);
         }
       }
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  const handleDeleteReport = async (reportId: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (!window.confirm('Are you sure you want to delete this clinical report?')) return;
+
+    try {
+      const res = await fetch(`/api/reports/${reportId}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        onAddToast('Clinical Report deleted successfully', 'info');
+        const url = userEmail ? `/api/reports?user_email=${encodeURIComponent(userEmail)}` : '/api/reports';
+        const repRes = await fetch(url);
+        if (repRes.ok) {
+          const data = await repRes.json();
+          const updatedReports = data.reports || [];
+          setReports(updatedReports);
+          if (activeReport?.report_id === reportId) {
+            setActiveReport(updatedReports.length > 0 ? updatedReports[0] : null);
+          }
+        }
+      } else {
+        const err = await res.json().catch(() => ({}));
+        onAddToast(err.detail || 'Failed to delete report', 'error');
+      }
+    } catch (err) {
+      onAddToast('Network error deleting report', 'error');
     }
   };
 
@@ -70,7 +103,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
 
       if (res.ok) {
         const data = await res.json();
-        onAddToast('Clinical Report saved to MongoDB Atlas', 'success');
+        onAddToast('Clinical Report generated successfully', 'success');
         fetchReports();
         if (data.report) setActiveReport(data.report);
       } else {
@@ -93,6 +126,149 @@ export const ReportModal: React.FC<ReportModalProps> = ({
     onAddToast('Report copied to clipboard', 'info');
   };
 
+  const handleDownloadPDF = () => {
+    if (!activeReport) return;
+    try {
+      const doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      const primaryColor = [13, 148, 136]; // Teal #0d9488
+      const darkColor = [15, 23, 42];      // Slate 900 #0f172a
+      const grayColor = [100, 116, 139];   // Slate 500 #64748b
+      const lightBg = [248, 250, 252];     // Slate 50 #f8fafc
+
+      const margin = 15;
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const contentWidth = pageWidth - (margin * 2);
+      let currentY = 18;
+
+      // Header Tag
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+      doc.text(`CLINICAL REPORT · ${activeReport.report_id.toUpperCase()}`, margin, currentY);
+      currentY += 6;
+
+      // Title
+      doc.setFontSize(18);
+      doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+      const titleLines = doc.splitTextToSize(activeReport.title, contentWidth);
+      doc.text(titleLines, margin, currentY);
+      currentY += (titleLines.length * 7) + 2;
+
+      // Metadata
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+      const dateStr = new Date(activeReport.createdAt * 1000).toLocaleString();
+      doc.text(`User: ${activeReport.user_email || 'N/A'}   |   Session: ${activeReport.session_id}`, margin, currentY);
+      currentY += 5;
+      doc.text(`Date Generated: ${dateStr}`, margin, currentY);
+      currentY += 8;
+
+      // Divider Line
+      doc.setDrawColor(226, 232, 240);
+      doc.setLineWidth(0.5);
+      doc.line(margin, currentY, pageWidth - margin, currentY);
+      currentY += 10;
+
+      // Section 1: Summary Title
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+      doc.text('CLINICAL CONSULTATION SUMMARY', margin, currentY);
+      currentY += 6;
+
+      // Section 1: Summary Content
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+
+      const summaryLines = doc.splitTextToSize(activeReport.summary, contentWidth - 6);
+      const summaryBoxHeight = (summaryLines.length * 4.5) + 6;
+
+      doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(margin, currentY, contentWidth, summaryBoxHeight, 2, 2, 'FD');
+
+      doc.text(summaryLines, margin + 3, currentY + 5);
+      currentY += summaryBoxHeight + 10;
+
+      // Section 2: Attached Image (if present)
+      if (activeReport.image_url) {
+        try {
+          const pageHeight = doc.internal.pageSize.getHeight();
+          const imgHeight = 50; // mm
+          const imgWidth = 65;  // mm
+          if (currentY + imgHeight + 10 > pageHeight - margin) {
+            doc.addPage();
+            currentY = margin + 10;
+          }
+
+          doc.setFont('Helvetica', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+          doc.text('ATTACHED RADIOLOGY SCAN / CLINICAL EVIDENCE', margin, currentY);
+          currentY += 5;
+
+          doc.addImage(activeReport.image_url, 'JPEG', margin, currentY, imgWidth, imgHeight);
+          currentY += imgHeight + 10;
+        } catch (imgErr) {
+          console.error('Failed to embed image into PDF:', imgErr);
+        }
+      }
+
+      // Section 3: Findings Title
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+      doc.text('DETAILED VQA FINDINGS & EVIDENCE', margin, currentY);
+      currentY += 6;
+
+      // Section 2: Findings Content
+      doc.setFont('Courier', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+
+      const findingsText = activeReport.findings || 'No findings recorded.';
+      const findingsLines = doc.splitTextToSize(findingsText, contentWidth - 6);
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const limitY = pageHeight - margin - 10;
+      const lineHeight = 4.2;
+
+      let idx = 0;
+      while (idx < findingsLines.length) {
+        if (currentY > limitY) {
+          doc.addPage();
+          currentY = margin + 10;
+
+          doc.setFont('Helvetica', 'bold');
+          doc.setFontSize(8);
+          doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+          doc.text(`Clinical Report (${activeReport.report_id}) - Page ${doc.getNumberOfPages()}`, margin, margin);
+
+          doc.setFont('Courier', 'normal');
+          doc.setFontSize(8.5);
+          doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
+        }
+
+        doc.text(findingsLines[idx], margin, currentY);
+        currentY += lineHeight;
+        idx++;
+      }
+
+      const fileName = `${activeReport.report_id}_clinical_report.pdf`;
+      doc.save(fileName);
+      onAddToast('PDF downloaded successfully', 'success');
+    } catch (e) {
+      console.error('PDF Generation failed:', e);
+      onAddToast('Failed to download PDF', 'error');
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -105,7 +281,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-100 text-sm">MongoDB Clinical Reports</h3>
+              <h3 className="font-bold text-slate-100 text-sm">Clinical Reports</h3>
               <p className="text-[11px] text-slate-400 font-mono">
                 GROUNDED CLINICAL CONSULTATION DOCUMENTS
               </p>
@@ -145,21 +321,30 @@ export const ReportModal: React.FC<ReportModalProps> = ({
               reports.map((rep) => {
                 const isSelected = activeReport?.report_id === rep.report_id;
                 return (
-                  <button
+                  <div
                     key={rep.report_id}
                     onClick={() => setActiveReport(rep)}
-                    className={`w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer ${
+                    className={`group relative w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-teal-500/10 border-teal-500/40 text-teal-100'
                         : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
                     }`}
                   >
-                    <div className="font-semibold truncate text-slate-200 mb-1">{rep.title}</div>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="font-semibold truncate text-slate-200 mb-1 flex-1">{rep.title}</div>
+                      <button
+                        onClick={(e) => handleDeleteReport(rep.report_id, e)}
+                        className="p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-red-500/20 text-slate-500 hover:text-red-400 transition-all cursor-pointer"
+                        title="Delete Report"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                     <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-mono">
                       <Calendar className="w-3 h-3" />
                       <span>{new Date(rep.createdAt * 1000).toLocaleDateString()}</span>
                     </div>
-                  </button>
+                  </div>
                 );
               })
             )}
@@ -172,7 +357,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                 <div className="flex items-center justify-between border-b border-slate-800 pb-4">
                   <div>
                     <span className="text-[10px] font-mono uppercase bg-teal-500/10 text-teal-400 border border-teal-500/20 px-2 py-0.5 rounded font-bold">
-                      MONGODB ATLAS RECORD · {activeReport.report_id}
+                      CLINICAL REPORT · {activeReport.report_id}
                     </span>
                     <h2 className="text-xl font-bold text-slate-100 mt-2">{activeReport.title}</h2>
                     <p className="text-xs text-slate-400 font-mono mt-1">
@@ -180,13 +365,30 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                     </p>
                   </div>
 
-                  <button
-                    onClick={handleCopyReport}
-                    className="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-2 transition-all cursor-pointer"
-                  >
-                    {copied ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <Download className="w-3.5 h-3.5" />}
-                    <span>{copied ? 'Copied!' : 'Copy Document'}</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleCopyReport}
+                      className="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-2 transition-all cursor-pointer"
+                    >
+                      {copied ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <FileText className="w-3.5 h-3.5" />}
+                      <span>{copied ? 'Copied!' : 'Copy Text'}</span>
+                    </button>
+                    <button
+                      onClick={handleDownloadPDF}
+                      className="px-3 py-1.5 rounded-lg border border-teal-500/30 bg-teal-500/20 hover:bg-teal-500/30 text-teal-200 text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm"
+                    >
+                      <Download className="w-3.5 h-3.5 text-teal-400" />
+                      <span>Download PDF</span>
+                    </button>
+                    <button
+                      onClick={() => handleDeleteReport(activeReport.report_id)}
+                      className="px-3 py-1.5 rounded-lg border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 text-xs font-medium flex items-center gap-2 transition-all cursor-pointer"
+                      title="Delete Report"
+                    >
+                      <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Summary Box */}
@@ -198,6 +400,22 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                     {activeReport.summary}
                   </p>
                 </div>
+
+                {/* Attached Radiology Scan */}
+                {activeReport.image_url && (
+                  <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4 space-y-2">
+                    <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-teal-400">
+                      Attached Radiology Scan / Clinical Evidence
+                    </div>
+                    <div className="flex justify-center bg-slate-950 rounded-lg p-3 border border-slate-800/80">
+                      <img
+                        src={activeReport.image_url}
+                        alt="Radiology Scan"
+                        className="max-h-56 rounded-lg object-contain border border-slate-800 shadow-md"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {/* Findings Section */}
                 <div className="space-y-3 flex-1">

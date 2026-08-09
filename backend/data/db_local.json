@@ -10,11 +10,12 @@
     },
     {
       "id": "8d31c56f-a3fd-4177-b0c6-9cbfbb603600",
-      "firstName": "Kha. Mo. Syeed",
-      "lastName": "Asif",
+      "firstName": "Asif",
+      "lastName": "",
       "email": "kmsyeedasif@gmail.com",
       "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
-      "createdAt": 1786031955.9701674
+      "createdAt": 1786031955.9701674,
+      "avatarColor": "teal-sky"
     }
   ],
   "sessions": [
@@ -31,6 +32,13 @@
       "user_email": "anonymous",
       "createdAt": 1786032009.4566336,
       "updatedAt": 1786214079.618575
+    },
+    {
+      "session_id": "session-1786291571962",
+      "title": "what is the abnormaliy of this image?",
+      "user_email": "anonymous",
+      "createdAt": 1786291814.4534788,
+      "updatedAt": 1786291841.8919704
     }
   ],
   "messages": [
@@ -667,6 +675,142 @@
         }
       ],
       "timestamp": 1786214079618
+    },
+    {
+      "id": "user-1786291814453-84bc",
+      "session_id": "session-1786291571962",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormaliy of this image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786291814453
+    },
+    {
+      "id": "assistant-1786291814485-1a71",
+      "session_id": "session-1786291571962",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There is no visible abnormality in this image. The organs appear to be within normal limits based on the provided view.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.960674286
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.94361496
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.939128876
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.926456511
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.92186743
+        }
+      ],
+      "timestamp": 1786291814485
+    },
+    {
+      "id": "user-1786291841870-158d",
+      "session_id": "session-1786291571962",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is this organ?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786291841870
+    },
+    {
+      "id": "assistant-1786291841891-6f18",
+      "session_id": "session-1786291571962",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This image shows an axial slice from an abdominal MRI. The large organ occupying most of the left side of the image is the **liver**. Other structures visible include the kidneys, spleen, and portions of the gastrointestinal tract.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.964328885
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.935196
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.934623778
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.931881
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.929882109
+        }
+      ],
+      "timestamp": 1786291841891
     }
   ],
   "reports": [
@@ -681,12 +825,13 @@
       "createdAt": 1786031665.9494283
     },
     {
-      "report_id": "rep-533fafb2",
-      "session_id": "session-1786029243770",
+      "report_id": "rep-d0c78f1a",
+      "session_id": "session-1786291571962",
       "user_email": "kmsyeedasif@gmail.com",
-      "title": "Clinical Consultation Report (08/08/2026)",
-      "summary": "Clinical Consultation session containing 6 user queries. Key clinical topics evaluated: 'what is the abnormality of this image?, what is the abnormality of this image?, what is the abnormality of this image?'.",
-      "findings": "Q: what is the abnormality of this image?\nA: Error calling Gemini API: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.\n\nQ: what is the abnormality of this image?\nA: Error: HuggingFace API failed to process the image. (Detail: Client error '401 Unauthorized' for url 'https://router.huggingface.co/v1/chat/completions' (Request ID: Root=1-6a74afd4-65bc27844631220c6af49a1c;70ea6d0c-948d-4461-9450-27308ac19eea)\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401\n\nInvalid username or password.). Please switch Engine Settings to Gemini Pro.\n\nQ: what is the abnormality of this image?\nA: There appears to be a hypodense lesion within the liver, which could represent a variety of conditions such as a cyst, hemangioma, metastasis, or other focal liver lesions. Further clinical correlation and possibly additional imaging sequences or contrast enhancement would be necessary to characterize this finding accurately.\n\nQ: what is the abnormality of this image?\nA: The image shows a fracture in the lower leg, specifically involving the tibia and fibula bones near the ankle joint. The red area highlights the site of the fracture.\n\nQ: what is the abnormality of the image\nA: The abnormality in the image is a fracture of the femur at the knee joint. The red area highlights the site of the fracture.\n\nQ: what is the abnormality of this image?\nA: There is no obvious abnormality visible in this image. The structures appear normal without any evident masses, fractures, or other pathologies. However, further clinical information and potentially additional imaging sequences might be needed for a comprehensive evaluation.",
+      "title": "Clinical Consultation Report (09/08/2026)",
+      "summary": "Clinical Consultation session containing 2 user queries. Key clinical topics evaluated: 'what is the abnormaliy of this image?, what is this organ?'.",
+      "findings": "Q: what is the abnormaliy of this image?\nA: There is no visible abnormality in this image. The organs appear to be within normal limits based on the provided view.\n\nQ: what is this organ?\nA: This image shows an axial slice from an abdominal MRI. The large organ occupying most of the left side of the image is the **liver**. Other structures visible include the kidneys, spleen, and portions of the gastrointestinal tract.",
+      "image_url": "data:image/jpeg;base64,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",
       "retrieved_cases": [
         {
           "answer": "No",
@@ -695,7 +840,7 @@
           "img_organ": "",
           "kbase": "",
           "question": "Are there abnormalities in this image?",
-          "score": 0.948818207
+          "score": 0.960674286
         },
         {
           "answer": "None",
@@ -704,25 +849,7 @@
           "img_organ": "",
           "kbase": "",
           "question": "What diseases are included in the picture?",
-          "score": 0.91891861
-        },
-        {
-          "answer": "MRI",
-          "answer_type": "OPEN",
-          "content_type": "Modality",
-          "img_organ": "",
-          "kbase": "",
-          "question": "What modality is used to take this image?",
-          "score": 0.914692
-        },
-        {
-          "answer": "Liver",
-          "answer_type": "OPEN",
-          "content_type": "Size",
-          "img_organ": "",
-          "kbase": "",
-          "question": "What is the largest organ in the picture?",
-          "score": 0.91135031
+          "score": 0.94361496
         },
         {
           "answer": "T2",
@@ -731,10 +858,28 @@
           "img_organ": "",
           "kbase": "",
           "question": "What is the mr weighting in this image?",
-          "score": 0.909347534
+          "score": 0.939128876
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.926456511
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.92186743
         }
       ],
-      "createdAt": 1786202007.1091712
+      "createdAt": 1786294020.230958
     }
   ],
   "metadata": [
@@ -909,6 +1054,63 @@
         "retrieved_count": 5
       },
       "timestamp": 1786214079.6479442
+    },
+    {
+      "id": "meta-2c31511b",
+      "event_type": "user_profile_updated",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "email": "kmsyeedasif@gmail.com"
+      },
+      "timestamp": 1786290393.556765
+    },
+    {
+      "id": "meta-625e597f",
+      "event_type": "report_generated",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "report_id": "rep-31696dfa",
+        "session_id": "session-1786029243770"
+      },
+      "timestamp": 1786290413.7983189
+    },
+    {
+      "id": "meta-1aaf43b5",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 37,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786291814.5500917
+    },
+    {
+      "id": "meta-3f6a9e77",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 19,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786291841.9069712
+    },
+    {
+      "id": "meta-2ee004eb",
+      "event_type": "report_generated",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "report_id": "rep-d0c78f1a",
+        "session_id": "session-1786291571962"
+      },
+      "timestamp": 1786294020.2419045
     }
   ]
 }

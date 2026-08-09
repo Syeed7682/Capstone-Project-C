@@ -357,7 +357,8 @@ class MongoDBManager:
 
     # ── 3. REPORTS COLLECTION ───────────────────────────────────────────────
     def save_report(self, session_id: str, title: str, summary: str, findings: str, 
-                    user_email: Optional[str] = None, retrieved_cases: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+                    user_email: Optional[str] = None, retrieved_cases: Optional[List[Dict[str, Any]]] = None,
+                    image_url: Optional[str] = None) -> Dict[str, Any]:
         now = time.time()
         report_doc = {
             "report_id": f"rep-{uuid.uuid4().hex[:8]}",
@@ -366,6 +367,7 @@ class MongoDBManager:
             "title": title,
             "summary": summary,
             "findings": findings,
+            "image_url": image_url,
             "retrieved_cases": retrieved_cases or [],
             "createdAt": now
         }
@@ -402,6 +404,19 @@ class MongoDBManager:
             reps = [r for r in reps if r.get("user_email") == target_email or r.get("user_email") == "anonymous"]
         reps.sort(key=lambda x: x.get("createdAt", 0), reverse=True)
         return reps
+
+    def delete_report(self, report_id: str) -> bool:
+        if self.connected and self.db is not None:
+            try:
+                self.db.reports.delete_one({"report_id": report_id})
+            except Exception as e:
+                print(f"[MongoDB] Report delete error: {e}")
+
+        store = self._read_local_store()
+        original_count = len(store["reports"])
+        store["reports"] = [r for r in store["reports"] if r.get("report_id") != report_id]
+        self._write_local_store(store)
+        return len(store["reports"]) < original_count
 
     # ── 4. METADATA COLLECTION ──────────────────────────────────────────────
     def log_metadata(self, event_type: str, details: Dict[str, Any], user_email: Optional[str] = None):

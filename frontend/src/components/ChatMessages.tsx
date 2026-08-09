@@ -86,12 +86,6 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({
                       {avgScore} (BiomedCLIP)
                     </p>
                   </div>
-                  <div className="px-3 py-2 bg-slate-900 rounded border border-slate-700">
-                    <p className="text-[9px] text-slate-500 uppercase font-mono">Token Usage</p>
-                    <p className="text-xs text-slate-300 font-mono font-semibold">
-                      142 In / 68 Out
-                    </p>
-                  </div>
                 </div>
 
                 {/* SLAKE Grounding Details */}

@@ -68,10 +68,15 @@ flowchart TD
         VectorDB[("Pinecone / FAISS\n(SLAKE Embeddings)")]
     end
 
-    Presentation Layer <-->|HTTP/REST| Application Layer
-    Application Layer <--> Data & Storage Layer
-    Application Layer <--> AI & ML Layer
-    AI & ML Layer <--> VectorDB
+    PresentationLayer["Presentation Layer"]
+    ApplicationLayer["Application Layer"]
+    AILayer["AI & ML Layer"]
+    DataStorageLayer["Data & Storage Layer"]
+
+    PresentationLayer <-->|HTTP/REST| ApplicationLayer
+    ApplicationLayer <--> DataStorageLayer
+    ApplicationLayer <--> AILayer
+    AILayer <--> VectorDB
 ```
 
 ---

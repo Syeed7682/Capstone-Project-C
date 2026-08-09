@@ -557,7 +557,7 @@ export default function App() {
         />
       )}
 
-      {/* MongoDB Clinical Reports Modal */}
+      {/* Clinical Reports Modal */}
       <ReportModal
         isOpen={isReportsOpen}
         onClose={() => setIsReportsOpen(false)}

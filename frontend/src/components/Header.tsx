@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
           <ShieldCheck className="w-5 h-5 text-white" />
         </div>
         <h1 className="text-lg font-semibold tracking-tight text-slate-100">
-          MedVQA <span className="text-slate-500 font-normal">| RAG Multi-Engine</span>
+          MedRAG-VQA <span className="text-slate-500 font-normal">| RAG Multi-Engine</span>
         </h1>
       </div>
 
@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           onClick={onOpenReports}
           className="px-3 py-1.5 rounded-xl border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 font-medium text-xs flex items-center gap-2 transition-all cursor-pointer shadow-sm"
-          title="View & Generate Clinical Reports in MongoDB"
+          title="View & Generate Clinical Reports"
         >
           <FileText className="w-3.5 h-3.5 text-teal-400" />
           <span>Clinical Reports</span>

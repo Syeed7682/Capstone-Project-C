@@ -192,7 +192,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onAuthSuccess }) => {
         <nav className="land-nav">
           <div className="nav-logo">
             <div className="logo-orb">🧠</div>
-            <span>MedVQA</span>
+            <span>MedRAG-VQA</span>
             <span className="logo-chip">RAG</span>
           </div>
           <div className="nav-btns">
@@ -227,9 +227,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onAuthSuccess }) => {
         {/* Feature Sections */}
         <section className="help-section">
           <div className="help-header">
-            <div className="help-eyebrow">What MedVQA Can Do For You</div>
+            <div className="help-eyebrow">What MedRAG-VQA Can Do For You</div>
             <h2 className="help-title">How this chatbot helps you</h2>
-            <p className="help-desc">From clinical education to research support — MedVQA is built for your workflow</p>
+            <p className="help-desc">From clinical education to research support — MedRAG-VQA is built for your workflow</p>
           </div>
 
           <div className="help-grid">
@@ -239,7 +239,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onAuthSuccess }) => {
               <div className="card-label">Primary Use</div>
               <h3 className="card-title">Ask Clinical Questions About Any Scan</h3>
               <p className="card-body">
-                Simply upload a medical image and type your question in plain language. MedVQA will analyze the scan, retrieve relevant clinical knowledge, and give you a concise, grounded answer — no radiology jargon required.
+                Simply upload a medical image and type your question in plain language. MedRAG-VQA will analyze the scan, retrieve relevant clinical knowledge, and give you a concise, grounded answer — no radiology jargon required.
               </p>
               <div className="steps-list">
                 <div className="step-row">
@@ -332,7 +332,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onAuthSuccess }) => {
           <form className="auth-card" onSubmit={handleLogin}>
             <div className="auth-logo">
               <div className="logo-orb">🧠</div>
-              <span className="auth-logo-txt">MedVQA</span>
+              <span className="auth-logo-txt">MedRAG-VQA</span>
             </div>
             <h2 className="auth-h">Welcome back</h2>
             <p className="auth-sub">Sign in to continue your clinical conversations</p>
@@ -376,10 +376,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onAuthSuccess }) => {
           <form className="auth-card" onSubmit={handleSignup}>
             <div className="auth-logo">
               <div className="logo-orb">🧠</div>
-              <span className="auth-logo-txt">MedVQA</span>
+              <span className="auth-logo-txt">MedRAG-VQA</span>
             </div>
             <h2 className="auth-h">Create account</h2>
-            <p className="auth-sub">Join MedVQA — free forever for research & education</p>
+            <p className="auth-sub">Join MedRAG-VQA — free forever for research & education</p>
 
             {signupErr && <div className="auth-err show" id="signup-err">{signupErr}</div>}
 
