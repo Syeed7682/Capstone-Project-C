@@ -30,7 +30,7 @@ import faiss
 from PIL import Image
 from tqdm import tqdm
 
-from app import config
+from backend.app import config
 
 # ── Global model placeholders (lazy-loaded) ───────────────────────────────────
 _biomedclip_model       = None
@@ -147,24 +147,30 @@ def _get_pinecone_index():
     Lazily connect to the Pinecone index and cache the client.
     Uses the host URL directly for the fastest possible connection.
     """
+def _get_pinecone_index():
+    """Lazily connect to the Pinecone index and cache the client, with error handling and fallback to FAISS."""
     global _pinecone_idx
     if _pinecone_idx is not None:
         return _pinecone_idx
-
+    import traceback
     from pinecone import Pinecone
-    pc = Pinecone(api_key=config.PINECONE_API_KEY)
-
-    # Connect via the index host URL (avoids extra DNS lookup)
-    if config.PINECONE_HOST:
-        _pinecone_idx = pc.Index(
-            name=config.PINECONE_INDEX_NAME,
-            host=config.PINECONE_HOST,
-        )
-    else:
-        _pinecone_idx = pc.Index(name=config.PINECONE_INDEX_NAME)
-
-    print(f"Connected to Pinecone index: '{config.PINECONE_INDEX_NAME}'")
-    return _pinecone_idx
+    try:
+        pc = Pinecone(api_key=config.PINECONE_API_KEY)
+        # Connect via the index host URL (avoids extra DNS lookup)
+        if config.PINECONE_HOST:
+            _pinecone_idx = pc.Index(name=config.PINECONE_INDEX_NAME, host=config.PINECONE_HOST)
+        else:
+            _pinecone_idx = pc.Index(name=config.PINECONE_INDEX_NAME)
+        print(f"Connected to Pinecone index: '{config.PINECONE_INDEX_NAME}'")
+        return _pinecone_idx
+    except Exception as exc:
+        err = traceback.format_exc()
+        print(f"Pinecone connection error: {exc}\n{err}")
+        if getattr(config, "PINECONE_FALLBACK", True):
+            print("Falling back to FAISS index.")
+            config.USE_PINECONE = False
+            _init_faiss_index()
+        raise  # Re‑raise to let caller handle if needed
 
 
 def _init_pinecone_index():
@@ -204,6 +210,12 @@ def _init_pinecone_index():
         err = traceback.format_exc()
         index_status.update("failed", 0.0, f"Pinecone connection failed: {exc}", error=err)
         print(f"Pinecone init error:\n{err}")
+        if getattr(config, "PINECONE_FALLBACK", True):
+            print("Attempting fallback to FAISS index.")
+            config.USE_PINECONE = False
+            _init_faiss_index()
+        # Swallow exception to allow server to continue with FAISS
+        # raise  # optional: do not re‑raise so fallback proceeds silently
 
 
 def _build_and_upsert_to_pinecone():
@@ -652,13 +664,29 @@ def build_medical_prompt_with_history(
 
 # ── Generative VQA engines ────────────────────────────────────────────────────
 
+# Helper to trigger fallback manually (optional)
+def fallback_to_faiss():
+    """Switches to FAISS index when Pinecone is unavailable."""
+    if config.USE_PINECONE:
+        print("Switching to FAISS fallback.")
+        config.USE_PINECONE = False
+        _init_faiss_index()
+
+
 def _generate_via_hf_api(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:
     """Uses Hugging Face Serverless Inference API to call the specified vision model."""
     if not config.HF_TOKEN:
         raise ValueError("HF_TOKEN environment variable is missing for the huggingface_api engine.")
 
     from huggingface_hub import InferenceClient
-    client = InferenceClient(token=config.HF_TOKEN)
+    # Determine whether to use the custom HF endpoint
+    client_kwargs = {}
+    if config.USE_CUSTOM_HF_ENDPOINT and config.HF_ENDPOINT:
+        client_kwargs["base_url"] = config.HF_ENDPOINT
+        print(f"[DEBUG] Using custom HF endpoint: {config.HF_ENDPOINT}")
+    else:
+        print("[DEBUG] Using standard HuggingFace inference endpoint")
+    client = InferenceClient(token=config.HF_TOKEN, **client_kwargs)
 
     if pil_image is None:
         pil_image = Image.new("RGB", (336, 336), color=(255, 255, 255))
@@ -684,7 +712,9 @@ def _generate_via_hf_api(prompt: str, pil_image: Optional[Image.Image], max_toke
         return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"HuggingFace API Chat Completion error: {e}")
-        return f"Error: HuggingFace API failed to process the image. (Detail: {e}). Please switch Engine Settings to Gemini Pro."
+        # Fallback to local Moondream model regardless of engine selection
+        print("[DEBUG] Falling back to local Moondream model for HF request.")
+        return _generate_via_local_moondream(prompt, pil_image, max_tokens)
 
 
 def _generate_via_gemini_api(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:
@@ -692,9 +722,20 @@ def _generate_via_gemini_api(prompt: str, pil_image: Optional[Image.Image], max_
     if not config.GEMINI_API_KEY:
         raise ValueError("GEMINI_API_KEY is missing for the gemini_api engine.")
 
+    print("[DEBUG] GEMINI_API_KEY loaded:", "present" if config.GEMINI_API_KEY else "missing")
+
     import google.generativeai as genai
-    genai.configure(api_key=config.GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    try:
+        genai.configure(api_key=config.GEMINI_API_KEY)
+    except Exception as e:
+        print(f"[DEBUG] Gemini configuration error: {e}")
+        if config.GENERATIVE_ENGINE == "local_moondream":
+            print("[DEBUG] Falling back to local Moondream model for Gemini request.")
+            return _generate_via_local_moondream(prompt, pil_image, max_tokens)
+        raise
+
+    model = genai.GenerativeModel(config.GEMINI_MODEL)
+    print(f"[DEBUG] Using Gemini model: {config.GEMINI_MODEL}")
 
     try:
         if pil_image is not None:
@@ -703,6 +744,10 @@ def _generate_via_gemini_api(prompt: str, pil_image: Optional[Image.Image], max_
             response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
+        print(f"Gemini API call error: {e}")
+        if config.GENERATIVE_ENGINE == "local_moondream":
+            print("[DEBUG] Falling back to local Moondream model for Gemini request.")
+            return _generate_via_local_moondream(prompt, pil_image, max_tokens)
         return f"Error calling Gemini API: {str(e)}"
 
 
@@ -764,7 +809,7 @@ def _generate_via_local_moondream(prompt: str, pil_image: Optional[Image.Image],
         moondream_config.update({"pad_token_id": _local_gen_tokenizer.eos_token_id})
         _local_gen_model = AutoModelForCausalLM.from_pretrained(
             config.GEN_MODEL_MOONDREAM,
-            revision="2024-08-26",
+            revision="main",
             trust_remote_code=True,
             config=moondream_config,
             torch_dtype=torch.float32 if config.DEVICE == "cpu" else torch.float16,

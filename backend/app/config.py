@@ -42,6 +42,12 @@ DIM = 512
 # Available engines: 'gemini_api', 'huggingface_api', 'local_moondream', 'local_llava'
 HF_TOKEN = normalize_secret_value(os.getenv("HF_TOKEN", ""))
 GEMINI_API_KEY = normalize_secret_value(os.getenv("GEMINI_API_KEY", ""))
+HF_ENDPOINT = os.getenv("HF_ENDPOINT", "")
+
+# Debug prints (mask secrets)
+print("[DEBUG] HF_TOKEN loaded:", "present" if HF_TOKEN else "missing")
+print("[DEBUG] GEMINI_API_KEY loaded:", "present" if GEMINI_API_KEY else "missing")
+print("[DEBUG] HF_ENDPOINT:", HF_ENDPOINT if HF_ENDPOINT else "default")
 
 if GEMINI_API_KEY:
     DEFAULT_ENGINE = "gemini_api"
@@ -50,9 +56,8 @@ elif HF_TOKEN:
 else:
     DEFAULT_ENGINE = "local_moondream"
 
-GENERATIVE_ENGINE = os.getenv("GENERATIVE_ENGINE", DEFAULT_ENGINE)
-
-# Model IDs
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash-001")
+USE_CUSTOM_HF_ENDPOINT = os.getenv("USE_CUSTOM_HF_ENDPOINT", "false").lower() in ("true", "1", "yes")
 GEN_MODEL_LLAVA = "Qwen/Qwen2.5-VL-72B-Instruct"  # Cloud VLM via HF Inference API
 GEN_MODEL_MOONDREAM = "vikhyatk/moondream2"
 
@@ -67,13 +72,11 @@ META_PATH = DATA_DIR / "slake_meta.json"
 # Falls back to local FAISS if the key is not set.
 PINECONE_API_KEY   = os.getenv("PINECONE_API_KEY", "")
 PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "slake-index")
-PINECONE_HOST      = os.getenv("PINECONE_HOST", "https://slake-index-gmci4oc.svc.aped-4627-b74a.pinecone.io")
+PINECONE_HOST = os.getenv("PINECONE_HOST", "https://slake-index-gmci4oc.svc.aped-4627-b74a.pinecone.io")
 PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "slake-vqa")
-
-# Auto-detect which vector store to use
-USE_PINECONE = bool(PINECONE_API_KEY)
-
-# RAG Hyperparameters
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT", "")
+PINECONE_FALLBACK = os.getenv("PINECONE_FALLBACK", "true").lower() in ("true","1","yes")
+USE_PINECONE = bool(PINECONE_API_KEY) and (bool(PINECONE_HOST) or bool(PINECONE_ENVIRONMENT))
 TOP_K = 5
 ALPHA = 0.6  # Fusion weight: alpha * image_embedding + (1 - alpha) * text_embedding
 MAX_NEW_TOKENS = 128
