@@ -55,8 +55,9 @@ elif HF_TOKEN:
     DEFAULT_ENGINE = "huggingface_api"
 else:
     DEFAULT_ENGINE = "local_moondream"
+GENERATIVE_ENGINE = DEFAULT_ENGINE
 
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash-001")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 USE_CUSTOM_HF_ENDPOINT = os.getenv("USE_CUSTOM_HF_ENDPOINT", "false").lower() in ("true", "1", "yes")
 GEN_MODEL_LLAVA = "Qwen/Qwen2.5-VL-72B-Instruct"  # Cloud VLM via HF Inference API
 GEN_MODEL_MOONDREAM = "vikhyatk/moondream2"

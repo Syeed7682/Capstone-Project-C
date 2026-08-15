@@ -1,6 +1,8 @@
+# Run with: e:/Capstone/.venv312/Scripts/python.exe e:/Capstone/Capstone-Project-C/run.py
 import sys
 import os
 from pathlib import Path
+
 
 # Add backend to Python path
 sys.path.append(str(Path(__file__).resolve().parent / "backend"))
@@ -10,8 +12,8 @@ if __name__ == "__main__":
         import uvicorn
     except ImportError:
         print("\n[ERROR] 'uvicorn' is not installed in the active environment.")
-        print("Please install dependencies first by running:")
-        print("    pip install -r requirements.txt")
+        print("Please install dependencies in the project's virtual environment:")
+        print("    e:/Capstone/.venv312/Scripts/python.exe -m pip install -r requirements.txt")
         sys.exit(1)
 
     print("\n" + "=" * 60)

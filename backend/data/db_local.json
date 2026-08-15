@@ -59,7 +59,14 @@
       "title": "what is the abnormality of this image",
       "user_email": "anonymous",
       "createdAt": 1786478068.8211691,
-      "updatedAt": 1786478101.7663317
+      "updatedAt": 1786612823.8702009
+    },
+    {
+      "session_id": "session-1786613169556",
+      "title": "what is the abnormality of this image?/",
+      "user_email": "anonymous",
+      "createdAt": 1786615347.424003,
+      "updatedAt": 1786615462.2555625
     }
   ],
   "messages": [
@@ -1444,6 +1451,1434 @@
         }
       ],
       "timestamp": 1786478101766
+    },
+    {
+      "id": "user-1786568681932-0d0e",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to be safe from fever",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786568681932
+    },
+    {
+      "id": "assistant-1786568681950-1b74",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "To prevent fever, follow these general guidelines:\n\n1. **Practice Good Hygiene**: Wash your hands frequently with soap and water, especially before eating and after using the restroom. Use hand sanitizer when soap and water are not available.\n\n2. **Stay Vaccinated**: Keep up-to-date with recommended vaccinations, which can protect against many infectious diseases that cause fever.\n\n3. **Avoid Close Contact**: Stay away from people who are sick, as many fevers are caused by contagious illnesses.\n\n4. **Maintain a Healthy Lifestyle**: Eat a balanced diet, exercise regularly, get enough sleep, and manage stress, all of which can help strengthen your immune system.\n\n5. **Protect Against Insect Bites**: Use insect repellent and wear protective clothing if you're in areas where insect-borne diseases are common.\n\n6. **Be Cautious with Food and Water**: When traveling, avoid consuming potentially contaminated food and water to prevent foodborne and waterborne illnesses.\n\nRemember, if you develop a fever, seek medical advice to determine the cause and appropriate treatment.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.908958495
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.902702332
+        },
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.90233618
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.902088225
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.90051651
+        }
+      ],
+      "timestamp": 1786568681950
+    },
+    {
+      "id": "user-1786568910094-8a3c",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786568910094
+    },
+    {
+      "id": "assistant-1786568910160-5dac",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "No visible abnormality is detected in this image. The liver, kidneys, spleen, and pancreas appear within normal limits. There are no apparent masses, lesions, or structural abnormalities.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.94871527
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.914215147
+        },
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.912243
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.910514951
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.908409238
+        }
+      ],
+      "timestamp": 1786568910160
+    },
+    {
+      "id": "user-1786568939882-3f25",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786568939882
+    },
+    {
+      "id": "assistant-1786568939905-c914",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 models/gemini-1.5-flash-001 is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786568939905
+    },
+    {
+      "id": "user-1786569008503-5bd7",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569008503
+    },
+    {
+      "id": "assistant-1786569008890-5c97",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 This model models/gemini-2.0-flash is no longer available. Please update your code to use a newer model for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/migrate-to-interactions).",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569008890
+    },
+    {
+      "id": "user-1786569351451-41c6",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569351451
+    },
+    {
+      "id": "assistant-1786569351846-b198",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 This model models/gemini-2.0-flash is no longer available. Please update your code to use a newer model for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/migrate-to-interactions).",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569351846
+    },
+    {
+      "id": "user-1786569455052-b615",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569455052
+    },
+    {
+      "id": "assistant-1786569455070-a051",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This is an axial MRI image of the abdomen. It shows various abdominal organs including the liver, kidneys, and parts of the gastrointestinal tract. There are no immediately obvious gross abnormalities such as large masses or significant structural deformities visible in this single slice. However, a comprehensive analysis would require reviewing the entire MRI study along with clinical history and other relevant imaging sequences.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569455070
+    },
+    {
+      "id": "user-1786569564874-8826",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569564874
+    },
+    {
+      "id": "assistant-1786569564970-e32c",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash-lite is no longer available. Please update your code to use a newer model for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/migrate-to-interactions).', 'status': 'NOT_FOUND'}}",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569564970
+    },
+    {
+      "id": "user-1786569808766-2fc0",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569808766
+    },
+    {
+      "id": "assistant-1786569808898-d5a2",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Error calling Gemini API: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use a newer model for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/migrate-to-interactions).', 'status': 'NOT_FOUND'}}",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569808898
+    },
+    {
+      "id": "user-1786569881876-5f5b",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me something about this",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786569881876
+    },
+    {
+      "id": "assistant-1786569881928-3c9d",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This is an axial MRI image of the abdomen. Key observations include:\n\n- **Liver**: Appears homogenous without any focal lesions or masses.\n- **Kidneys**: Both kidneys are visible and seem structurally normal.\n- **Pancreas**: The pancreas is partially visualized and appears unremarkable.\n- **Spleen**: Visible and seems within normal limits.\n- **Gastrointestinal Tract**: Portions of the bowel are seen, and there are no signs of obstruction or abnormal wall thickening.\n\nNo gross abnormalities are evident in this single slice; however, a full evaluation requires review of the entire MRI series and correlation with patient symptoms and history.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.886436522
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.883091033
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.876907349
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain liver?",
+          "score": 0.87323
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.872238159
+        }
+      ],
+      "timestamp": 1786569881928
+    },
+    {
+      "id": "user-1786570189543-bb2c",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "explain what is in the image?",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786570189543
+    },
+    {
+      "id": "assistant-1786570189581-e2d2",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This image is an axial T2-weighted magnetic resonance imaging (MRI) scan of the upper abdomen. \n\nKey anatomical structures visible include:\n- **Liver** (right side of the image, showing the gallbladder as a bright fluid-filled structure)\n- **Kidneys** (both right and left kidneys appear normal in size and signal intensity)\n- **Spleen** (left side of the image)\n- **Pancreas and surrounding gastrointestinal structures** centrally located.\n\nOverall, this single slice demonstrates normal cross-sectional anatomy of the upper abdominal organs without obvious structural abnormalities.",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.943473816
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.939723969
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.933952391
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.928146362
+        },
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.920391083
+        }
+      ],
+      "timestamp": 1786570189581
+    },
+    {
+      "id": "user-1786571172579-9a53",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to take care of it",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786571172579
+    },
+    {
+      "id": "assistant-1786571172629-4450",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "The image provided is an axial MRI of the abdomen, which appears to show normal anatomy without any immediately apparent abnormalities. However, \"taking care of it\" depends on the specific clinical context and any findings that might be present upon a thorough review of the entire MRI study by a qualified radiologist.\n\nIf this image is part of a routine check-up or follow-up and no abnormalities are found, general health maintenance would involve:\n\n1. **Regular Medical Check-ups:** Continue with periodic health evaluations as recommended by your healthcare provider.\n2. **Healthy Lifestyle Choices:** Maintain a balanced diet, engage in regular physical activity, avoid smoking, and limit alcohol",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.917785764
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.895908415
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.894756377
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.893859923
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.889122128
+        }
+      ],
+      "timestamp": 1786571172629
+    },
+    {
+      "id": "user-1786571375243-74a7",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to take care of it",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786571375243
+    },
+    {
+      "id": "assistant-1786571375277-ad9d",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "As previously mentioned, this image represents a normal axial MRI slice of the abdomen without any apparent acute pathology. \n\nBecause medical management or lifestyle guidance cannot be determined from a single diagnostic image alone, the most appropriate steps include:\n\n1. **Follow Up with Your Physician:** Discuss the results of the complete MRI report with the ordering doctor who knows your specific symptoms, medical history, and why the scan was performed.\n2. **Review the Full Report:** A single slice does not replace the comprehensive evaluation of the entire multi-slice MRI sequence by a radiologist. \n3. **General Wellness:** Follow standard",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.917785764
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.895908415
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.894756377
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.893859923
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.889122128
+        }
+      ],
+      "timestamp": 1786571375277
+    },
+    {
+      "id": "user-1786571691278-1ed2",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to take care of it",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786571691278
+    },
+    {
+      "id": "assistant-1786571691316-920d",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "To properly address your question, it is essential to discuss the complete imaging report and findings with the healthcare provider who ordered the study. A treatment or management plan cannot be determined from a single diagnostic image alone. \n\nPlease consult your physician for specific recommendations tailored to your medical history and symptoms.",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.917785764
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.895908415
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.894756377
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.893859923
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.889122128
+        }
+      ],
+      "timestamp": 1786571691316
+    },
+    {
+      "id": "user-1786571727533-8869",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to take care of it",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786571727533
+    },
+    {
+      "id": "assistant-1786571727552-865b",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "Based on the provided X-ray image showing a displaced bone fracture in the forearm near the elbow, immediate medical attention is required. \n\n**How to care for this injury:**\n\n1. **Seek Immediate Medical Evaluation:** Go to an emergency department or consult an orthopedic specialist immediately. A fracture of this nature typically requires professional intervention.\n2. **Immobilize the Arm:** Do not attempt to straighten or move the arm. Keep it supported and immobilized in the position it is in using a splint or sling to prevent further injury to surrounding tissues, nerves, and blood vessels.\n3. **Apply Ice",
+      "imageUrl": null,
+      "engine": "gemini_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.64689064
+        },
+        {
+          "answer": "Medical treatment, supportive treatment, surgical treatment",
+          "answer_type": "OPEN",
+          "content_type": "KG",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How to treat the most severe disease in this image?",
+          "score": 0.634651184
+        },
+        {
+          "answer": "X-Ray",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How was this image taken?",
+          "score": 0.634460509
+        },
+        {
+          "answer": "Head",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Where does the picture show?",
+          "score": 0.633937895
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.632661879
+        }
+      ],
+      "timestamp": 1786571727552
+    },
+    {
+      "id": "user-1786607490172-8d47",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "explain this image",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786607490172
+    },
+    {
+      "id": "assistant-1786607490205-8bb3",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This image is an X-ray of the elbow joint, highlighting a fracture. The red area indicates the site of the injury, where there is a clear break in the continuity of the bone. This type of fracture appears to involve the distal humerus, which is the lower end of the upper arm bone that forms part of the elbow joint. The fracture seems to be displaced, meaning the broken ends of the bone are not aligned properly. This kind of injury would likely require medical intervention such as surgical fixation to ensure proper healing and alignment.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.625673354
+        },
+        {
+          "answer": "X-Ray",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How was this image taken?",
+          "score": 0.614433348
+        },
+        {
+          "answer": "Coronal Plane",
+          "answer_type": "OPEN",
+          "content_type": "Plane",
+          "img_organ": "",
+          "kbase": "",
+          "question": "In what plane is this image scanned?",
+          "score": 0.604883254
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this a X-Ray?",
+          "score": 0.603754103
+        },
+        {
+          "answer": "X-Ray",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.600704253
+        }
+      ],
+      "timestamp": 1786607490205
+    },
+    {
+      "id": "user-1786612734504-9776",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "how to take care of it",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786612734504
+    },
+    {
+      "id": "assistant-1786612734574-8b54",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "To manage the fracture shown in the image:\n\n1. **Immediate Medical Attention:** Seek urgent care at an emergency room or contact an orthopedic specialist. Displaced fractures like the one depicted often require surgical intervention to realign the bones properly.\n\n2. **Immobilization:** Avoid moving the injured arm. Use a splint or sling to keep the elbow stable and prevent further damage.\n\n3. **Pain Management:** Over-the-counter pain relievers can help manage discomfort until you receive medical care. Follow the dosage instructions carefully.\n\n4. **Follow Professional Advice:** Once evaluated by a healthcare provider, adhere strictly to their treatment plan,",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.642730713
+        },
+        {
+          "answer": "Head",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Where does the picture show?",
+          "score": 0.63264662
+        },
+        {
+          "answer": "Medical treatment, supportive treatment, surgical treatment",
+          "answer_type": "OPEN",
+          "content_type": "KG",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How to treat the most severe disease in this image?",
+          "score": 0.632059097
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How was this image taken?",
+          "score": 0.631856918
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this image taken via X-Ray?",
+          "score": 0.631563246
+        }
+      ],
+      "timestamp": 1786612734574
+    },
+    {
+      "id": "user-1786612823810-f9ee",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "explain the image",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786612823810
+    },
+    {
+      "id": "assistant-1786612823870-6102",
+      "session_id": "session-1786478036637",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This image is an axial view from an abdominal MRI scan. It shows various organs within the abdomen, including the liver, kidneys, and parts of the gastrointestinal tract. The liver appears to occupy a significant portion of the left side of the image, while the kidneys are visible towards the right. There are no obvious signs of gross abnormalities such as large masses or significant structural distortions in this particular slice. However, detailed analysis would require comparison with other slices and clinical correlation.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "T2",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the mr weighting in this image?",
+          "score": 0.896976531
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.893837035
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.891449034
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.890545
+        },
+        {
+          "answer": "Abdomen",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Which part of the body does this image belong to?",
+          "score": 0.887813687
+        }
+      ],
+      "timestamp": 1786612823870
+    },
+    {
+      "id": "user-1786615347424-d59f",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the abnormality of this image?/",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786615347424
+    },
+    {
+      "id": "assistant-1786615347505-7f7b",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There is no visible abnormality in this image. The organs appear within normal limits based on the provided view.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.939956725
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.905323088
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.90504849
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.901691556
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.895240843
+        }
+      ],
+      "timestamp": 1786615347505
+    },
+    {
+      "id": "user-1786615406914-9086",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "tell me if this is a medcal image?/",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786615406914
+    },
+    {
+      "id": "assistant-1786615406994-9469",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "No",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain eyes?",
+          "score": 0.641418517
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Do the organs in the image exist in the head?",
+          "score": 0.633514464
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain ears?",
+          "score": 0.632736266
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "KG",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Do any of the organs in the picture belong to the nervous system?",
+          "score": 0.632011473
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Organ",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain eyes?",
+          "score": 0.631136
+        }
+      ],
+      "timestamp": 1786615406994
+    },
+    {
+      "id": "user-1786615435282-9089",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "why this image is no an medical image",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786615435282
+    },
+    {
+      "id": "assistant-1786615435388-60c8",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "This image is not a medical image because it depicts a dog outdoors, likely in a park setting, rather than any anatomical structures or diagnostic imaging such as X-rays, MRIs, or CT scans. It lacks any features associated with medical imaging modalities.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this an MRI?",
+          "score": 0.696239531
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Do the organs in the image exist in the head?",
+          "score": 0.692556381
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this an MRI?",
+          "score": 0.690330505
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "KG",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Does the picture contain the organ which has the effect of sensing light?",
+          "score": 0.684345245
+        },
+        {
+          "answer": "Yes",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this a CT?",
+          "score": 0.683330536
+        }
+      ],
+      "timestamp": 1786615435388
+    },
+    {
+      "id": "user-1786615462204-580b",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "user",
+      "text": "what is the ibnormality of this image?/",
+      "imageUrl": null,
+      "engine": null,
+      "retrieved": [],
+      "timestamp": 1786615462204
+    },
+    {
+      "id": "assistant-1786615462255-4e64",
+      "session_id": "session-1786613169556",
+      "user_email": "anonymous",
+      "role": "assistant",
+      "text": "There is no abnormality in this image. It shows a happy dog outdoors, which is not a medical image and does not depict any medical abnormalities.",
+      "imageUrl": null,
+      "engine": "huggingface_api",
+      "retrieved": [
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How was this image taken?",
+          "score": 0.662805557
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "How was this image taken?",
+          "score": 0.647499144
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this an MRI?",
+          "score": 0.644672453
+        },
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Is this an MRI?",
+          "score": 0.641630173
+        },
+        {
+          "answer": "Head",
+          "answer_type": "OPEN",
+          "content_type": "Position",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Where does the picture show?",
+          "score": 0.638872147
+        }
+      ],
+      "timestamp": 1786615462255
     }
   ],
   "reports": [
@@ -1513,6 +2948,63 @@
         }
       ],
       "createdAt": 1786478221.8451405
+    },
+    {
+      "report_id": "rep-a8107a74",
+      "session_id": "session-1786613169556",
+      "user_email": "kmsyeedasif@gmail.com",
+      "title": "Clinical Consultation Report (13/08/2026)",
+      "summary": "Clinical Consultation session containing 4 user queries. Key clinical topics evaluated: 'what is the abnormality of this image?/, tell me if this is a medcal image?/, why this image is no an medical image'.",
+      "findings": "Q: what is the abnormality of this image?/\nA: There is no visible abnormality in this image. The organs appear within normal limits based on the provided view.\n\nQ: tell me if this is a medcal image?/\nA: No\n\nQ: why this image is no an medical image\nA: This image is not a medical image because it depicts a dog outdoors, likely in a park setting, rather than any anatomical structures or diagnostic imaging such as X-rays, MRIs, or CT scans. It lacks any features associated with medical imaging modalities.\n\nQ: what is the ibnormality of this image?/\nA: There is no abnormality in this image. It shows a happy dog outdoors, which is not a medical image and does not depict any medical abnormalities.",
+      "image_url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAFeAg0DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDyh4gO1QlcGrjAGoGWuSMjscCuelRPU7LULjFaoyZEOtFGKWrENPSoiealbpUR60DHR9auxVTiHNXIxUyGi9FVyE1Riq7BzWYy/F0qylV4e1WVqRi4qvKeDU5PFVZT1oApSnmq7HmppDyarM1MBG61Gxpc5NNPWqEMNIFyadSoOaYiaJfaraL7VDEvSrSDioZSQbfamkCpD0phoG1YjxS0ZFIDzTRI9a6Xwl4YHiKW5M139kt4AMylc5Y9q5qNGkkWNAWdiFUDuTXo5sm0WzttLhY/IN07j+KQ9fy6fhUynyq5cI87sUdT+G2o21rJc6deQaiiZJjiBEmPp3rhXUqSCCCOCDXs+hzTRurByCp7Gs3x/wCFYb60fW9Oj23cQ3XUSjiRf74HqO9EKikKdNxPJjUZ71Mw4qJhWhBCetOUZoxT4xzQBNGtWIx7VFGtWUWpGOVfanbfanAUuKQEZUY6VEyj0qY9KiamIrOtRFasMKiI5piISKYRxUrVE1AiM1GetSGr+i6Fd67eeTb4SNeZZm+6i+v/ANamG+hnW9tPe3C29tC80znCogyTXUW/gRoAJdb1K3sk6mKP95J+Q4FdCZLTwxp8lvpqYbB3XDD9456Yz2HtXI3N7PcMWd84PUngnuaydVv4TojQX2jUl8EaVNC39l6uJrnGRFKu0nvhffp/+uuJAwSOeDjmtA3dxHMk0UjB423A/TmpNejjXWJJYh8lwq3C/Rxn/GtKcm9GZVaajqjPWpk7VAtTIaozROtSAcVGh4qQGpKAioyoqSmNQBA61ER7VMxqI0ySLb7Ubfan0ACmAzHtRg0/ApMCkOwzHtSY9qfgUlAFoNkUxzwaiWT5etBasVFnW5Kwxj1qCSpWNQN1reKOaWo0dadikWn9qbEiJqiPWpm71H3poB0Qq5GKrxLVyNaljJ4h0q9COlVYl6VdiHFQxlyLtVgdKgjFTDiobGDVUlq0elVpTwaEx2M+TvVVutW5arleatCIgOaCOakCUFaYiHBp6DmjBp6LzQBYiHFWF6VCgwKkBqC0PJ4qJjTi3FQs1NCYuaBTBT16UxHSeB7AXvieB2yI7UGdj9On6129wu+5fPOTnJrL+HNkV0u/vNvMziJTjsOtdBcW/lsxB6dqxkuaVjaD5YXH2I8l1J4zW2bhRGHwCBwwPcVyyXG19jMFVj8r9QDWlbXLSbo2ADgcj1+layp2iZRqXkeZ+LdEGi6wwhH+iT5khPoM8r+H+Fc44r13X7CPWNM+xEYuFBeFj/eHb8a8nnhkglaORSrLwQexpwlzK4pR5XYrY9qei80bealjWqJJY1q0i8VHGtWVXipGJikNP20hFIZEaiapm71E3emIhYVEe9StUR70ySFqiY1M3eltLObULyO1gUtJIwUe1MRJpOj3Wt3otrYAAcvI33Y19TXosz2eh6bDaWQCoASW7vgdTTrGxttB0wWkZDEn9646yP8A4CuF13VTc6g0Mb/u0H7xvRR/jWDbqPlWx0RiqceZ7iapqzTvgNlQeKoqwkGwnnHPovtWa8u9iy/KvQH0+nvU1rKob5fuL1Y9M/1Na+zSRKqtsufZl2k9PSm6qv8Ao2lPySbMKT9HYCtO2gDwB27DcSap6wpfS9LdQAvluAO5+dv6VFN+/YqtrTuYwNSqagBOKkU10WORMsI1SBqgVqeG4qCkyTdTC1JuphbigLgxqM0E0wmqsK4uaXNM3e9GaQ7js0U3NGaQxaSjIozSAgVzTs5qFKnVSaqw0xO1RN1qwUphjppgRKKkPSnJH7U9kwKlsaKrd6jHWrDqKhA+b8apATxLV2JeRVaEVdhWobGkTxrwKuRA46VFEtWo1xWTkjTkJUHSpcYFMHFKWpCsDHiqspqV24qtI1UgK0nWo8U9jlqXFUIYF4prDFS4FRtTERAc1Ii802pEoAlXpS0g6UUh3AniomOTTqbTEIoqUDimqKlAyMevFAHsXg20e38J2YfC7w0hx7nio9RuDHIUCsRnhhztrV06N4PDtkhHK26jH4VgXOnandS/Lbp5RORI8wjI/XmppRvJsdR2gkLDPFKrJcwjafvOv8//AK9Ehk025hlVt8GQN3XimjRb2Ibhd25x2D7iPxq1bRu0TWt2i7JAQGU5XPtXS9TnWhavIzvidG2neGzXIeMtDV2GoW68SDcwA7kf4125ty+ljd/rIhtPviq0MKT6e1nJzyNpNcSfs52Z2te0gmeMGMgKSOvH4g1NEvNdVq3hp4ZP3aHAkmbj2Gf5msKLT5zdm1Rd0isVPpkda2TT2MeVobGtWFWkVFBO07lB4b196lC8UgGFeKjYVYK1Ey0gK7d6iap2FRhdzFeuapCZWaoXrQis3mjRtpw0oTNaMHh6aS5PmKRGo3scdQB0ouhWbOfS3knKxopLOwArttC0waLG8jKDdzH5c/wIP8eavaL4fWz23lwoysY2L/tGrfkiW4kkc9eOOuB2H8qxqVL+7E3pU7e9I5/xJqbWmmmRQdxBSIepPU/nxXn5gkjQiQBnY75STgZ7Z9q6jxJdC41JYoV3yqNqKOi/T/H8qzfIisuJWEl0edg52H1PYfjk10UoKMTGpPmZz7Mc5bc2eA2w4/CrcAGUEyqSD8o/xrQk+0k7lmuPcLCXX8//AK1QW2nYnE9w2xTyfLUrn6g9DWpmdXaQB7Ek4II/Os7XLY/2HYzELwrphe/zE49h3NbtqsYsF4Krt4HoKhuooT4UgnYg7Hk2KR1Oep9h1rkj/FOqWtI88wV4PWlB5pX++eSTnknvTM11HESq1PDcVADTt3vSsFyXdTCabuozTsAZppNGfem5FABnFGabmgUAPopBS1BQA0tJRmkUivHVuNeKrxLVxOBQyohtz2pfL9qeozTwBU3NOVEYQKOBUUnSrDHAqpK3BpLUHZIgc81Ev36VmpYBls1p0My7AnSr8ScVWgXpWhGuBXNUmddKncljXpVhKgQVYQcVipG0oWH5xTS1KQajboa2RyS3I3eqkknvUshqo5ya0RDY5etSdqijqUnimISoDUrGojTATvUy9KhXrU6ihgPHSkpcUlIY0ikAp1GKBCqKnhXM0YIyN4/nUair2mRrJqNujEAM4GT9aaA9quZimnRKFHywrgdO1cHqV2iuZWgnz/fWUsF/4D6V6BdwqLVVz0jA5+leda3GI5XQsyHqpU0UgmloWtO16+hw7hLmz/56xHJX6jqK3RLFKomtmC+Zzg/dY/0NeeWF/HbXQS6laCQnCXcXGPQOOhFdpauyDZLGis4/g/1U3uv91vatmzLlNqHUFeKSN/3cyjDqf0PuKrWt2iguxG5efwrF1SQpGjo5DL/q5P7p9D7e1UrMXV8NyBgQSGX0z/8AXrhq6s7aGkTt3aGWPc207un9f5Vh32kpFprR24AnuFPmSDqAeW/nimW1pessIbdxnI/GnXs9zp+lzyykh2XYn1J/+tUwbTsXNJq5xksIilZMAFTjaOi+3uaQLxTgD35PrTwvFdBypERHtUbCrG2mMtAyoy0Wqbr6BcZy4GPWpWWpdLjLa1YqOpnQfrQTY7Sw8Px2ulQ+cBvF1I31HQfoKvDyRwcDIOfp/kVBdyXhg8oZ4yw/z+dctd315bN+8BBwQf1/xrkk3JndCCijp7y/QyLCpHB4H5Y/nWZfXjW9s6W4L3UgKRhT90dz9f5Vy51ZjdsxbgHrWjZ3Ml3IzJ95h8zE/dHpV0laVyKzvHQzW0+6gytvGGupB88qnAQegP8AWq8XhK/mj3NcAJ1+VlRT+J6/WurGn3Tgm2t1buZrg7Yl98Hlj9eKxdXNhp0e/VNUmu5j0jhbYp+ld62OAxLvSn0ZfPl05tn/AD8JPvX68HAqjbS+fqA2/Nz984IH07ZqX+1bKRWexlu4jn95aXEgIcf3kbsR69vcZp+kWgW6eYp8ucqOzZ9hwPfHfPah7AjpCzG3KjIXbU32Vm8IRB2xku/4Zpbm2aLSzI7KGI5ye9S668kHh+3towOEBOen/wBeuWK986Zv90eaTKFlYDpnio6kl5kbLbjnk1HXWcQmaM0UUALmikooAKbS5FMzQIKBRSgUAhy06mgcUoqC0LRRRSKHpAcA1IEK8VaRQFqNxis73NuWw0HApQajJ4pjPgU7BcdJIAOtUZZcninyMWqs3WriiGxpOas29VasQHFVLYUdzWg7VeU4Ws6BsYq4jZFcVSN2d9KSRZQnNWEqohwasxms0rGk5XJqY3SnVG5rRM55RKsgHNVmGTVmQ9ag71rEyaGqMU+iitDMY1R4p5HNNxQIRRyKsJ0qJBUyikMd2ppp+KbikVYaBzTh1pB1p6jmmIei1atRKtxE0Q+YMMfnUCjNSxYDjLOvPUUCPereA3GmxNIjBjGM/lXBeJ7U22WGCFORnt6iu48OX4n0i1DS7j5YHzd6zfFNrE8TEoDkcqejCrha5MrnmcFrFeB1ECSKfvxucA/j/D9elbOkmawja1y9xaDrDMMTQ/8AxQ9CK5KSdtL1EiKRhGG+Un7yV2+najb6jaJ5xjZ1HyyL/nIpyCKuLJB9ruFWMPLG33gOtdbpOhxIqtHycYx91v1rM0O2X7WXIDc8HJ/pXc20aso449zXK9WdF7IrxadGMnbz1I/qKyvF+gTX/h2Q2cBklSRZNqjkr3wK6uGHJ6nA9e1X0ConbNawgmZSqNHzsNOvBn/RJ+OD+7P+FDWlwh2vbzKfQoRX0K8uFJ71m3Ooxxcuqn6ih2QRvLoeDFCDgg5+lTJpt7MoMVncOD3WMmvboZLa4+cW8Oc9fLH51dTcRwcD0HFK6ZTTR4I+iaoOunXQ+sRrb8KeEr6fVYb67geC3gfeBIMFyOmB6e9exZwOc1GyimyEYc2nxlOEBYjAGO1cprujI0LhlGeeB613spCrkcZ61i3pR1PGT7CueUdTpjNngWqwS2NyyMuBnnHb2rf0S7S3hVcDzCMsT/DVrxpYcb0hXg5yzbQP6muQs/PmUxR3CRZ+/Ia1irilI6LxF4xFrEYoczT4+UE/KvufT+f0rzm5lubu4M11I0kz9z2H9K6G7j0nT0by5pL266lgMhT/ACH161z0szOx4CAnnua6InM9yW2QB1B6A9up9hXd+G7N7mZExlgeFHRfr9K4uwBLbxwo6uev0Hp9a9R8LWTJYC4cGKMj5e24f4U5OyFu9DQu9MjnuLe1aVcFxkk5rH8ciygTykuLiQgYCKdq1r6Vc2d7rU0hYSRW64JzgZrjfGK6M945tJZ/PzykmSPwNZUlrcurtY5JuvHFMpxptbnOxKKWigQ2m06mmgBpNJTsGgLQAgFOUUoWnAUmxpABxSgU8LTgtQUiPAowKk2+1G32pXKsXA3y1C5zTRMCKYz5rNI2ckITULGnk8VCx5NaIhkbGoj1p7GoyatEiYqSLg1FmpYutNgaEJ4q5GapRdqtp0rGUUawlYtIasI2KqxZPNWVrBo6Iy0JvMGKieQHvTT0qBjzQkTJiu2TUeaQ0qitYmTHDrSGnAUu2qMyE02pivFM20wFRanUVGgxUoHFSUhtNNPNRE9aAFHWpENRKeakQ0ySZamjjaRwoTPPSoErQ0u0N3fRptUqCM722ikNnqekwQQeH4QQIyq5BXqDXJX/AInuJJZLO6jlKKcJOinH416NpptoLCOFkUALjgcVmapBDNlYkTnsRUqSTuXyt6Hi2puZZiSBnPUdDRpLzR3S7JCuTgj1rv5vDKSyFhGpB6qRUWneC/I1RJIZZVUnJQ4OPzFac6YlGx2PhmJ1tFZmU5/u12EC5Ax+tZFrH5Kqp6LxyK0o7pIxlyFHuaxTVymnY1Uwi9aazjOe1YEviayjvBaLKC7A4we47VqLJ5sIcHgjNa3sjJInkkUiud1dGlQKn3jWtlvTNV2jDTgnnmspO5tBWJNOtRBCgY5YAZrRDAfWqofYnHWp4RxkiqiRMkOAvNQMw7ZqhqOsW9hJsklVTjJye1U21dCN7OFHbnirbJUWX7hcg4Nc9qLFFJ+Y+xPFXv7TjcECQke2f8Kz72YSoSp3DpkdR9axlY2gmcb4hAu7KRRZ2+cfeZiDXmhlhtN5ndVwejfN+Qr1W6QGVomYhW/I15n4o8LXUd2ZUfMJ5zwf5VpTs9yZ6HO32oi6fbEG2dt3GfwHAqC3h86T5ug7epq7HpTjhUYAdXPU1Zt9PmDhETDHoO49zW10loZ2b3LOlG0gnE14FdYuVjJ+Ue5robvxHqOvx/ZtOidLYDDyhcDHtUmk+DLa8g2ziR2PVz0B9hXWReH4NI04pEqSKq8h+D+tZymmOMGmYfhbS449D1RZWYN03YyelefXOFuZFVtwDHnbj9K9a0eynl0HUDAjByThEK5P0rya+jmjvJVmSRJAxyJFwaulrG5FXSRATTM0Gm1oYDs0uaaDTqADNNp1JQFhAKeFoValVaTZVhgX2qRUzT1Splj9qhsqxCEp4T2qZY6d5ftUXKSK+yk2VZ8v2o2VNyuUyweKMmox0p65rWxIE1C/epiKgfNCGRMaZmg9abmtESL3qeLrVbPNWIutJgaEXSrcYzVOLoKtxnNZM0iWohVgDio4hkVZVOKxZsQP92oCpzVt04piRbj0pOVioxuyFINxqwLcAdKtRw4FSeX7VKmW6aKPk47Unl+1X9lMMdacxg46lEx0zyqv+VxSCHPajmFylELg06rLwEdqrsCvWmncRGxqJjT2NQsasgUGpVqAVKh4oAmVgK7PwxYi1YXV2YLMHkPOcyn/AHV7fU1xsLsjZQ7W/vdx9K2bPUY7DBggE94/WaXLYJ7KPX3pMaPUxdWe1QBNKSMhmzz781TuL2FXx8g9i4rEsZ5ZIVSd4VuG5YAbmqwkcfnBPNJJP90VzPc6o7aG1arLdMAoyp7g/wBa34bBLK3MjjMhHUmodIto7aEMXwSM4CgU64uvtDnBOwcAetU5KK8yUnKRDLc+Sm58j2HeobjzYbRprjALD5Iyen1pmo31tpNs99eEmOFS+D615LffErXde1PyND00PkkLvBbP1GQB+NKlTlN6DnUjBak0kuoaVrfnNbvsabzU/iUjPOD2PP5Zr2DRdSaexQE9FFeK6f4sudSdYtRhWO5hl2yIoxyO3PSvStH1BbmNfK5AO04/A4/z71rUco6MiEYyV4ndwNvUnPem7B53HFPtomSBd3UjJ+tCDL5OeB370WJvZisdpBbkf4Uk94tvAWJ7U26JEe4dQDXL6pqQNqyswHqD+tTKXKOEeY8z8e+K3k1Fo9rA5P3Tg5HSl8Haxd3h8m/VirDCbuAo9z3rn/E2oW/9q+asaEg4X6Z61TsvF93bo8ttpay2yEKZGz8vpz69TzWyjKUNCOaEJe8er6jaX+mBby3/AHlsfvYY/KKWDUGuVHzYOMjkE/8A16xvCPxItNRP2O7URK3ymN+Qv+Irbm04WtyywqTATujwc49vpXNOLjudMJKS0IpgCwkK5APIHap7rTY7y03oQwx0IzUMpMeeMitDTpVeIwsu8YyMHnH9aKcugqkepyw0iPcRj5h321Sn0g253xgJ7nvW/qj+RMdkjqPTdgj86pCOG5jJZ1Y/ix/M1pchLqZIu7+AfI0aqP4ljMhqxFqE9wuxdSjZ/wC46bDVa+054gXijJHqHPFUo7G+WJb6VBLbRsPNUHeQvdh347is2jRNWOwv3/s7wuQ11FHIwJxIpVT7bl+6fevHbqSWS4cyly2f4n3fr3r1XxGbWbQ4IbW/jUuubdnOYpvVM/wt/nkdPJmUK7DaVIPKnsfSuylscFX4iPNJTsUu01oZWGinDpS7falAxQUkIKUD2pcU4ClcYqrVhF4piLViNahspIVUqZUFKi1Mq1m5GkYjFSnbKlC07bWVzRRK+yk2+1Tke1NxSuFjnFFPWnolToorpMCsRULLWg0QI6VVljx2poCgwqIjmrDjrUBHWrQho61PF1qEdamiHFDAvRHOKtxdRVOEE8CtCGJjjisZOxpDUvQDirgqK3gyoNWVj21zOaN1FjSmR0pirg1bCfL0qJht7Vm3c3grD4xxTjUHm7RUZnOetOMW2E5osFsUgOar7yRSq+DW1tDnbuWlXIp4QYpkbZFShqgdhjIMVSuI+tXyeKqTtwaqLJaMmXg1XJ5q1NyTVU9a3RkxV61KvSoV61KlMRYSrMLIjBmLYHXb1PsD2qslX7KJ3uE2qOCOW4H/ANeoY1ud34bsI10/7ZeKI1cZSEccds9/zqxLeRCbMSlIx/dGKuaTFtsTk+bKv32PCqfTvXM+Ir02u52fcw6DGAK55nVSVzrotWiW38uM5kYYxnJqRb9bUoWYZPfsK868MalJPdyNJywyRk9K60WU+uQGNS6IfvMOoHtWVm3Y2skjnPiXq02q240+wQtbjmWX+Dd2BNctaXWrWGl2o0e4jt1tx8yhUDFiPmLbu/tXps+nW9jY/wBjzbvLYcMvBYHuTXNP4KZbrdDeBk6/MgLA+n4DFddKdlZOzRyVIXbbV0zmLDT5L7UpZrljLLOmZZMYDNnOQB2AwMjrXsHgXw3NZxLNcAlByiHsf89Kr+HvDFvabAgMjuQWdupFejQwx28IDkLgcAdqpr2kr9ibqnG3cUjC4xUQXac/zNMa9haTahGfrQZgvLcD+91FVYi42cnZyePpxXnfjGyumiklticEHcB3Nek8SLwcj25rndZEYVhxg55x0rOpG5rSlZnzVqtk620pz+83dP6Us+oajNotrpUCRCwGHXy4+WbnJY9zzXol9oFnem6DfLOW3Z659PxrmJfD95Z/vdOmkIzlgD0+uP51vCr7uhjKn73vHNahatp9xaMm5Z/LzIBwQPU16d4K8Wx6lYLbXj4uIOA3ciuQtdBmuJWnvZV+Y7nQE7m78k8/0qXVrSO3WI2a7LmPhZEPJX0OO1Zz5ZLle5rBNNySsj0W91ONm4ZcH+IdKzJNWNoVkRvnU7hg8Ed64qx1KeQbZtwbo3samluJY3ZGOY35B6YNc3K0zqumjttS1GO+tQ6EM+3JXGePX6VhwTOzbkeNfZXxWTbXifZ40kYZXODnBU1bimXJzcNn+7IB+jVfqZ2sdFaGKchWJz3yx5q9eKmlqtzEknkyLibau4D/AGivf8Of5VkaPEk9ygVmwT65H866bxBpLHSCY/NDqMgpyfoR3qoK7IqOx5LrD+VI8do6yWUrlwUbchB7EdsHpkAjNY5BJyck+9aN1D+/fLgtnk7Sp/EVB5VdMXZHI9WVgnFLsq0Ivajyz6UXCxW2UuyrHl+1Hl+1FwsVtvtTgtTeXShMUriERasRio1Wp0GKhsuKJUFTLUa1ItYs2ih44opKM1JYGm0tJQIxlWpo1qJDxU8TDFdLZgkK6jFUph1q85yKpzdKUWNoz5RzUBqxJ1NQ4rZGYwDmpohlsVHirFuMtSb0HY0rSHOMCtu3tcgcVQsUwBmt+2xgV5taq7nZShoLFCEXmn7ATxSucUKwJ61gmzeyQFQKgkHFTE5qNxkVrEkozfKKrjrVmcVCq4Nbx2MZasUHikzzSnpUZOKomxOk2KnWYHvWY0mDSefijlFexqNLx1qpLLVY3PrUTzAnrTjElyCRsmq5PNOLZpg61qZtj0FTKKiQVOgoYE0YrV0rYt0pzI754C8H/wCt9e1ZiD2q9bFgwHRe4Hesmy0j1CK8EejrHAyJGo58voPbPc15l4kme4uGAYkeprr7S5kn07yl5A4yBgCs210Q32o7mVnRT6dTWM37x1UUuVlLwFp8lxfSlozsVQoJ6Zr2rT9OhtLUADkjrWJo+kQ6cqIEALHc3FdOjIU+9genatKcerMqs76I4/xTYm5hATAljOVPTNc9oCT31+sAbGwfve44PSvQ7nT0vT5bDr3FJYaLaaddpBbIoB+eVifmY9vwpKm3IftUoWJ7dLXSbRr29mSJQOWY4xWHP43tJpWFnE8q9N7jGfpXnPjTxxBc6vKZ5S0MLskEA6cHG4+5/lXPJ4zRoCYUOfrXfCEYrU4ZSbdz2OHWY5p1kS3RSPV63gyahbhUk8uTHc9a8BufFLxWocMQ/wBa0vDPxOFvMINRkIiJwH9P8KtQgyW5rU9tSQxHyfODOPYgVkatDL5jZOElGQfRvT8azIPEovbpUjkSRkZSSD99GHynr9RXSrdQXVrskQjjGD2rnnBJ2NoTdrnDmwZnfcmJBnkcE1x93eT2E8kLMVZTkH19f8/4V6dexG0fzIiGxzj1FY+r+GbPxVAJ7SVba+Ax8w+VvY+lc7TTsdcZLc8uu9RndvvgqOR6r9K2PD1h9qk8+fBY9N3OKc3gXVrG4P263YBTwyHKkeua6fSbJbUBWIX6g4/OktByd1oTr4esTH5giUyAcnb1rB1zRVaEyRw7HUcjHDCu8hlt44wu7OPSsrXCDEZbYkqeGVu9U431M4yadjxa6YwNgcMp5H+faprO8yApPynpntWxq+gySXIkSMmOQ4/3TXOXdjc6XMCyN5eeTjpQloXc7bQZ0F2mIgpz2ODXqMwY6Nl4TNEV545X3rxrQL/M8XyB1JHfpXt9mjy6QoibaSvfpTp7mdbZHjOs2QF3I8cgKknhsk1jGAg9j9K77xHp14ZmZrb5u5UZDe9cg8BViCAD3Fa3MrXM/wAqjyvarxjpvlUrhylPy6Ty/arfl0nl0XFYp7Pak2VaKU0pRcmxXC1Iop2ynBcVLZaQq1IO1NC04Cs2aoUUtKFpdtSUMpMVJtpNtFwMVQQtSoCBTU6VMOBWkpERiRk1Xl6VPIcVWY5oiynErsmTUZQVYK1GymtUzJxKxGKltjiTFMYEHpSRna4NVuiNmdFauABWrDcBQK5yGbgVcS4461wTpXZ1wnY2JbketRx3PJOax5bvtmnQTEgdacaVkN1bs3klBqQcis6B+RV1CSKl6FJ3IZhljxTMYqdkJJOKiZcCriyWiu1QO2KmkqnK2K1iZyGSPxUW+mseaYTWiRi2OL03NMJ5pV5qiSUdKeopUjyKmCVNykhqrU6rSKlSqtQ2UkSRrVuFeneoIlz6VqadYyXU6IpTBPJLVDKSOg0CJ5YSihee4OfzrtNJslhTcB8i9/7x/wAKboejW9lagKMk/e+bP61sbSV2R7VUdhU8ut2aKWlkQzMY183v05qWC7RgAeOKzNRuGQCNTuI61nW98yyMqje4GSM9Pr6fzqovWxLjpc677dDbxFty7yOnTFZmiaq19DfXmQjlCU74A6V5xrGuXc2upZTzloWOPLQbV6dDjk10mhTw2+mzp5O0PldoPQ1104q1zlqPoeB+JLeSDXL0MWkXzmIfnjJzg1SsS0aSMynaRwSO9eh+NrOXTrr+2bDbLHJxcI4yGPY49K89uNRnuwBI+QM4AAAH5VqR1H6hM0kcQycEZNUkPBGakMoKrnsKmtoHvpAiqFRfvMP89aQ7dTvfh9NObW4kLFvLVUUEZOMkivQLvxMYxDEpfdt+deefxrznQZo9LQQWvVuSzdGP1q5LPvl3Xm2QdQMEZ/DtTVmLVHeWfiCC9/0ZpgzNzGc5z7Vp2MkULFtwz2BOOa82j1WDasEBiRwDJHkDcpHI5HWk1TXLobZEY7HXI29MH69KzlTTdzSFRpWPZINbgyI5SpQ8YY5pt5Z2rJ58QUI3JIGRXhS+IpIgUWdzu5wW/ka67wz40lyIJm82NxhgxqGlsylfdHTXk8UDcPIB6jGKqST/AG+FoCxwRwc1kanqMTTNsb5QeCp/Qik0q9V5tueD0PpWLdmbJNq5pQxpEvkTIzA8Hdz+tVtQ0KK5gbHzwsMdMslady4cqkZzIOx702K5eI7nhJA4YClJWHF3OBstBm0vWEwAYC3UGve9DigfTI1RmHy8g9K4uO4sJjkSKD/daM5rotFvWU+WrjZ7CrpO0rsmreUbDtb0yOWNvMi3DsV6ivM9X00RszRkSAckMPmA/rXtku2SL5sHjuK4zXtMRt0iWyvjuvJrWcTCnLozygxjPSmeWK2r23KStkMOehTFUDFWFzosUfLppSrhj9qaY6Li5SkY6Z5dXjHTfKouHKUfL9qURVd8qgRUgSKojpwjq15VL5VSy0isEpdlWPLxSFKhspIg20m2piKYQKm4znkPAqXOBUKcLTweOtasmJHI3NNij3nPanH5jirltDnHFDlyoq1xiWoP8NP+xj+6K1YbfgcVYNsoXpWDralqmc7JaoBytUpIAp4GK6C4gxnisuZMHkVtTqXM507FNVpwyBT8UbTW2hiQ4JNWYD0pojqWJOaUnoEVqaNv0FaER4rOg4Aq9EeK45vU6oFkLmo5IuKkjOVp+3NZqdjTluZM0Z5qjLGc9K33gyOlZ88GCa6IVDKVMyGWoiMVfkhqs0ZzXSpXOWUbFdUJOBVqGDHXrToo6uRx1MpCjEYkVSiOplj4p+2s+Y1USuE9qcFqfbTdtO4NBGvtmt/QVeK8RykKLnrJyfyrEUYrS0whLlGKysc/wHH61NxpHr9tNG9ugyOnYYFP+VOFJOfWs6wmdrOPDmMY5EnzE/nTp3MmQpIB6kU2wiivqUkcgKRfiR/Sue81rOXzGGI8Y2itG9uktxgnB7Csa4nUK0krchSQPT3+tQndmnL7pxfiK8MWrfb1BARwBk8KM8j61v2OvKI22geU4GM4G72AHb+f0rm77TLuW01BJgA2wP1zjqcVzCXM0CxCYlEwVifPUDqp9ua9CDsjhmtT0a81BDBLJMyyRvwRjOT/AEGO1edapZwy3JaNBF2Cr2NPbXZCYoBmX5ugqq+rS7spbxKVbksMmquTYq2lvEYmeXk9q0o540jAUBccHb396zFvpAMMkbZJPIx1pUvYh963Ge+CaGCNm3vSh3CQg4I6d/8AGlm1CCdszSPJznB4G71+tZBvInHUqcdxTVnTOWZT26UILJnSW11EVdI4+GPysVzzzVfUr9p8Ro5VUQLwTg471lfbjFDhSyoTjd6kdqozXTSnCkgeueaa1E7IlZmXDKSCORnoa2dBvCsynoBzgGueRyvOeO9aemFl2EYzvJFTNaFwep213cl5y4/iA5Hf3rS0pzGMtyO/tXPRyLJIkZbkdPb2NaMd4qgqAQa45aO52Q1R2UTR3SqCSJF6YP8AKro3hQ/mAnHfjNcjY3bEgCQgfyrpEuVeMDzUWUj14b8KFJPQlwa1LQvYBjdBu99oNbWkTiWUFVCj6AVykU15HMf3MUi57MQfyrpdJlYuC0Kp7qf8auO5EtjtY1MsGN46Vhavp8+1nWQD3xW1asDGD8p47VXvnIQkZI9M8V0vVHJF2Z5nqFpcBid+5f8AZYH+dYckRB5B/Guv1mBJGZkYqepU/wBK5p0IJ5zXJLc74K6KBjppjq4Y/ak8v2qblWKRi9qQxe1XDHTdntRcmxU8r2o8ureymlKLjSK3l0bKnK0w1IyEgVGwAqZqhY1AyNu9RE8052qEmglswsYFNJxxUxXiq7HBrZBYkjAzmtS0xxWVEea0bckYqKi0Lgb1sgIqyyrjFZ0ExC9anWTPevOknc6IkdxGCDxWPLBuY1sS5YcGqhjJzzW9KTSInZmU0IWk8rIq+8JpixV1KZzuJR2dqnhh5FT+VzUiJjFKUtCYx1ECYqWM8YpSvFIoINZWubovRdBVmMZqrCScCr8S5rJxNUIY8iqVxDweK11Tiq8sW44ApxdhtXOeli56VWaLmt2W0xVKS356V0Qmc9SJnonNWo14oEJBqdEwKpsxirAo4pcU8DimkVJqhpoABoxT1FFxNAi81fs9qSqWZwM9uKqKKsQggjGKm5SiekaVcRyWS7RgdMsP8atvlhgAY9TWR4bR2t16D6Lz/jXRbBHzkZ9+taKN1ci6TOc1HT2ZGcDcR6CuU8uf7bsZGGGyc9Ce34D+demec7YUQ7hnqBTJ9Pt5VwYcH3FNU+wva9GcWbCFrSYMMu8ZySK8tkso7mxvbUHbdo6vEG6PjIK/XHT6V7ZfafJAhwMp3AryXXYf7G1o3UTAhptpicZUqeQfwOa6aEujOetHqjF8FWBu/EEimAu0VvI4yOFI4yf1pdQ04Kitt5I3H6mt3wVj/hOtRs7SRFW7hlVJG6DGGz+hrV1bTVW32qMsAFJPcgVq9woq8Wjy+SIrnNRBcjPatbVoREeBUM1mYIUBHO0Z+tNPQUoamftqVFAG49B1oCZbGKsrayz3SQRAZUBjnpQ2JRSIruGaO2iZiRG5yF9DVRTWjqs8m2O2kChk5IBzVKKB3QMB947Vz3PenDVGc7XGgEgD1NdBpsO2NSQOKyre3MlykY5A5NdFEg2BAOB0rOrKysa0Ytu5HC7x6mZGGVdefYjv+X8q3LeNZ2DE7cjJI/nWaYC6bQQGHIPoavWFuzKuXwhPB/un0rkm+ZHZCPKbMM1vAAFZGcjg9jWhZrHLh7iJwc8HHA+hqpBpaRDLRbz1I7H6VbjuRbgKiyRD0OcfnURKkbkRtwoWNn/mPyra0sbiMNnHdeP0rkITJIwO47T3/wD1V1Wko6gfMenXFb07tnNU0R2Nm+Fwwz796ku0WSI8A5FV7JvlAYc9jVqXayHjPtXWlocd9Tz7WkeKVsr9CO9c+2CScYrstdgLqxjIcjnB6iuPcHceMVxTVmd9J3iR7aTbUgAowKzNSLbTStTEUwimSRYqMjrUrVGxxQBE1QsakY1C5oGRMagY1K3eoHpWERsajJp5pmKRBjsTtNVtrE5xU7v2qNTWiKerJIY2J6VcDbMCoYTirAAYc1DVy07IsQzcdavQyZFZqLirMLYrGVMpTLrdKYq9ajaT1pySACsuWw3IeYwageML9am38VE53GtIXIbIRGaeq04UqjpVCiAGaekXNORQeKsxoKTdjSKuEUeKvwpwKhjUCrSHFZORsojwvtUixDrikU1IDxUNgVZos1Skt85rUbkVCUHpVxkyJK5kPBjtUW3HatSWMYqkyc1tGV0YuJDj2pCvFTBKCtO4JEASnqtSbaUClcpREVatQBFYEgMffpUSip4wM1Ny0jqtDupHIjDsw/uxrtUfU11sUBwGKjOO5zXFeH5FFx8zAgei5xXcLcBlGGAx75NdNKzWpy1bp6EyxtjLNj2A6UxlUDjefxoF9CB87KD6UG+gI+VjXQkjnuypcRhlIKnn1zXnfjrw99q06SaMYdeeO/PFelu3mgkMwrI1PT5buzniXJLoQGP8Jxwfw60krO6KvdWZ4X4VgkfxVpxhLZDtuYH+EKc16LrMK+QQF+tZ+heHv+Efle6upkluXG1fLztVM9s85q1qNzviZcj2NatmtKLR57c2X23XILbqGcs/sq8mn6rbgMfrWzotuJNT1C7Iz5UQjX2LHn9BUOoWnmTjHO4gDFLoVy3ucxb2LSyjC8ZpZoXsM3fnKWmYjb3X0rrLLTBCCHU5JwK5CazkkuJkuGLvG7Ku1sqfmxVW0MJ3RkOHnuMncWc9SOtaZjcKqhQruu1Y+yqO+f8APWroNvYRr5aq1w3c/Mx/A8CoolJZmfl27/0pSnZaERpXeo61txCu1Ms56nFbNpZSS7Tt6+tQ6fZNIwYjA966eyt0jAG/b/wGuaTcjpSUVZC2WkIcGXaPpWzBZWlqTiMMrdQRnBp9ooxhJ1J9CBWjGjqQGiifPfGKSiDmV4YUUhYm246Ag1OYHkHIBB9Bn9KtJMEXbKjD3zkGmPLEwIjYKT/Cw4/CqUUiOZlaKCIMDhVI/iH9a6DTkYEcgj1rBUHzGLj/AIDn+VbunFVxzx61rBGU2dLbDC9amkYhM9fpVa3cgDGMVK7ZU7Tz6Vuc5gaoVkBP8Y7iuQuhmQnOT+tdXeEvMwzz6d656/ttrEgVyVEdtLQy6XHFLjBpcVgbjKY3epT0qJqYETGoGNStULUDI271C1TEZphWgCswNRMpq2V9qiZaBWKpWmYqdhURHNIVjmmakRgD1prZxzUWTW1tDO5oROAatxsDWVC5BFXonz3qbajbdjQXBFSiPIyKrxHjrVyNuKrkTRj7RpkDAikDkVPIN3NVyvNYyp2LVQlV896kyDVUZFSLUKNilIlFOU0xacpoNEyZTVmJqpqeasRmspI2iy8h4qYNVRGqUNisbGnMWlanh6qeZgdab53PWqUSXMvb6bn1qoJ/ekabI60+UnmHTP2HSoNuaQvk80B8VotESO2e1MIFP3Z70007jsMxQOtFFIpDgeakUjPr9ahB4pQ1SyzRt7lo8DzGCj+FOM1u2mpyy7UBAHZV/mTXLxn1OBW3pFtLcTKkCsx9cVdNu9jOola7OjijM8gUv06k9617WK3U5XDEdXbpVGe3/sm03KjXV4+FjhTklj6nsB61Lpdq9rAq3DbpOpHYZ7V6EVoedJ3Zqb933Bn3P9Kq30pS1nZuAsbHA69KteYBhQQWPQVBN5ZQqfn3Ag1QovU8v1SZoL0x+YHjc5VsY/P3qhdOSC3HQZ/z+NXtYhxPgnJjbBP04qheHMZI6H9KEej0Q7SYBFpN3Nn/AFtwc57BeP6mpoLPzLyMkZAyfxqzZ27LpVvARgsu9vqTmtZLbyznGM8CrSM1sZNyI7aElgcyMI4/UMxwP8a8ruJbl5jFCPLXc3TrnOK7XxTqqR3yQBifLJIUdT2z/P8AOubSMP8AMMHjqPXqahysrmNX3pcqKcFqI+eWc9WJ5rUs7RpCB0H0ohtxkZ6Gtm0hKsB2P6Vje71GtFZFuy08qAXZvwroLW3CrkNkCqunnaMMOn6itiECOVcY56H19R9apIzbZPFbq4GFBf0YdfoamV1iX5W2+qt0z/SnLhCMf6tun+yfT6VX1AxPG6yjD7eGBwf/AK9VYhakd5qEcAIcBSehB4z/ACrK/tQTMVBG3PSueuJ5fNaMyF0zxnqKsWY3ODnk9fep3NLJI6qzu96hZCxXtnkj8a3LCZM7c89jXKW5aM5A+X+VbFvNyOx7VrHQxlqdhbTlPlbpU00ylM5wfWsi1uBJGAxwR0NSXExSMhunqKpyIUdSN3Ek2SRn2qhqUfBOKgSdxehSNyk9av3ibovwrnk7o6YKzOXcYY0zNT3C7WNV81gdCGmmMOKkwaY3FAyu4xUJAqw4FV260wGbfak257U7IpcigCMrxUTVKT1qJqAK71CetTP3qE9aAOeZMjrVZ48Gr+0EdKhkjB6Vrc5kVUGDVuM1CEOanQbRz1qWy+hZilxgHpVxH6YNZYzU8cpXvxVxZhKPY09wIqPjNQLNx1p2/JpvUlJomwKQACgHigGsmkaQuPWnUikU7FRY2TFWp4yMVXzg09XrKSNYsvoeKkJqpG9TZ4qLF3B3x3qIvQ5qI1pEzdyVZKdvquM04E0NDiSlzQGJqLNOTk1m3Y2SJ0BNTrDmkhXNXUUYqOYLFUwjHSoXjx2q+wxVaUUKQ+UpHINKpBPWkkpqN8w4zTGlY1NOtHuZgFwR7jivTNB0VIIAzszew+UVy/hWwkcq7qFXtXosKhIgCa7cPBJXOLEVG9CJ4lXO0Kox0UYrJuf3cjEHgdBWxM64P0rHvHRY2aQqi46k4rpOUypdXS3SaUnLKp4qudWExKq4/wBXxz3rl9bvIUAK3Fv5aOW3ecNxIBwMda5Sy8QXEMskkpDKPQ/w9D/OkNI6DVLhrHV5EupE8i8Alt3PY9ChPrkE/jRLYSfY/OdS0ZAYBeSVz1H5VmyX9l4n019IvJxDIr77aY8hT6H68VyFyut+Grpo7n7QqA4V45TsPoVPI/OqSubQruK5Wj2a3095SkiIpj8sENuGG9uelY3iHxHbaVaM8pUT4IAzn6ceteWy+MtZdSi6hOEPY7SfzxVSCx1PWJ/NcSOD1lmOAKp+Ye2XRGmi3Fxv1a8ASLzwWLOAUAHTHX+L05P0qeOHyyCvQ/eH9a0Le2jsLAwrtllkHltO65ODyQvpxnmmiL5d2OtY1JJ6IUE7tsfbxAnkcA1q28eSfXpVCFdgUHpkVoRvgHkDJxzSSGzXtsecq+o71pLtlg2MdrdQ3ow6VkiZRPCOm5Sc1JDqCyIPmxuYnj8qozaNAXwe1ZiSjqdrj0Yf0NZep332qzyjBZI27HnB/pWVPqL+dPg/LI2Wx9KpGdj859OalyuWo21IZZCrEknP8qsWN4kj8Mcqe1Z1zcRSxyKeHA6iqNossa7lckk5yKqKsiW7ux6Ba3M0bfKRIhHQjnFa0E0MoG0FT3TP8q43TdRYbUlBHow6iuptZt4HmIrqfuuvBqkyGjorVtvcsp7jrViW4UJtYgqazrTZxscj2NSX0hVCHUEdiKmT0HFalRwqXsbqWwT1BrpJY99sD7VycMweeMDI+boa7dIt1ov0qIao0npY4y/gKOTWYTg10uqW2M9a5qVNrGsZR1NoO6DdxTGamn61GSaCgY1AxqRulV3amhXAnFJvqImkBoBEhNMalzxTGakMhk6VFmpHIqAn3piuYysQKcQGHAqKNuKnVuKqxzKVmRiMjtTvLJp24GpYqluxslzEXlEDJqMqfStDyt1NeHFJTQ/ZtFNSR3qRJMHBPFNdcVEG5weKu5lY0Ffil3e9VUbipAcVLZUYk4fjrUqvVQ+tAcjvSuXylstSK2D1qEPkdaA3NQzWKL0bmrKvx1rNjY5qyjVmy7FnOeKAgNRBqer4NTewOI8JxTSmKercdaMiqTJtYhOQafH1pGxSKcGpkjWLL8TdKtK4rNSXHerCzD1rKw7lpmyKqymlaYY61UlnHPNCQXGuwzTrVkE4O3Jzxk1UeXNSW7kODkD61aWoz0/w2SyDJUn2bgV1oljVfmkH0FebaBqByIoUX/aY13NvLEIxuVWb6130XdHnVlaRO032iTyoiqjBZpG+6ijqTXkfiTxVfeIbq8s/D0ezTYFPm3cjbTIB1LOfug9lHNdd488QpY+DdYitSEupHS2O3ghCAx/POK8r1i4tHjt9ISSSzgshsTAyJpD9529z/LFdF7IzpU3Ul5I5vz7maSQNarKVySySHp+NP0eNr2+ljVG4iJxn9Ku6hpN1b2rI5ChBwuCpUD3P8qb4UDx6tO0hBKR7SR0pLVGlWEaeiZSWOS3nQgksrE89z711VhrplsQkyiaFm2qG59qq63pvnaZf3ka/JFtYsO247f1rm7S5NtIqNnYBtwPSna6MObU7D7LZ+azR20QLE7TsHyn06UyQszBQMAfpTbG4jkhy7DnpT926QkcbRWbuaxILqQLhAOI+OnfFLbt5seB1zUEwHzY6k5PvRanyo5ZSeAMD3qOpZbkcK+F7c0faQUGM+v1rLa4YsSO/WmSTMwwrEU7hY27i/JVdpxgYBFQW14VXk49B7CqCtvUZPPpUE9wtvCXZsYpJthokWri6CMe474qs+qAAKnfrnrWJJeSTS+Zu+X0qEyclj3rZUzF1L7FqSd5LoGI4LNjj0ratlYAbCQe6msnSrTzmMrjg8L/jW/agLIIrgYP8LiiT6IIrqy7afMQGx9CK6XS90eBw0Z6isuGwb5TwQej1sWdrIhB24b09aku6Z0EChMHG5D+lU9TdlkxFIVOM4Perlv8A6oqTtOK5nUL/AHTmKYfMp4I4pSegoLUv2shaRDIMMGHSvRbUg2SfSvMLCQSbcnow616XY82MfPalS6jrdDI1YfKeK465Y7zXa6omUNcZeJhzWc9zSlsUy+KjaUetDioG4zUo1Y5pMiq7SU13xUBfmqRDZOHFKpzVcGpEakxolNRtTiaiY0JCbI2HWoj1qRmqEnmqsTcwEkwKf5tVyRTS3FWc6Vyx5wB61bglyR0rIzVm3kwRWVSN1odVHRnRQYIFPlQbaq2kvAq8xDJivP5mpHdypoyZl4IqmxOeTV25JU1nuec13Qd0cFRWlYsxNk4qwo4qjAxzV5TkUMIiHioy2DUx6VCy8moNUOVqlWqy8GrCGoZpEsRipwcVDHUmRUlXRIHo8zFQFsVA0pBosFzQWX3p3m1nLN71KJM96aRLZbMlJvqvvz3pN1OwJlnzcCmm4x3qsXNQs9JRDmLT3Z9agM7MarknNPQZq+QXMTByasRMMjJIqKNParUUQLAAZJ6Ad6XKVzG5o0i+Yu6R1UehxXepqWnadppvL24WK3UZ3OcZ+g7mvJ31WCyYiMCeVMFgrYSP/fbt+FcxqeuXeqytNI3nyIOpGIoAD/COh+v6d66aMZGVWK3kzf8AG3iWLWb+e4tIfs1nMERjM3MmOA4Uc9K5ZLl7NG84IWfGISuSyn+In/P4VX+0lX81HLOWw1w4yST1Cj/P4VpeH/DN3r/2owMY441JLOMtI3ZM9ia6LaamCmoO8CkdUcb1efduOMNzt9Dmrkcb6bJtQkiRcs/Zj14rJGnTiaTEBaNTyOcjnofQ/Wuqh1iS4it7W00oS3MfKbiZDn6Y/nQ7LYyk3Lc0dTumsfAqaVsZr/VZ1uGjI5SFPu/mefpXCsTuOR17GvQIdKuopZbzU5TPqtyMHJz5S+npn6dKz9Z8PRiFD9ycnjHf60c2pCjocwbl40j8tiNvb3rUh1bjdKMbhgGsW5t5rWXy5hgjjPY1FNJm3jXPIJp8qYlJpm9PeEKHTDKvWpftEckYUH5cA4+tc3FPJjGfl3/n2q3FujMgYnGMflUOFi41Lmo2EY5IwKgjlG9mY/KTVO7nV027j8xDH8KpvesYiFAAH8xSjTKdSxrzX0dtI7ueBwo7msSa4mvpC7nCZyB6VCA8zl3Ykdye9S5wMDgVpGCiZObn6CkjaAOgpYozM+OdoPJpiq0jhV6mtm1tBGpjHIPOfeiTsOMbs0bKIIqhRjHSuit7JL6HaMCQdKw7D5lHqvBrpdOXDrg4bsfWs0aMs6XHPbP5R6DqrdK6iO1BjDIdpx909KZa26XahiAJV6+9accXlRY6r+oq0jO5mzTeTCc46Z4NcRc37y3BUuWXPG9M1v8AiSfyIXjDEP1UiuWsd88mHHPrWMmbwXU6HTwrIGxzkdOlej2En+hR/SuDtYPKhT6iu1sziyX6VVNWIqu5HqLZRq4y+PztXS6jPhCM1ytwC8hINZzNKS0KZBNQvHVwpgVDIpNQjYzZeM1VLc1enQ4PFUGBB6VSJaHBs09TzUag+lP2kUDJN/vTCaTNISKpIzY1qYRTzzTTVknNsny5FRFfep1Py01hmkmZc1iuVIpY2IankEUd+RQ1c0jM0bWXAFaKzZTrWHESMYNXYZT0NcdSlrc66dXSxYlBcHvVdbfNWogc56irKxA0KdlYUqfM7matuVp/KH2q88WBVV6qMrkcjQgcYphINIV9OKQDNNoaExzUinApu2jmpsO5ZST3qUSVQD4PNSCXjrS5RcxZZuKrOc0u/IphHNNIdxgODUoc0wLmlKMKqwXJlkp2+qwOOtLuzRYaZOWpvWmKeamGOpOKEhXIwnNTJHg09ozFD5spEaHpuPLfQf44FUrnVoIfMQTS2jKeGUhpSeoHHG0+oPHvVxi5bFctleWhoSTRWgXzywLchFXczD1ArJudeAJhAMoJ+eK3bGV93656HI47EVDdXMcUbSxSJaxzxAybpPMncnh0z/DnrzisiJZbiQW9vGUDfdRPvuOev+JxXRCklqzKda2kR00zTOBcHzGUELBFwBkdeOnPWr+k6Ne644jiCGNCMsTthTPfj7x46CtLS/DkcQD3oBPBECtx/wADP8X06V1dmSksYXCqCAABgAew7U3US0Rjyylqy7o/gXTdIuI7t2lvLhFAjMihUX3Cj+tdLbWkVuSYIEi3ct5agAn1xU6qHt0YNnih7iO2j9TRvuZGffaBpmoTNc3un27yHq+CrN9SCM/jVRLS10y3aDToEhBOW2Dr+PWtRfOvDuYlU9KmjtYg29h8q8/U0BcybfTUtoTdXP3yMgHtXOaiTLI9w/A5CD0rqtTmMvy5wD+grkdUmV5MD7icD3pDic/ewiVFg2gmQ5PtWFd6Swf90/yDIANdYtuVV55B8xHHsKrNaM3lZHJ+ahNopxT3OQigKpsYYPf61YeSMRyEN820mtvUdJbyjcRD5hywHcVzkg+bI4zWl7mVrbFMyFh3JNSm1/0NJTnDNTT3Fbt9BHD4P0lwP3kjSM303YFUKxhYAGB0pY42lOFH41JFA0p7hfX1rStrYKhwMVMpWKjG4yC1EccWByxyTWzBDyOOtRLDgR8cA1pRR4ZT2FZmqVitbqYro+hNdLYYYADt0rNe03AlfvA5FXdOlw2G4YdRQgZ2ulNvVe0i9D61sSlWhJ+6SOcetc7YzCMhh909farWqX4gtluI268MPWr6GNtTkPEc5mnMZI+Q8MpzUWlw/MrbQyn0qtcN52pOx+UPWxplqFYAHI9qytqdF7I3VGyJAFGK6O0Y/YhkY4rAkACp9K2YZNliOe1WtDJ6mLq0+GIrED7jWhqUnmSGs5AN1c8nqdMFoPIqF14q0FGKjdBUlmdKgNVTbAnpWky7qaExVIllEWwUcCo3iIrRYYqvIAaARnMntTcYqxIOajK+1XFkshY8VA7c1ZdeOlVXxmncmxz+8gUZz0NQ7velDc1aRytkvJFMZscGng8VHJyDRYpSBZMdKsRTc4zWdg5+U1LHuyMmplFGsJHQW0gOKvqeKxLSQggE1qo5281w1IWZ3U5aDpJtoINVJGDcg0lw/Wqgf5utOnFjm0Tg0d6RWzzTiARWpmLnik6imZ96TdimhNA1ICSaaWz3qaJMjNOxFgUMO1Ozmp1TI6Ux4sc0rDQiCpQBUaH5go5JOAB3qeSN4EV7gCFGBKtIQM84wB1z7UJMpJvYYYwfSovKJbaiszeijNRy6jbRHjLDs8jeWp/DBJ+nWs+fWmmhVYyWLL91F8pRzyGPcEe4xmtI0pMb5Y/EzVKLDkXEvlNj5UUBmPr3wPxNVJdbjtyRagE9fl+aTb/vdBj0A/GsKW4ZyVml4J5WIAc+/Y/Wn2dteXrGOxtyqn7xQfd4wTuPOPatVSitWQ69tIL/ADJp7yZzmR/JVy2VQ7ncHpnsTzjPXrVaF5jIi2sOyQfKCi7nOeo//XXR2XhBUctdT7hnG2HIyP8AePPvW/a6bb2UPl20KxrjnaOT9T3pOtGKsjPlnN3ZyNr4ZlfDXb+SvHyKQzH8exrobS0htE2QRhMgBiBy3uT3rRaDjpUYiINYuq5blxppbAgqxG3vUarjqKeoFC1Gzt9Ec3FkqjkjvUlzagONwJHeo/BwLwPnnBwK3Ly1J9AK3jsccvisY5uQkYGMDtSST4jy3ftUE4/fYByFrNvLl/uDrTBIgvrkySFVPA6msiO2+0zlyMxofzNXJgR+7Xlz19quRQLBbBB2GT7mpK2MmW2MrpGP4mx+FPntgJGIH3eBWrbQZlMhH3RgfWj7PvlRcfefNUK5lT2mIdhHJSuBm0t5ZZfLOCGPGK9VuYczD6kVzCWYjvJSRxuNAjzyS3eCRhIANvJ5rYb/AEq1tbduUhjGAfzp/iWxlsr+aOU7QxVXQDlD1wT2Pt274pLE5Z942q33ffFVJ6CitQFpyAKtJFhgoFWYo9zLkY74qRI/nLY6GoNEMMeIs+mDWjEgZQfUVGEHII4NTQHYuD2pDLceMA0yRRFcrIvAbg+xqI3Ajcc8NUc9wG+XPBGPxp3CxtWeobYmDdV4YGo5r3z7CWJiflcFTWCLk4YA/Mwq/YurRENnnqKLitYtCCJyuQMnvitC0za3oRj8rDimC2LRI69uvNT3tnMLVZVJ3L0NOwkzW80FAOCK02+XTwQe1ctYXhli2Pw1dNcHZpigdcUlqDVjmrqTMhFQD1ombdITURciuWW51x2Jw5700tnqarmX3qJpsd6SQyzkUpIC1RNyB3ppuxjrVksssarStUfnlvug00qx600hXEODTGbFDArUDNTYkrjZJKqs3NSSEkcVVYnNIqxzavk1KnOai2kNgrgj/ZxVy3tnZBIRhCCCTXQ7JHDytsRQe3pmkZCVyO4py7gqnGMDnP4/404fcAGM44Gee+anmsWoFdEG7pUyxc1L5abgFPIAzj1qQLtIpN3KSsSW8fIrTRflqlDjNaCEFK46m5103oULlSAapxjL1qXCZFUUXD1UHoORahiBFTNBxRAOKsDkVQjJnRkORUG+tOdNwNZ5iIbAFA1qNUEmrtuMdao+fCnHmKzdgpz+tV5tYK/JD8h7BDl/cex/T2rSNOTFKyWrOiZ4oQvmuqZ555P5DmqNzq1oozAjSoQCJJj5Sn1xg5PNc3Nezsz7nSMOckAcn3OO4qvzIxO1pXIyxfJP1wP61tGkupk60VsjYk1yQ5S2+9jGYogM/XOeOTWfJdSMTmTyxyMbi7YI4H09/eljsbyfll2Jnnd8o98AfSrdvpUEf+tzIcEHPA/xqrwiQ6lSZmK2+VVjUySMfvONzZ+lalvoGpXa5kZYgRnbI3OfoOnFbNsiQjEcaJn+4oFaMJGRUyq9gjT7sg07wvY25VpF+0ODkM4wOvHyiujt7REjWNFVUUYCqMAfhVaBulaMB5Fc05N7s2hFLYUWvHApDan0rQixjmpDsrFssyvs3qKYbUelaxRSKgdMVKZRmtBgdKrsuOtaUnANUpjntW0GZyOu8FygQug4Ockmt+6eORvL3tIx/hFcl4T8zz3TgLiulibyZG4BdjxXZF6HFNale6tVihJ2heOB3JrBurNoIy74L9cCujlRWn3zyb2XkKOi1mSOLu5ZyMW8PfsTTaEmc60fkmPePnkbJqdpAF696rXUr3GoM6D5EFVDckQO2c7TipKOhhULaqe55NEZH25F7gZqGC4VrVT2CimQSbtQds8BKYi1Mu6TOOnNc/dEwyzyIcMvzqfQiuhZgTn1WuM1zVIbS5EW1pHIOVU9B70CRnXcTsg8xxIxYsWI5JJzk+/vVWeEIPQgAip4b+O8QJwsqgZTPX3HrUN3ewK7fMp2jDd8f/XoKSsW7XaW4xk9cVNGo2sKq2cyPgqOCOPepPOCsee5pFJErygbfemNcDZkHmqDz5Yn8BUW9ioHvSuXYtT3BcKwpqys7Jk1EgySD0qSKM7vpSASMsGy3TNbVi4IxWZbj5irVp2Ua7xjI9xTQpbHRWjxmMAjn1rXhdXs3gfnjjNYUU8VvIIbldoP3ZB0NTPcyQTACQPG3Q1ZkkLBEonVMc7uK39Sk8uzRfasW0xLfxgKBjnNXdem2RgZ6Cp6FbtGBNOA5qnLdgDrVa4uPmNU2kz3rLlN02W2u80w3IPeqRcU3fmnyhzFwyqe9CvuPFVAc1YhAzSsFy5FwKm4xTY0G3NPK1WhJXmbCms5pOSK0ZYwQc1UMGTwKhs0iVGYkVXYnNaRtz6VXkhw1JMdjIRYlJG0gDoQ2M01ndeRIxU9jzn8aidv3mB09DUkcHnBlLHZj1709tyVYjJY7iy8g5PPJpu8YAO4Z7gCrHlMqjdgnHNVZAVUdcD1rSKuYylYlQhjjfGPqcVLvJHNUlfmrSkMopNWY0+ZEglK45q3DdcdazX4pqSkGplBSRUZWZsvKGWq2RuqBZsjrS76xUbGykjShcYqcPxWXHMAOoGPWnDWYILpDCPtAX04P+ArSMGw8ya9v4bVCWO4jqF7fX/DrWJPqMk+7EfydieB7fX6/pVW4nDSAnE0gHoAqj+p96Le0uNQbcDlBxvb7o9gO9dMYRjqzKVV/DEimuGlJ3Oz7sfKgwpx9Kmt9Pubgc4t4zz05P4davw2kdmMgFpP75/p6U/z8HrWcqz2iEaN9Zsjt9FgT/XOZD6Dgf41owQRW64hjCepHU/U1XjnqzHJurnlOb3ZvGEFsiUIM80vlAHOKkUAiplj3LTixNEMcY4xVqM7etNRBn0NOKkVpe5lsXoZV4q/FPjoaw0LD1qZJ2U1DiaJnSRz5FWVfPWsC2ujx1rShnDAc1k1Yo01XIpkiGo458ChrjNZsaRWmGAazZXIJxV+ZyRWdJnNXFicTa8MtJ/aCgyFUJ5yev0FdzMiQgyNgKBwO5rzbTLhba7SViVweuMmvQkvrLyEmlLMWHG6uylJNHHWjZlWRmaIuyEK33VA5aqUqyXP7kKEROSi9B9TVyae81CcRWcBjzwZnGAo9hVgxw2dvsXmNepPWRvU1qZHNXtstlp7ELmWU8Dv7Vzt7bPa20dmvN1MdzD+6Peug1TWIrW4LsBPfdIYB0UngFvf2qrHaNYWrXd43m305yfr6D2paDWhTt5GiR42/gIBqzE+2SZs9RWdd7rW0+Y5mncfzqyT5edx54FIouyXaxQySOeI4tx/AV5hdTm8uZrmbcWlO7HbHYV2msyE6VfKuSWh4xXBAlQBvJz2J6fWnFXJbsDKhb+WT0pXA2jaRgdO2KMk/wAX04peowc7v0qrCuT2NyyzlSVxjAIarkkh2k1mwqRcxsqkDpk9KvgbkGaiRrDYI1Oypki5IxSqUXbk07zVBU5HNSVclSLnpxViG1beR/e6UyO4jG4Z+7zWjA6ugYEZHQ00iWxsWmnP86tDT7mwxMFMkB+8OpFTm6WGNZODjrV+z1iNRtbDRsOlUkibsntYbTU7TyjgnHBNZl5YNYIwdn4+6RVvEcV15tpJ5aMclT0qxqMjyaU7u8e4fdOKHsTHcNBVFbdkkgZyaqeILwvKVHSp9H3RWDSMwJPOawtQl8yUk81DehrFXZlyFmY5qIoatBcnNPWLPaouapFIRFqPJK960hFtHIqN1FHMHKU1GDU8fBppHNJgjmi4WNCOYJSmfPSs3fjqaUTY70mwSLpYseTUkcYYVQScZ61bjmHrWbuaKxOUUA1SmwGFWi2RVWSMsQQaSHc4vPzDByKv20gAxTxokxP+uT8jT7bTXLENKvHoK6ZQbRzRkkK+GqtImcitiLSTI20TY/4DSzaM0QBaYHJA4WiEWkTNxbOYZCj1PGeK2LjSIUhMrzuQp6BB/jUD2NrBHHIZZmV2Kj5QCMDPrTlGTHFxiUW5qEjBroL3S7ayMW8yPux0PqKybi8sYGlCWZdkbCmRs5HvQoSBtPYhQMRkDgnGTwKnTyuWkdiigltg7e2cZ/Cq02pG4jAjgSEY4IYtj8DxWfPOu8+e0szj+82BTVNX1L5kkX7nU42RY1VVUAZjjAOT67uuPas95pCAjYiTtGg5NMMkhX5dkfb5Bj9atw26243H5nPU1ppFGbm5bE9jYowU3Kg46RDp9T6mt9QuzAAAAwAKxYpCDitG3kJrmm29zSCSEmTg8VnSREGtp1BFVJY1INKJbZRjBJq9bxncKgRAGrQgA4okgjImELAd6ljVh3qSMhl5FO3Be1ZpGgnOR61KoyOaiDhj0qVQMVaM2AwDTsr6U1gOtMJoFctRsB0q3E6jqaylkI47VKsxFS1ctSNxJARw+aGmFYv2op600359DWTgaRka5lBHWoGYVlm/I7Gmi9JPQ1HKyuZGqhGQfSu40GZpLEfIm8dC45P4V53DcDIODXbeEpTIkxHBHTjpXRRdpWOeuvdudRLdpaw7XcFz97t+Fcjrev7dyRfPJ+QFWdXEiozPKwB/uda4+8mXGEDBffqfrXS2csYhpUlvbXr6hfFpZ8kxxqMkn1PoK0G1mO5mMk4AfsoP3R71zMjO4OGKr3x1NU5Jxswu4L39TU3L5UatzqqXmqbmBEUfK+nFWLy+EofyznowxXLO3y5Vmz70kd/LC2D8w6U0x8p0cF8J1VX642kGue1TT5LaQzIrGEnGV5A9iKsh/NxIvyt1rWsLkyOnH3hhgehoTE0ckNxJyrZIzwKmht2dS0gMUYOCzn+ldJd6fZu7MLdA248j5f5VlSxRwn5EA4696rmIULlV1SHJQkjouewphlYIMGmucnJqvK+wGouabIf9pYluRmmG53Nw5z0x6VRbzJHBDAVOvC7SBn1FVYSbZd80kYy2elWodReKPyxlqy0Dt8u8496sK4iHyipK3NmHVX8ja/OOoPpUlteqj4RvkPIGelY6XKsMOmacEVm+TIB9aLisjudLuVZwPvA9Qa1tajZbGKGNVdGOSGrlvDFvdSXyxiVdue5NdhqVnJ/aUMbONvsTVJ3RDVmQjFtpoXG047Vz0zq7Guo1by4bUDafwrkpGDOSBispuzNqSurkiRqTVmONQO1UkbBqdZsDvWTZvYlkVB1qs4XmnNL7VXkmGOhpJgyF+CarySECnPKTVSaYdMGtUjJsY0mT1qJpSD1qCW4UZ+U1VlueeAa0USXI0UuSD1qeK7JbrWCbo+lPiu8N0NDiSpHTpckipBNWPDcFsdati4UDG01nymiZ/9k=",
+      "retrieved_cases": [
+        {
+          "answer": "No",
+          "answer_type": "CLOSED",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "Are there abnormalities in this image?",
+          "score": 0.939956725
+        },
+        {
+          "answer": "None",
+          "answer_type": "OPEN",
+          "content_type": "Abnormality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What diseases are included in the picture?",
+          "score": 0.905323088
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.90504849
+        },
+        {
+          "answer": "Liver",
+          "answer_type": "OPEN",
+          "content_type": "Size",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What is the largest organ in the picture?",
+          "score": 0.901691556
+        },
+        {
+          "answer": "MRI",
+          "answer_type": "OPEN",
+          "content_type": "Modality",
+          "img_organ": "",
+          "kbase": "",
+          "question": "What modality is used to take this image?",
+          "score": 0.895240843
+        }
+      ],
+      "createdAt": 1786615567.1742475
     }
   ],
   "metadata": [
@@ -1944,6 +3436,319 @@
         "session_id": "session-1786478036637"
       },
       "timestamp": 1786478221.9039705
+    },
+    {
+      "id": "meta-57692844",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 25,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786568681.9827933
+    },
+    {
+      "id": "meta-70c18d01",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 37,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786568910.1810176
+    },
+    {
+      "id": "meta-00953a0a",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786568939.9305968
+    },
+    {
+      "id": "meta-5bda4d75",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569008.9066188
+    },
+    {
+      "id": "meta-25de0435",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569351.8595495
+    },
+    {
+      "id": "meta-7a9586c9",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569455.094096
+    },
+    {
+      "id": "meta-66a76d08",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569565.0056968
+    },
+    {
+      "id": "meta-2069d22a",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569808.9161448
+    },
+    {
+      "id": "meta-008793c2",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 28,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.65,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786569881.9716768
+    },
+    {
+      "id": "meta-78b0972c",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 29,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786570189.6001804
+    },
+    {
+      "id": "meta-b398c02b",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 22,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786571172.694759
+    },
+    {
+      "id": "meta-8229ec8e",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 22,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786571375.3080852
+    },
+    {
+      "id": "meta-7252abcf",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 22,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786571691.3351848
+    },
+    {
+      "id": "meta-b702c7e8",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 22,
+        "has_image": true,
+        "engine": "gemini_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786571727.5703235
+    },
+    {
+      "id": "meta-bafe5e3a",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 18,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786607490.2666776
+    },
+    {
+      "id": "meta-555b3a00",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 22,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786612734.6396472
+    },
+    {
+      "id": "meta-7b1e18b3",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 17,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786612823.9337106
+    },
+    {
+      "id": "meta-425b35d4",
+      "event_type": "user_login",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "email": "kmsyeedasif@gmail.com"
+      },
+      "timestamp": 1786615291.2342625
+    },
+    {
+      "id": "meta-7d553292",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 39,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786615347.5592089
+    },
+    {
+      "id": "meta-79b9384f",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 35,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786615407.0625458
+    },
+    {
+      "id": "meta-16176a00",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 37,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786615435.4636126
+    },
+    {
+      "id": "meta-699a406c",
+      "event_type": "vqa_query",
+      "user_email": "anonymous",
+      "details": {
+        "query_length": 39,
+        "has_image": true,
+        "engine": "huggingface_api",
+        "top_k": 5,
+        "alpha": 0.6,
+        "retrieved_count": 5
+      },
+      "timestamp": 1786615462.3093634
+    },
+    {
+      "id": "meta-6814237c",
+      "event_type": "report_generated",
+      "user_email": "kmsyeedasif@gmail.com",
+      "details": {
+        "report_id": "rep-a8107a74",
+        "session_id": "session-1786613169556"
+      },
+      "timestamp": 1786615567.2126012
     }
   ]
 }

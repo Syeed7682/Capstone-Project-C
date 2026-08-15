@@ -1,6 +1,7 @@
 import React from 'react';
 import { User, Stethoscope, ChevronRight, Cpu, Activity, Database, Copy } from 'lucide-react';
 import { ChatMessage } from '../types';
+import ReactMarkdown from 'react-markdown';
 
 interface ChatMessagesProps {
   messages: ChatMessage[];
@@ -74,9 +75,21 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({
                     <span className="text-[10px] text-slate-500 font-mono">Engine: {msg.engine || 'Gemini 3.6 Flash'}</span>
                   </div>
 
-                <p className="text-sm leading-relaxed text-slate-100 whitespace-pre-wrap">
-                  {msg.text}
-                </p>
+                <div className="text-sm leading-relaxed text-slate-100 prose prose-invert prose-sm max-w-none
+                  [&_strong]:text-white [&_strong]:font-semibold
+                  [&_em]:text-slate-200
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
+                  [&_li]:text-slate-100
+                  [&_h1]:text-base [&_h1]:font-bold [&_h1]:text-white [&_h1]:mt-3 [&_h1]:mb-1
+                  [&_h2]:text-sm [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-3 [&_h2]:mb-1
+                  [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-slate-200 [&_h3]:mt-2 [&_h3]:mb-0.5
+                  [&_p]:mb-2 [&_p:last-child]:mb-0
+                  [&_code]:bg-slate-900 [&_code]:text-cyan-300 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs
+                  [&_pre]:bg-slate-900 [&_pre]:p-3 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:text-xs
+                  [&_blockquote]:border-l-2 [&_blockquote]:border-cyan-500 [&_blockquote]:pl-3 [&_blockquote]:text-slate-300 [&_blockquote]:italic">
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+                </div>
 
                 {/* Retrieval Metrics Cards */}
                 <div className="mt-4 pt-4 border-t border-slate-700/50 flex gap-4">

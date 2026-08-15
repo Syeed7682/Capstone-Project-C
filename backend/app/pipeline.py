@@ -718,37 +718,37 @@ def _generate_via_hf_api(prompt: str, pil_image: Optional[Image.Image], max_toke
 
 
 def _generate_via_gemini_api(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:
-    """Uses Google's Gemini 1.5 Flash API."""
+    """Uses Google's Gemini API via the new google.genai SDK."""
     if not config.GEMINI_API_KEY:
         raise ValueError("GEMINI_API_KEY is missing for the gemini_api engine.")
 
     print("[DEBUG] GEMINI_API_KEY loaded:", "present" if config.GEMINI_API_KEY else "missing")
 
-    import google.generativeai as genai
-    try:
-        genai.configure(api_key=config.GEMINI_API_KEY)
-    except Exception as e:
-        print(f"[DEBUG] Gemini configuration error: {e}")
-        if config.GENERATIVE_ENGINE == "local_moondream":
-            print("[DEBUG] Falling back to local Moondream model for Gemini request.")
-            return _generate_via_local_moondream(prompt, pil_image, max_tokens)
-        raise
+    from google import genai
+    from google.genai import types
 
-    model = genai.GenerativeModel(config.GEMINI_MODEL)
-    print(f"[DEBUG] Using Gemini model: {config.GEMINI_MODEL}")
+    client = genai.Client(api_key=config.GEMINI_API_KEY)
+    model_name = config.GEMINI_MODEL
+    print(f"[DEBUG] Using Gemini model: {model_name}")
 
     try:
         if pil_image is not None:
-            response = model.generate_content([prompt, pil_image])
+            contents = [pil_image, prompt]
         else:
-            response = model.generate_content(prompt)
+            contents = [prompt]
+
+        response = client.models.generate_content(
+            model=model_name,
+            contents=contents,
+            config=types.GenerateContentConfig(
+                max_output_tokens=max_tokens,
+            )
+        )
         return response.text.strip()
     except Exception as e:
         print(f"Gemini API call error: {e}")
-        if config.GENERATIVE_ENGINE == "local_moondream":
-            print("[DEBUG] Falling back to local Moondream model for Gemini request.")
-            return _generate_via_local_moondream(prompt, pil_image, max_tokens)
         return f"Error calling Gemini API: {str(e)}"
+
 
 
 def _generate_via_local_moondream(prompt: str, pil_image: Optional[Image.Image], max_tokens: int) -> str:
@@ -809,7 +809,7 @@ def _generate_via_local_moondream(prompt: str, pil_image: Optional[Image.Image],
         moondream_config.update({"pad_token_id": _local_gen_tokenizer.eos_token_id})
         _local_gen_model = AutoModelForCausalLM.from_pretrained(
             config.GEN_MODEL_MOONDREAM,
-            revision="main",
+            revision="2024-08-26",
             trust_remote_code=True,
             config=moondream_config,
             torch_dtype=torch.float32 if config.DEVICE == "cpu" else torch.float16,
